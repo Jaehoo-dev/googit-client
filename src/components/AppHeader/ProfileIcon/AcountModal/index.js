@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import AccountManagement from './AccountManagement/index';
 import Logout from './Logout/index';
-import apiLogOutUser from '../../../../api/apiUserLogout';
 
 const Modal = styled.div`
   width: 20em;
   height: 10em;
   box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.6);
   position: relative;
-  top: -2em;
+  top: 3em;
   left: 76.8%;
   z-index: 1000;
 

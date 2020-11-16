@@ -38,7 +38,6 @@ export default function AppHeader({ onLogout, buttonMode, handleOnClick }) {
     <Header>
       <section>
         <PrivateNoteModeButton buttonMode={buttonMode} handleOnClick={handleOnClick} />
-        {/* 메인 뿌리는 에피아이부터 */}
         <SearchBar />
         <ProfileIcon handleOnClick={logoutClickHandler} />
       </section>

@@ -14,13 +14,12 @@ export default function ProfileIcon({ handleOnClick }) {
   const [isClicked, setIsClicked] = useState(false);
 
   function handleModalToggle() {
-    console.log('click');
     setIsClicked(!isClicked);
   }
 
   return (
     <Wrapper>
-      <div onClick={handleOnClick}>
+      <div onClick={handleModalToggle}>
         <ProfileImg src={`${process.env.PUBLIC_URL}/images/G-logo.png`} alt='logo' />
       </div>
       <AccountModal open={isClicked} handleOnClick={handleModalToggle} handleLogout={handleOnClick} />
