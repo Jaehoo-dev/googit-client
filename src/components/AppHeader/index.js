@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { auth } from '../../config/firebase';
+import PrivateNoteModeButton from './PrivateNoteModeButton/index';
 
 const Header = styled.header`
   position: fixed;
@@ -33,6 +34,7 @@ export default function AppHeader({ onLogout }) {
 
   return (
     <Header>
+      <PrivateNoteModeButton />
       <button
         type='button'
         onClick={logoutClickHandler}
