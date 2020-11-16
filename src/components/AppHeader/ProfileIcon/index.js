@@ -10,10 +10,10 @@ const ProfileImg = styled.img`
   width: 1em;
 `;
 
-export default function ProfileIcon({ img }) {
+export default function ProfileIcon({ handleOnClick }) {
   const [isClicked, setIsClicked] = useState(false);
 
-  function handleOnClick() {
+  function handleModalToggle() {
     console.log('click');
     setIsClicked(!isClicked);
   }
@@ -23,7 +23,7 @@ export default function ProfileIcon({ img }) {
       <div onClick={handleOnClick}>
         <ProfileImg src={`${process.env.PUBLIC_URL}/images/G-logo.png`} alt='logo' />
       </div>
-      <AccountModal open={isClicked} handleOnClick={handleOnClick} />
+      <AccountModal open={isClicked} handleOnClick={handleModalToggle} handleLogout={handleOnClick} />
     </Wrapper>
   );
 }

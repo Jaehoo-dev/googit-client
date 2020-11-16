@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Switch, Route } from 'react-router-dom';
 import AppEntrance from '../../components/AppEntrance';
-import AppHeader from '../../components/AppHeader';
+import AppMain from '../../components/AppMain';
 import { setCurrentUser, setHasToken, initializeStore } from '../../actions';
 import Loading from '../../components/shared/Loading';
 
@@ -12,7 +12,13 @@ function AppContainer({
   onLogin,
   onLogout,
 }) {
+  const [isPrivate, setIsPrivate] = useState(false);
   const history = useHistory();
+
+  function handlePrivateMode() {
+    // console.log('private mode');
+    setIsPrivate(!isPrivate);
+  }
 
   useEffect(() => {
     if (!hasToken) {
@@ -56,7 +62,7 @@ function AppContainer({
       }
       {
         hasToken && currentUser
-        && <AppHeader onLogout={onLogout} />
+        && <AppMain onLogout={onLogout} buttonMode={isPrivate} handleOnClick={handlePrivateMode} />
       }
     </>
   );

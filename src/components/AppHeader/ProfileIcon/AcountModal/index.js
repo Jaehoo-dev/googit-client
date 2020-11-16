@@ -37,24 +37,7 @@ const Overlay = styled.div`
   z-index: 1000;
 `;
 
-export default function AccountModal({ open, handleOnClick }) {
-  const [hasLogoutAsked, setHasLogoutAsked] = useState(false);
-
-  // useEffect(() => {
-  //   if (hasLogoutAsked) {
-  //     console.log('logout fetch');
-  //     const result = apiLogOutUser();//userId
-  //     // //if res.status === ok
-  //     // //window.location.href='/';
-  //     setHasLogoutAsked(!hasLogoutAsked);
-  //   }
-  // }, [hasLogoutAsked]);
-
-  function handleLogout() {
-    setHasLogoutAsked(!hasLogoutAsked);
-    handleOnClick();
-  }
-
+export default function AccountModal({ open, handleOnClick, handleLogout }) {
   if (!open) return null;
 
   return createPortal(

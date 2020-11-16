@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { auth } from '../../config/firebase';
-import PrivateNoteModeButton from './PrivateNoteModeButton/index';
+import PrivateNoteModeButton from './PrivateNoteModeButton';
+import SearchBar from './SearchBar';
+import ProfileIcon from './ProfileIcon';
 
 const Header = styled.header`
   position: fixed;
@@ -18,11 +20,11 @@ const Header = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 2em 0;
+    padding: 1em 0;
   }
 `;
 
-export default function AppHeader({ onLogout }) {
+export default function AppHeader({ onLogout, buttonMode, handleOnClick }) {
   const history = useHistory();
 
   async function logoutClickHandler() {
@@ -34,13 +36,12 @@ export default function AppHeader({ onLogout }) {
 
   return (
     <Header>
-      <PrivateNoteModeButton />
-      <button
-        type='button'
-        onClick={logoutClickHandler}
-      >
-        로그아웃
-      </button>
+      <section>
+        <PrivateNoteModeButton buttonMode={buttonMode} handleOnClick={handleOnClick} />
+        {/* 메인 뿌리는 에피아이부터 */}
+        <SearchBar />
+        <ProfileIcon handleOnClick={logoutClickHandler} />
+      </section>
     </Header>
   );
 }
