@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { SETISPRIVATE } from '../constants';
 
 const hasToken = (
   state = !!localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN),
@@ -21,9 +22,20 @@ const currentUser = (state = null, action) => {
   }
 };
 
+const isPrivate = (state = false, action) => {
+  switch (action.type) {
+    case SETISPRIVATE:
+      return !state;
+    default:
+      return state;
+  }
+}
+
+
 const appReducer = combineReducers({
   hasToken,
   currentUser,
+  isPrivate,
 });
 
 export default function rootReducer(state, action) {

@@ -3,21 +3,20 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import AppEntrance from '../../components/AppEntrance';
 import AppMain from '../../components/AppMain';
-import { setCurrentUser, setHasToken, initializeStore } from '../../actions';
+import { setCurrentUser, setHasToken, initializeStore, setIsPrivate } from '../../actions';
 import Loading from '../../components/shared/Loading';
+import fetchNoteList from '../../api/noteListFetch';
 
 function AppContainer({
   hasToken,
   currentUser,
   onLogin,
   onLogout,
+  togglePrivateMode,
+  isPrivate,
 }) {
-  const [isPrivate, setIsPrivate] = useState(false);
-  const history = useHistory();
 
-  function handlePrivateMode() {
-    setIsPrivate(!isPrivate);
-  }
+  const history = useHistory();
 
   useEffect(() => {
     if (!hasToken) {
@@ -49,6 +48,15 @@ function AppContainer({
     getUserData();
   }, []);
 
+  useEffect(() => {
+    console.log(isPrivate, 'note list');
+    async function getNoteList() {
+    const noteList = await fetchNoteList(isPrivate, currentUser);
+    console.log(noteList, '이자리로 디스패치 함수를 불러서 리덕스에 넣는다.') // 이 유즈 이펙트 앱으로 올라가야할듯 
+    }
+    if (currentUser) getNoteList();
+  }, [isPrivate, currentUser]);
+
   return (
     <>
       {
@@ -61,7 +69,7 @@ function AppContainer({
       }
       {
         hasToken && currentUser
-        && <AppMain onLogout={onLogout} isPrivate={isPrivate} handleOnClick={handlePrivateMode} currentUser={currentUser} />
+        && <AppMain onLogout={onLogout} isPrivate={isPrivate} handleOnClick={togglePrivateMode} currentUser={currentUser} />
       }
     </>
   );
@@ -76,6 +84,9 @@ function mapDispatchToProps(dispatch) {
     onLogout() {
       dispatch(initializeStore());
     },
+    togglePrivateMode() {
+      dispatch(setIsPrivate());
+    }
   };
 }
 
@@ -83,6 +94,7 @@ function mapStateToProps(state) {
   return {
     hasToken: state.hasToken,
     currentUser: state.currentUser,
+    isPrivate: state.isPrivate,
   };
 }
 
