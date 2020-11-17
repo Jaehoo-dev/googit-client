@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import SearchInput from './SearchInput/index';
-import SearchIcon from './SearchIcon/index';
+import SearchInput from './searchInput.js';
+import SearchIcon from './serachIcon.js';
 import { apiSearchNoteByKeywords, apiSearchAutoComplete } from '../../../api/apiKeywordSerach';
 
 const Form = styled.form`
@@ -25,11 +25,11 @@ export default function SearchBar() {
     }
   }, [isSubmitted]);
 
-  // useEffect(() => {
-  //   if (keyword) {
-  //     const result = apiSearchAutoComplete(keyword);  //이건 한번씩 칠때마다
-  //   }
-  // }, [keyword]);
+  useEffect(() => {
+    if (keyword) {
+      const result = apiSearchAutoComplete(keyword);  //이건 한번씩 칠때마다
+    }
+  }, [keyword]);
 
   function handleKeywordsChange(e) {
     console.log('change');

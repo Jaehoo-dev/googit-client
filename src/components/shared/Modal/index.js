@@ -3,10 +3,8 @@ import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import AccountManagement from './AccountManagement/index';
-import Logout from './Logout/index';
 
-const Modal = styled.div`
+const ModalContainer = styled.div`
   width: 20em;
   height: 10em;
   box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.6);
@@ -36,20 +34,18 @@ const Overlay = styled.div`
   z-index: 1000;
 `;
 
-export default function AccountModal({ open, handleOnClick, handleLogout }) {
-  if (!open) return null;
+export default function Modal({ isOpen, children, handleOnClick }) {
+  if (!isOpen) return null
 
   return createPortal(
     <>
       <Overlay onClick={handleOnClick} />
-      <Modal>
+      <ModalContainer>
         <CloseButton onClick={handleOnClick}>
           <FontAwesomeIcon icon={faTimes} />
         </CloseButton>
-        <AccountManagement handleOnClick={handleOnClick} />
-        <Logout handleOnClick={handleLogout} />
-      </Modal>
+        {children}
+      </ModalContainer>
     </>,
-    document.getElementById('portal'),
-  );
+    document.getElementById('portal'));
 }

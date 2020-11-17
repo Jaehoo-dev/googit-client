@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Button = styled.button`
@@ -21,12 +20,11 @@ const Button = styled.button`
   }
 `;
 
-export default function AccountManagement({ handleOnClick }) {
+export default function LogOut({ children, handleOnClick }) {
+
   return (
-    <Link to='/profile/edit'>
-      <Button onClick={handleOnClick}>
-        계정관리
-      </Button>
-    </Link>
+    <Button onClick={handleOnClick}>
+      {children}
+    </Button>
   );
 }

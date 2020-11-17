@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import AccountModal from './AcountModal/index';
+import { Link } from 'react-router-dom';
+import Modal from '../../shared/Modal';
+import Button from '../../shared/Button';
 
 const Wrapper = styled.div`
   margin-right: 2em;
@@ -11,10 +13,32 @@ const ProfileImg = styled.img`
 `;
 
 export default function ProfileIcon({ handleOnClick }) {
-  const [isClicked, setIsClicked] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   function handleModalToggle() {
-    setIsClicked(!isClicked);
+    setIsModalOpen(!isModalOpen);
+  }
+
+  function applyButtonCsss() {
+    const Button = styled.button`
+      color: #04040a !important;
+      text-decoration: none;
+      background: #9e9ea8;
+      padding: 10px;
+      border: 1px solid #9e9ea8 !important;
+      display: inline-block;
+      transition: all 0.4s ease 0s;
+      border-radius: 20px;
+      width: 20em;
+    
+      &:hover {
+        color: #ffffff !important;
+        background: #f6b93b;
+        border-color: #f6b93b !important;
+        transition: all 0.4s ease 0s;
+      }
+    `;
+    return Button
   }
 
   return (
@@ -22,7 +46,14 @@ export default function ProfileIcon({ handleOnClick }) {
       <div onClick={handleModalToggle}>
         <ProfileImg src={`${process.env.PUBLIC_URL}/images/G-logo.png`} alt='logo' />
       </div>
-      <AccountModal open={isClicked} handleOnClick={handleModalToggle} handleLogout={handleOnClick} />
+      <Modal isOpen={isModalOpen} handleOnClick={handleModalToggle} >
+        <Link to='/profile/edit'>
+          <Button handleOnClick={handleModalToggle}>계정관리</Button>
+        </Link>
+        <Link to='/'>
+          <Button handleOnClick={handleOnClick}>로그아웃</Button>
+        </Link>
+      </Modal>
     </Wrapper>
   );
 }
