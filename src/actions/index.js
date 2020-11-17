@@ -1,4 +1,4 @@
-import { SETISPRIVATE } from '../constants';
+import { SET_IS_PRIVATE, INIT_NOTE_LIST } from '../constants';
 
 export const setCurrentUser = user => ({
   type: 'setCurrentUser',
@@ -14,5 +14,10 @@ export const initializeStore = () => ({
 });
 
 export const setIsPrivate = () => ({
-  type: SETISPRIVATE
+  type: SET_IS_PRIVATE,
+});
+
+export const initializeNoteList = noteList => ({
+  type: INIT_NOTE_LIST,
+  payload: noteList
 });
