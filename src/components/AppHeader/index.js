@@ -28,7 +28,7 @@ const Header = styled.header`
   }
 `;
 
-export default function AppHeader({ onLogout, buttonMode, handleOnClick }) {
+export default function AppHeader({ onLogout, isPrivate, handleOnClick }) {
   const history = useHistory();
 
   async function logoutClickHandler() {
@@ -41,7 +41,7 @@ export default function AppHeader({ onLogout, buttonMode, handleOnClick }) {
   return (
     <Header>
       <section>
-        <PrivateNoteModeButton buttonMode={buttonMode} handleOnClick={handleOnClick} />
+        <PrivateNoteModeButton buttonMode={isPrivate} handleOnClick={handleOnClick} />
         <SearchBar />
         <ProfileIcon handleOnClick={logoutClickHandler} />
       </section>
