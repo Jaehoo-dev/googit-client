@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import AppEntrance from '../../components/AppEntrance';
 import AppMain from '../../components/AppMain';
-import { setCurrentUser, setHasToken, initializeStore, setIsPrivate } from '../../actions';
+import { setCurrentUser, setHasToken, initializeStore, setIsPrivate, initializeNoteList } from '../../actions';
 import Loading from '../../components/shared/Loading';
 import fetchNoteList from '../../api/noteListFetch';
 
@@ -14,6 +14,8 @@ function AppContainer({
   onLogout,
   togglePrivateMode,
   isPrivate,
+  initializeNoteList,
+  noteList,
 }) {
 
   const history = useHistory();
@@ -52,7 +54,7 @@ function AppContainer({
     console.log(isPrivate, 'note list');
     async function getNoteList() {
     const noteList = await fetchNoteList(isPrivate, currentUser);
-    console.log(noteList, '이자리로 디스패치 함수를 불러서 리덕스에 넣는다.') // 이 유즈 이펙트 앱으로 올라가야할듯 
+    initializeNoteList(noteList);
     }
     if (currentUser) getNoteList();
   }, [isPrivate, currentUser]);
@@ -86,6 +88,9 @@ function mapDispatchToProps(dispatch) {
     },
     togglePrivateMode() {
       dispatch(setIsPrivate());
+    },
+    initializeNoteList(noteList) {
+      dispatch(initializeNoteList(noteList))
     }
   };
 }
@@ -95,6 +100,7 @@ function mapStateToProps(state) {
     hasToken: state.hasToken,
     currentUser: state.currentUser,
     isPrivate: state.isPrivate,
+    noteList: state.noteList
   };
 }
 

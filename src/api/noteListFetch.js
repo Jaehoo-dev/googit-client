@@ -1,7 +1,7 @@
 export default async function requestNoteList(isPrivate, currentUser) {
   try {
     // isPrivate ? console.log('private note fetch called') : console.log('recent note fetch called');
-    console.log(currentUser,'ajax')
+    console.log('ajax')
     const userId = currentUser._id;
     let fetchUrl;
 
@@ -19,7 +19,7 @@ export default async function requestNoteList(isPrivate, currentUser) {
     });
 
     response = await response.json();
-    return response;
+    return response.data;
   } catch (err) {
     console.error(err, 'note list error');
   }
