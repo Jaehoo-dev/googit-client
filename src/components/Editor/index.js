@@ -1,106 +1,87 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const EditorWrapper = styled.div`
-  padding-top: 100px;
-  min-width: 480px;
-  max-width: 560px;
-  margin: 0 auto;
+const Wrapper = styled.div`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 70px;
+  width: 560px;
+  padding: 25px;
+  border-radius: .5em;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+  /* display: flex;
+  flex-flow: column;
+  height: 75%;
+  overflow: auto; */
 `;
 
-// presentational component에서 데이터 관련 코드 빼기
-export default function Editor({ user }) {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+const ToolBarWrapper = styled.div`
+  height: 50px;
+  background-color: gray;
+`;
 
-  async function submitHandler() {
-    const res = await fetch(
-      `http://localhost:4000/users/${user._id}/branches/new`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN)}`,
-        },
-      }
-    );
+const TitleBlock = styled.div`
+  h2 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+  }
+`;
 
-    const response = await res.json();
+const ContentBlock = styled.div`
+  margin-top: 15px;
+`;
 
-    if (response.result === 'failure') {
-      alert('브랜치를 만들다가 문제가 생겼어요');
+// const EditModeToggleButton = styled.button`
+//   height: 50px;
+//   width: 50px;
+//   border: none;
+//   border-radius: 50%;
+//   background-color: coral;
+//   position: absolute;
+//   bottom: 5%;
+//   right: 5%;
+// `;
 
-      return;
-    }
+const title = 'Title';
+const content = 'Magna incididunt excepteur do ipsum minim Lorem occaecat reprehenderit eiusmod officia ex. Minim id dolor occaecat Lorem ad pariatur ut enim nostrud velit ut. Eu esse ex tempor commodo laboris est. Duis proident irure excepteur aute ad eiusmod adipisicing dolore Lorem et tempor sunt ut ea. Duis ullamco id ipsum consequat ad id ad ut. Cillum cillum mollit ut cillum velit commodo in.';
 
-    const res2 = await fetch(
-      `http://localhost:4000/users/${user._id}/notes/new`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN)}`,
-        },
-        body: JSON.stringify({
-          title,
-          content,
-          branchId: response.newBranchId,
-        })
-      }
-    );
+export default function Editor() {
+  const [isEditMode, setIsEditMode] = useState(false);
 
-    const response2 = await res2.json();
+  function focusHandler() {
+    setIsEditMode(true);
+  }
 
-    if (response2.result === 'failure') {
-      alert('쪽지를 만들다가 문제가 생겼어요');
-
-      // delete branch
-
-      return;
-    }
-
-    const res3 = await fetch(
-      `http://localhost:4000/users/${user._id}/branches/${response.newBranch._id}/notes/${response2.newNote._id}`,
-      {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN)}`,
-        },
-        body: JSON.stringify(response.newBranch)
-      }
-    );
-
-    const response3 = await res3.json();
-
-    if (response3.result === 'ok') {
-      console.log('쪽지 만들어서 새 브랜치에 담는 과정 끝');
-    }
+  function blurHandler() {
+    setIsEditMode(false);
   }
 
   return (
-    <EditorWrapper>
-      <form>
-        <label htmlFor='title'>제목: </label>
-        <input
-          type='text'
-          name='title'
-          value={title}
-          onChange={ev => setTitle(ev.target.value)}
-          autoComplete='off'
-          size='50'
-        /><br />
-        <label htmlFor='content'>내용:</label><br />
-        <textarea
-          cols='80'
-          rows='12'
-          name='content'
-          value={content}
-          onChange={ev => setContent(ev.target.value)}
-          autoComplete='off'
-        /><br /><br />
-        <button type='button' onClick={submitHandler}>등록</button>
-      </form>
-    </EditorWrapper>
+    <>
+      {
+        isEditMode && <ToolBarWrapper />
+      }
+      <Wrapper>
+
+        <TitleBlock
+          onFocus={focusHandler}
+          onBlur={blurHandler}
+          contentEditable
+        >
+          <h2>{title}</h2>
+        </TitleBlock>
+        <ContentBlock
+          onFocus={focusHandler}
+          onBlur={blurHandler}
+          contentEditable
+        >
+          <p>{content}</p>
+          <p>{content}</p>
+          <p>{content}</p>
+          <p>{content}</p>
+        </ContentBlock>
+      </Wrapper>
+    </>
   );
 }

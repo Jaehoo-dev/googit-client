@@ -11,6 +11,7 @@ function AppContainer({
   currentUser,
   onLogin,
   onLogout,
+  onCreateBranch,
 }) {
   const [isPrivate, setIsPrivate] = useState(false);
   const history = useHistory();
@@ -57,11 +58,21 @@ function AppContainer({
       }
       {
         hasToken && !currentUser
-        && <Loading text="이용자 정보를 불러오고 있어요" />
+        && <Loading text='정보를 불러오고 있어요' />
       }
       {
         hasToken && currentUser
+<<<<<<< HEAD
         && <AppMain onLogout={onLogout} isPrivate={isPrivate} handleOnClick={handlePrivateMode} currentUser={currentUser} />
+=======
+        && <AppMain
+          onLogout={onLogout}
+          buttonMode={isPrivate}
+          handleOnClick={handlePrivateMode}
+          currentUser={currentUser}
+          onCreateBranch={onCreateBranch}
+        />
+>>>>>>> feat: create new branch
       }
     </>
   );
@@ -75,6 +86,9 @@ function mapDispatchToProps(dispatch) {
     },
     onLogout() {
       dispatch(initializeStore());
+    },
+    onCreateBranch(updatedUser) {
+      dispatch(setCurrentUser(updatedUser));
     },
   };
 }
