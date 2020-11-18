@@ -1,39 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
 import AppHeader from '../AppHeader';
-<<<<<<< HEAD
 import NoteList from './NoteList';
-=======
 import TestForm from '../TestForm';
 import Editor from '../Editor';
->>>>>>> feat: create new branch
 
-const Header = styled.header`
-`;
-
-<<<<<<< HEAD
-export default function AppMain({ onLogout, isPrivate, handleOnClick, currentUser }) {
-
-  return (
-    <>
-      <AppHeader isPrivate={isPrivate} handleOnClick={handleOnClick} onLogout={onLogout} />
-=======
-export default function AppMain({
-  onLogout,
-  buttonMode,
-  handleOnClick,
-  currentUser,
-  onCreateBranch,
-}) {
+export default function AppMain({ onLogout, isPrivate, handleOnClick, currentUser, onCreateBranch, onLoad }) {
   return (
     <>
       <AppHeader
-        buttonMode={buttonMode}
+        isPrivate={isPrivate}
         handleOnClick={handleOnClick}
         onLogout={onLogout}
+        onLoad={onLoad}
+        currentUser={currentUser}
       />
->>>>>>> feat: create new branch
       <Switch>
         <Route path='/profile/edit'>
           <div>edit</div>

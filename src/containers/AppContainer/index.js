@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import AppEntrance from '../../components/AppEntrance';
 import AppMain from '../../components/AppMain';
-import { setCurrentUser, setHasToken, initializeStore } from '../../actions';
+import { setCurrentUser, setHasToken, initializeStore, setIsPrivate, initializeNoteList } from '../../actions';
 import Loading from '../../components/shared/Loading';
+import fetchNoteList from '../../api/noteListFetch';
 
 function AppContainer({
   hasToken,
@@ -12,13 +13,13 @@ function AppContainer({
   onLogin,
   onLogout,
   onCreateBranch,
+  togglePrivateMode,
+  isPrivate,
+  getNoteList,
+  noteList
 }) {
-  const [isPrivate, setIsPrivate] = useState(false);
-  const history = useHistory();
 
-  function handlePrivateMode() {
-    setIsPrivate(!isPrivate);
-  }
+  const history = useHistory();
 
   useEffect(() => {
     if (!hasToken) {
@@ -50,6 +51,15 @@ function AppContainer({
     getUserData();
   }, []);
 
+  useEffect(() => {
+    console.log(isPrivate, 'note list');
+    async function getNoteList() {
+    const noteList = await fetchNoteList(isPrivate, currentUser);
+    getNoteList(noteList);
+    }
+    if (currentUser) getNoteList();
+  }, [isPrivate, currentUser]);
+
   return (
     <>
       {
@@ -62,17 +72,14 @@ function AppContainer({
       }
       {
         hasToken && currentUser
-<<<<<<< HEAD
-        && <AppMain onLogout={onLogout} isPrivate={isPrivate} handleOnClick={handlePrivateMode} currentUser={currentUser} />
-=======
         && <AppMain
           onLogout={onLogout}
-          buttonMode={isPrivate}
-          handleOnClick={handlePrivateMode}
+          isPrivate={isPrivate}
+          handleOnClick={togglePrivateMode}
           currentUser={currentUser}
           onCreateBranch={onCreateBranch}
+          onLoad={getNoteList}
         />
->>>>>>> feat: create new branch
       }
     </>
   );
@@ -90,6 +97,12 @@ function mapDispatchToProps(dispatch) {
     onCreateBranch(updatedUser) {
       dispatch(setCurrentUser(updatedUser));
     },
+    togglePrivateMode() {
+      dispatch(setIsPrivate());
+    },
+    getNoteList(noteList) {
+      dispatch(initializeNoteList(noteList)) //naming
+    }
   };
 }
 
@@ -97,6 +110,8 @@ function mapStateToProps(state) {
   return {
     hasToken: state.hasToken,
     currentUser: state.currentUser,
+    isPrivate: state.isPrivate,
+    noteList: state.noteList
   };
 }
 

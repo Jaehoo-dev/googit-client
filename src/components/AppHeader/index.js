@@ -2,13 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { auth } from '../../config/firebase';
-<<<<<<< HEAD
 import PrivateNoteModeButton from './PrivateNoteModeButton';
 import SearchBar from './SearchBar';
 import ProfileIcon from './ProfileIcon';
-=======
-import PrivateNoteModeButton from './PrivateNoteModeButton/index';
->>>>>>> feat: create privateOnlyNoteButton
 
 const Header = styled.header`
   position: fixed;
@@ -28,7 +24,7 @@ const Header = styled.header`
   }
 `;
 
-export default function AppHeader({ onLogout, isPrivate, handleOnClick }) {
+export default function AppHeader({ onLogout, isPrivate, handleOnClick, onLoad, currentUser }) {
   const history = useHistory();
 
   async function logoutClickHandler() {
@@ -42,7 +38,7 @@ export default function AppHeader({ onLogout, isPrivate, handleOnClick }) {
     <Header>
       <section>
         <PrivateNoteModeButton buttonMode={isPrivate} handleOnClick={handleOnClick} />
-        <SearchBar />
+        <SearchBar onLoad={onLoad} currentUser={currentUser }/>
         <ProfileIcon handleOnClick={logoutClickHandler} />
       </section>
     </Header>
