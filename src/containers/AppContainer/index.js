@@ -14,7 +14,7 @@ function AppContainer({
   onLogout,
   togglePrivateMode,
   isPrivate,
-  initializeNoteList,
+  getNoteList,
   noteList,
 }) {
 
@@ -54,7 +54,7 @@ function AppContainer({
     console.log(isPrivate, 'note list');
     async function getNoteList() {
     const noteList = await fetchNoteList(isPrivate, currentUser);
-    initializeNoteList(noteList);
+    getNoteList(noteList);
     }
     if (currentUser) getNoteList();
   }, [isPrivate, currentUser]);
@@ -71,7 +71,13 @@ function AppContainer({
       }
       {
         hasToken && currentUser
-        && <AppMain onLogout={onLogout} isPrivate={isPrivate} handleOnClick={togglePrivateMode} currentUser={currentUser} />
+        && <AppMain
+              onLogout={onLogout}
+              isPrivate={isPrivate}
+              handleOnClick={togglePrivateMode}
+              currentUser={currentUser}
+              onLoad={getNoteList}
+            />
       }
     </>
   );
@@ -89,8 +95,8 @@ function mapDispatchToProps(dispatch) {
     togglePrivateMode() {
       dispatch(setIsPrivate());
     },
-    initializeNoteList(noteList) {
-      dispatch(initializeNoteList(noteList))
+    getNoteList(noteList) {
+      dispatch(initializeNoteList(noteList)) //naming
     }
   };
 }

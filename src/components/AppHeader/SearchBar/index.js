@@ -11,13 +11,14 @@ const Form = styled.form`
   border-bottom: 1px solid black;
 `;
 
-export default function SearchBar() {
+export default function SearchBar({ onLoad }) {
   const [keyword, setKeyword] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
     if (isSubmitted) {
       const result = apiSearchNoteByKeywords(keyword);  // 이건 서브밋 될때마다
+      // onLoad(result)
       // 리절트는 노트의 리스트
       // 리절트 값에 따라서 리덕스에 스테이트 저장하고
       // 메인 페이지에서 불러다 뿌려야함
