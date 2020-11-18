@@ -62,9 +62,6 @@ function AppContainer({
       }
       {
         hasToken && currentUser
-<<<<<<< HEAD
-        && <AppMain onLogout={onLogout} isPrivate={isPrivate} handleOnClick={handlePrivateMode} currentUser={currentUser} />
-=======
         && <AppMain
           onLogout={onLogout}
           buttonMode={isPrivate}
@@ -72,7 +69,6 @@ function AppContainer({
           currentUser={currentUser}
           onCreateBranch={onCreateBranch}
         />
->>>>>>> feat: create new branch
       }
     </>
   );

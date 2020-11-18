@@ -10,10 +10,6 @@ const Wrapper = styled.div`
   padding: 25px;
   border-radius: .5em;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
-  /* display: flex;
-  flex-flow: column;
-  height: 75%;
-  overflow: auto; */
 `;
 
 const ToolBarWrapper = styled.div`
@@ -31,17 +27,6 @@ const TitleBlock = styled.div`
 const ContentBlock = styled.div`
   margin-top: 15px;
 `;
-
-// const EditModeToggleButton = styled.button`
-//   height: 50px;
-//   width: 50px;
-//   border: none;
-//   border-radius: 50%;
-//   background-color: coral;
-//   position: absolute;
-//   bottom: 5%;
-//   right: 5%;
-// `;
 
 const title = 'Title';
 const content = 'Magna incididunt excepteur do ipsum minim Lorem occaecat reprehenderit eiusmod officia ex. Minim id dolor occaecat Lorem ad pariatur ut enim nostrud velit ut. Eu esse ex tempor commodo laboris est. Duis proident irure excepteur aute ad eiusmod adipisicing dolore Lorem et tempor sunt ut ea. Duis ullamco id ipsum consequat ad id ad ut. Cillum cillum mollit ut cillum velit commodo in.';

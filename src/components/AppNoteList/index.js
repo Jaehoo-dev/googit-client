@@ -6,7 +6,6 @@ import NoteListBody from './NoteListBody';
 
 const Wrapper = styled.div`
   margin-top: 6em;
-  
 `;
 
 export default function AppNoteList({ isPrivate }) {
