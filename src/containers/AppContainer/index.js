@@ -12,10 +12,11 @@ function AppContainer({
   currentUser,
   onLogin,
   onLogout,
+  onCreateBranch,
   togglePrivateMode,
   isPrivate,
   getNoteList,
-  noteList,
+  noteList
 }) {
 
   const history = useHistory();
@@ -67,17 +68,18 @@ function AppContainer({
       }
       {
         hasToken && !currentUser
-        && <Loading text="이용자 정보를 불러오고 있어요" />
+        && <Loading text='정보를 불러오고 있어요' />
       }
       {
         hasToken && currentUser
         && <AppMain
-              onLogout={onLogout}
-              isPrivate={isPrivate}
-              handleOnClick={togglePrivateMode}
-              currentUser={currentUser}
-              onLoad={getNoteList}
-            />
+          onLogout={onLogout}
+          isPrivate={isPrivate}
+          handleOnClick={togglePrivateMode}
+          currentUser={currentUser}
+          onCreateBranch={onCreateBranch}
+          onLoad={getNoteList}
+        />
       }
     </>
   );
@@ -91,6 +93,9 @@ function mapDispatchToProps(dispatch) {
     },
     onLogout() {
       dispatch(initializeStore());
+    },
+    onCreateBranch(updatedUser) {
+      dispatch(setCurrentUser(updatedUser));
     },
     togglePrivateMode() {
       dispatch(setIsPrivate());

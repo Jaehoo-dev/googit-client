@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Button = styled.button`
+const StyledButton = styled.button`
   color: #04040a !important;
   text-decoration: none;
   background: #9e9ea8;
@@ -20,11 +20,11 @@ const Button = styled.button`
   }
 `;
 
-export default function LogOut({ children, handleOnClick }) {
+export default function Button({ children, handleOnClick }) {
 
   return (
-    <Button onClick={handleOnClick}>
+    <StyledButton onClick={handleOnClick}>
       {children}
-    </Button>
+    </StyledButton>
   );
 }

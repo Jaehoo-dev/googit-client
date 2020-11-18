@@ -19,7 +19,7 @@ export default function ProfileIcon({ handleOnClick }) {
     setIsModalOpen(!isModalOpen);
   }
 
-  function applyButtonCsss() {
+  function applyButtonCss() {
     const Button = styled.button`
       color: #04040a !important;
       text-decoration: none;
@@ -30,15 +30,17 @@ export default function ProfileIcon({ handleOnClick }) {
       transition: all 0.4s ease 0s;
       border-radius: 20px;
       width: 20em;
-    
+
       &:hover {
+        cursor: pointer;
         color: #ffffff !important;
         background: #f6b93b;
         border-color: #f6b93b !important;
         transition: all 0.4s ease 0s;
       }
     `;
-    return Button
+
+    return Button;
   }
 
   return (
