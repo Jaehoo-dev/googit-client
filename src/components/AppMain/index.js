@@ -1,9 +1,10 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import AppHeader from '../AppHeader';
-import NoteList from './NoteList';
+import BranchList from './BranchList';
+import Temp from './BranchList/tempforsharing';
 
-export default function AppMain({ onLogout, isPrivate, handleOnClick, currentUser, onLoad }) {
+export default function AppMain({ onLogout, isPrivate, handleOnClick, currentUser, handleInput }) {
 
   return (
     <>
@@ -11,7 +12,7 @@ export default function AppMain({ onLogout, isPrivate, handleOnClick, currentUse
         isPrivate={isPrivate}
         handleOnClick={handleOnClick}
         onLogout={onLogout}
-        onLoad={onLoad}
+        handleInput={handleInput}
         currentUser={currentUser}
       />
       <Switch>
@@ -20,7 +21,10 @@ export default function AppMain({ onLogout, isPrivate, handleOnClick, currentUse
           {/* <AppProfileEdit /> */}
         </Route>
         <Route path='/' exact>
-          <NoteList isPrivate={isPrivate} currentUser={currentUser} />
+          <BranchList isPrivate={isPrivate} currentUser={currentUser} />
+        </Route>
+        <Route path='/temp'>
+          <Temp currentUser={currentUser} />
         </Route>
       </Switch>
     </>

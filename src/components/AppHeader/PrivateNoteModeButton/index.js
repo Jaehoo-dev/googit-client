@@ -26,7 +26,7 @@ const Button = styled.button`
 
 export default function PrivateNoteModeButton({ buttonMode, handleOnClick }) {
   let content;
-  buttonMode ? content = '나만의 노트 보기' : content = '모든 노트 보기';
+  buttonMode ? content = '모든 노트 보기' : content = '나만의 노트 보기';
 
   return (
     <Wrapper>

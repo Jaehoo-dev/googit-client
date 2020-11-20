@@ -1,21 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import apiNoteList from '../../api/noteListRequest';
 import NoteListHead from './NoteListHead';
 import NoteListBody from './NoteListBody';
 
 const Wrapper = styled.div`
   margin-top: 6em;
-  
 `;
 
-export default function AppNoteList({ isPrivate }) {
+export default function BranchList({ isPrivate, currentUser }) {
   let notes;
-
-  useEffect(() => {
-    const result = apiNoteList(isPrivate);
-    // notes = result.xxx
-  });
 
   const tempNote = [1, 'title1', 'han', 20201116, 'shared'];
 
@@ -27,7 +20,7 @@ export default function AppNoteList({ isPrivate }) {
   return (
     <Wrapper>
       <NoteListHead />
-      <NoteListBody noteList={notes} />
+      {/* <NoteListBody noteList={notes} /> */}
     </Wrapper>
   );
 }

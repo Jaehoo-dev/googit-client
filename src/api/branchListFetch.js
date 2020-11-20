@@ -1,13 +1,12 @@
-export default async function requestNoteList(isPrivate, currentUser) {
+export default async function fetchBranchList(currentUser, isPrivate, searchQuery) {
   try {
     // isPrivate ? console.log('private note fetch called') : console.log('recent note fetch called');
-    console.log('ajax')
+    console.log('search Query ajax');
     const userId = currentUser._id;
-    let fetchUrl;
+    const query = searchQuery || '';
 
-    isPrivate
-      ? fetchUrl = `http://localhost:4000/users/${userId}/branches/private`
-      : fetchUrl = `http://localhost:4000/users/${userId}/branches/`;
+    let fetchUrl = `http://localhost:4000/users/${userId}/branches/?q=${query}&private=${isPrivate}&limit=10`;
+    // let fetchUrl = `http://localhost:4000/users/${userId}/branches/?q=${query}&private=${isPrivate}&limit=10&skip=${skip}`;
 
     let response = await fetch(fetchUrl, {
       method: 'GET',

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SET_IS_PRIVATE, INIT_NOTE_LIST } from '../constants';
+import { SET_IS_PRIVATE, INIT_BRANCH_LIST } from '../constants';
 
 const hasToken = (
   state = !!localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN),
@@ -29,22 +29,22 @@ const isPrivate = (state = false, action) => {
     default:
       return state;
   }
-}
+};
 
-const noteList = (state = [], action) => {
+const branchList = (state = [], action) => {
   switch (action.type) {
-    case INIT_NOTE_LIST:
+    case INIT_BRANCH_LIST:
       return action.payload;
     default:
       return state;
   }
-}
+};
 
 const appReducer = combineReducers({
   hasToken,
   currentUser,
   isPrivate,
-  noteList
+  branchList
 });
 
 export default function rootReducer(state, action) {
