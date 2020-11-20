@@ -14,7 +14,7 @@ export default function TestForm({ user, onCreateBranch }) {
   const [content, setContent] = useState('');
 
   async function submitHandler() {
-    const res = await fetch(
+    const branchCreateRes = await fetch(
       `http://localhost:4000/users/${user._id}/branches/new`,
       {
         method: 'POST',
@@ -22,20 +22,19 @@ export default function TestForm({ user, onCreateBranch }) {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN)}`,
         },
-        body: JSON.stringify(user),
       }
     );
 
-    const response = await res.json();
+    const branchCreateResponse = await branchCreateRes.json();
 
-    if (response.result === 'failure') {
+    if (branchCreateResponse.result === 'failure') {
       alert('브랜치를 만들다가 문제가 생겼어요');
 
       return;
     }
 
-    const res2 = await fetch(
-      `http://localhost:4000/users/${user._id}/notes/new`,
+    const noteCreateRes = await fetch(
+      `http://localhost:4000/users/${user._id}/branches/${branchCreateResponse.branchId}/notes/new`,
       {
         method: 'POST',
         headers: {
@@ -45,14 +44,13 @@ export default function TestForm({ user, onCreateBranch }) {
         body: JSON.stringify({
           title,
           content,
-          branch: response.newBranch,
         })
       }
     );
 
-    const response2 = await res2.json();
+    const noteCreateResponse = await noteCreateRes.json();
 
-    if (response2.result === 'failure') {
+    if (noteCreateResponse.result === 'failure') {
       alert('쪽지를 만들다가 문제가 생겼어요');
 
       // delete branch
@@ -60,7 +58,7 @@ export default function TestForm({ user, onCreateBranch }) {
       return;
     }
 
-    onCreateBranch(response.updatedUser);
+    onCreateBranch(branchCreateResponse.updatedUser);
 
     console.log('브랜치 만들고 이용자 정보에 밀어넣고 새 쪽지 담고 currentUser state update 과정 끝');
   }

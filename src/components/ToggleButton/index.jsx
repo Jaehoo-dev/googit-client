@@ -1,10 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  margin-left: 2em;
-`;
-
 const Button = styled.button`
   margin-top: 5px;
   color: #04040a !important;
@@ -24,13 +20,11 @@ const Button = styled.button`
   }
 `;
 
-export default function PrivateNoteModeButton({ buttonMode, handleOnClick }) {
-  let content;
-  buttonMode ? content = '모든 노트 보기' : content = '나만의 노트 보기';
-
+export default function ToggleButton({
+  onClick,
+  text,
+}) {
   return (
-    <Wrapper>
-      <Button onClick={handleOnClick}>{content}</Button>
-    </Wrapper>
+    <Button onClick={onClick}>{text}</Button>
   );
 }

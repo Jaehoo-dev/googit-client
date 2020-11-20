@@ -1,23 +1,25 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
 import AppHeader from '../AppHeader';
-// import TestForm from '../TestForm';
-import Editor from '../Editor';
+import BranchList from './BranchList';
+import Temp from './BranchList/tempforsharing';
 
 export default function AppMain({
   onLogout,
-  buttonMode,
+  isPrivate,
   handleOnClick,
   currentUser,
-  onCreateBranch,
+  onLoad,
+  handleInput,
 }) {
   return (
     <>
       <AppHeader
-        buttonMode={buttonMode}
+        isPrivate={isPrivate}
         handleOnClick={handleOnClick}
         onLogout={onLogout}
+        handleInput={handleInput}
+        currentUser={currentUser}
       />
       <Switch>
         <Route path='/profile/edit'>
@@ -25,11 +27,12 @@ export default function AppMain({
           {/* <AppProfileEdit /> */}
         </Route>
         <Route path='/' exact>
-          <NoteList isPrivate={isPrivate} currentUser={currentUser} />
+          <BranchList isPrivate={isPrivate} currentUser={currentUser} />
+        </Route>
+        <Route path='/temp'>
+          <Temp currentUser={currentUser} />
         </Route>
       </Switch>
-      <Editor />
-      {/* <TestForm user={currentUser} onCreateBranch={onCreateBranch} /> */}
     </>
   );
 }

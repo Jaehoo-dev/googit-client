@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import AppEntrance from '../../components/AppEntrance';
 import AppMain from '../../components/AppMain';
-import { setCurrentUser, setHasToken, initializeStore } from '../../actions';
+import { setCurrentUser, setHasToken, initializeStore, setIsPrivate, initializeBranchList } from '../../actions';
 import Loading from '../../components/shared/Loading';
+import fetchBranchList from '../../api/branchListFetch';
+import EditorPage from '../EditorContainer';
 
 function AppContainer({
   hasToken,
@@ -12,18 +14,18 @@ function AppContainer({
   onLogin,
   onLogout,
   onCreateBranch,
+  togglePrivateMode,
+  isPrivate,
+  getBranchList,
+  noteList,
+  currentNote,
 }) {
-  const [isPrivate, setIsPrivate] = useState(false);
   const history = useHistory();
-
-  function handlePrivateMode() {
-    setIsPrivate(!isPrivate);
-  }
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     if (!hasToken) {
       history.push('/login');
-
       return;
     }
 
@@ -50,6 +52,24 @@ function AppContainer({
     getUserData();
   }, []);
 
+  useEffect(() => {
+    async function loadNoteList() {
+      const branchList = await fetchBranchList(currentUser, isPrivate, searchQuery);
+
+      getBranchList(branchList);
+    }
+
+    if (currentUser) loadNoteList();
+  }, [currentUser, isPrivate, searchQuery]);
+
+  function handleInput(e) {
+    const userInput = e.target.keywords.value;
+
+    if (!userInput) return;
+
+    setSearchQuery(e.target.keywords.value);
+  }
+
   return (
     <>
       {
@@ -60,13 +80,21 @@ function AppContainer({
         hasToken && !currentUser
         && <Loading text='정보를 불러오고 있어요' />
       }
-      {
+      {/* {
         hasToken && currentUser
         && <AppMain
           onLogout={onLogout}
-          buttonMode={isPrivate}
-          handleOnClick={handlePrivateMode}
+          isPrivate={isPrivate}
+          handleOnClick={togglePrivateMode}
           currentUser={currentUser}
+          handleInput={handleInput}
+          onLoad={getBranchList}
+        />
+      } */}
+      {
+        hasToken && currentUser
+        && <EditorPage
+          currentNote={currentNote}
           onCreateBranch={onCreateBranch}
         />
       }
@@ -86,6 +114,12 @@ function mapDispatchToProps(dispatch) {
     onCreateBranch(updatedUser) {
       dispatch(setCurrentUser(updatedUser));
     },
+    togglePrivateMode() {
+      dispatch(setIsPrivate());
+    },
+    getBranchList(branchList) {
+      dispatch(initializeBranchList(branchList)); //naming
+    }
   };
 }
 
@@ -93,6 +127,9 @@ function mapStateToProps(state) {
   return {
     hasToken: state.hasToken,
     currentUser: state.currentUser,
+    isPrivate: state.isPrivate,
+    noteList: state.noteList,
+    currentNote: state.currentNote,
   };
 }
 
