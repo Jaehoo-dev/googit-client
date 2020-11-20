@@ -177,12 +177,7 @@ export default function EditorPageHeader({
 
     console.log(noteCreateResponse);
 
-    // currentNote를 방금 바꾼 쪽지로 바꾼다 (새로운 route로 redirect하면 되나?)
-    // isChanged를 false로 바꾼다(O)
-    // newNoteCandidate을 null로 바꾼다(O)
     onSave(noteCreateResponse.newNote);
-
-    console.log('브랜치 만들고 이용자 정보에 밀어넣고 새 쪽지 담고 currentUser state update 과정 끝');
   }
 
   return (
