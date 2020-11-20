@@ -1,11 +1,13 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import AppHeader from '../AppHeader';
+
+import TestForm from '../TestForm';
+import Editor from '../Editor';
 import BranchList from './BranchList';
 import Temp from './BranchList/tempforsharing';
 
-export default function AppMain({ onLogout, isPrivate, handleOnClick, currentUser, handleInput }) {
-
+export default function AppMain({ onLogout, isPrivate, handleOnClick, currentUser, onCreateBranch, onLoad, handleInput }) {
   return (
     <>
       <AppHeader
@@ -27,6 +29,8 @@ export default function AppMain({ onLogout, isPrivate, handleOnClick, currentUse
           <Temp currentUser={currentUser} />
         </Route>
       </Switch>
+      <Editor />
+      {/* <TestForm user={currentUser} onCreateBranch={onCreateBranch} /> */}
     </>
   );
 }
