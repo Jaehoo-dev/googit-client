@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import AppEntrance from '../../components/AppEntrance';
 import AppMain from '../../components/AppMain';
-import { setCurrentUser, setHasToken, initializeStore, setIsPrivate, initializeNoteList } from '../../actions';
+import { setCurrentUser, setHasToken, initializeStore, setIsPrivate, initializeBranchList } from '../../actions';
 import Loading from '../../components/shared/Loading';
-import fetchNoteList from '../../api/noteListFetch';
+import fetchBranchList from '../../api/branchListFetch';
 
 function AppContainer({
   hasToken,
@@ -15,11 +15,12 @@ function AppContainer({
   onCreateBranch,
   togglePrivateMode,
   isPrivate,
-  getNoteList,
-  noteList
+  getBranchList,
+  noteList,
 }) {
 
   const history = useHistory();
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     if (!hasToken) {
@@ -52,13 +53,20 @@ function AppContainer({
   }, []);
 
   useEffect(() => {
-    console.log(isPrivate, 'note list');
-    async function getNoteList() {
-    const noteList = await fetchNoteList(isPrivate, currentUser);
-    getNoteList(noteList);
+    async function loadNoteList() {
+      const branchList = await fetchBranchList(currentUser, isPrivate, searchQuery);
+      console.log(branchList, ' test');
+      getBranchList(branchList);
     }
-    if (currentUser) getNoteList();
-  }, [isPrivate, currentUser]);
+    if (currentUser) loadNoteList();
+  }, [currentUser, isPrivate, searchQuery]);
+
+  function handleInput(e) {
+    // console.log(e.target.keywords.value, 'submit');
+    const userInput = e.target.keywords.value;
+    if (!userInput) return;
+    setSearchQuery(e.target.keywords.value);
+  }
 
   return (
     <>
@@ -77,8 +85,9 @@ function AppContainer({
           isPrivate={isPrivate}
           handleOnClick={togglePrivateMode}
           currentUser={currentUser}
+          handleInput={handleInput}
           onCreateBranch={onCreateBranch}
-          onLoad={getNoteList}
+          onLoad={getBranchList}
         />
       }
     </>
@@ -100,8 +109,8 @@ function mapDispatchToProps(dispatch) {
     togglePrivateMode() {
       dispatch(setIsPrivate());
     },
-    getNoteList(noteList) {
-      dispatch(initializeNoteList(noteList)) //naming
+    getBranchList(branchList) {
+      dispatch(initializeBranchList(branchList)); //naming
     }
   };
 }

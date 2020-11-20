@@ -1,4 +1,4 @@
-import { SET_IS_PRIVATE, INIT_NOTE_LIST } from '../constants';
+import { SET_IS_PRIVATE, INIT_BRANCH_LIST } from '../constants';
 
 export const setCurrentUser = user => ({
   type: 'setCurrentUser',
@@ -17,7 +17,7 @@ export const setIsPrivate = () => ({
   type: SET_IS_PRIVATE,
 });
 
-export const initializeNoteList = noteList => ({
-  type: INIT_NOTE_LIST,
+export const initializeBranchList = noteList => ({
+  type: INIT_BRANCH_LIST,
   payload: noteList
 });
