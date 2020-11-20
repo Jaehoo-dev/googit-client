@@ -6,6 +6,7 @@ import AppMain from '../../components/AppMain';
 import { setCurrentUser, setHasToken, initializeStore, setIsPrivate, initializeBranchList } from '../../actions';
 import Loading from '../../components/shared/Loading';
 import fetchBranchList from '../../api/branchListFetch';
+import EditorPage from '../EditorContainer';
 
 function AppContainer({
   hasToken,
@@ -17,15 +18,14 @@ function AppContainer({
   isPrivate,
   getBranchList,
   noteList,
+  currentNote,
 }) {
-
   const history = useHistory();
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     if (!hasToken) {
       history.push('/login');
-
       return;
     }
 
@@ -55,16 +55,18 @@ function AppContainer({
   useEffect(() => {
     async function loadNoteList() {
       const branchList = await fetchBranchList(currentUser, isPrivate, searchQuery);
-      console.log(branchList, ' test');
+
       getBranchList(branchList);
     }
+
     if (currentUser) loadNoteList();
   }, [currentUser, isPrivate, searchQuery]);
 
   function handleInput(e) {
-    // console.log(e.target.keywords.value, 'submit');
     const userInput = e.target.keywords.value;
+
     if (!userInput) return;
+
     setSearchQuery(e.target.keywords.value);
   }
 
@@ -78,7 +80,7 @@ function AppContainer({
         hasToken && !currentUser
         && <Loading text='정보를 불러오고 있어요' />
       }
-      {
+      {/* {
         hasToken && currentUser
         && <AppMain
           onLogout={onLogout}
@@ -86,8 +88,14 @@ function AppContainer({
           handleOnClick={togglePrivateMode}
           currentUser={currentUser}
           handleInput={handleInput}
-          onCreateBranch={onCreateBranch}
           onLoad={getBranchList}
+        />
+      } */}
+      {
+        hasToken && currentUser
+        && <EditorPage
+          currentNote={currentNote}
+          onCreateBranch={onCreateBranch}
         />
       }
     </>
@@ -120,7 +128,8 @@ function mapStateToProps(state) {
     hasToken: state.hasToken,
     currentUser: state.currentUser,
     isPrivate: state.isPrivate,
-    noteList: state.noteList
+    noteList: state.noteList,
+    currentNote: state.currentNote,
   };
 }
 
