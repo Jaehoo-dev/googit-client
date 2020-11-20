@@ -12,19 +12,17 @@ export default function EditorPage({
   newNoteCandidate,
   onCreateBranch,
   onSave,
+  currentNote,
 }) {
   // if isChanged, disable arrows
   // if isShowChangesMode, 누가 언제 작성했는지 보여줌
   // if !isLatestNote, contentEditable=false
 
-  useEffect(() => {
-
-  }, []);
-
   return (
     <>
       <EditorPageHeader
         currentUser={currentUser}
+        currentNote={currentNote}
         isShowChangesMode={isShowChangesMode}
         onShowChangesModeToggle={onShowChangesModeToggle}
         isChanged={isChanged}

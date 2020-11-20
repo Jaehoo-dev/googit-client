@@ -120,8 +120,10 @@ export default function EditorPageHeader({
     // initialize states related to Editor state..
     // what if user presses back button in the browser?
   }
-
+  console.log(currentNote);
   async function submitHandler() {
+    // why is currentNode undefined???
+    console.log(currentNote);
     const isBrandNew = !currentNote;
 
     let branchCreateResponse;
@@ -175,8 +177,6 @@ export default function EditorPageHeader({
       onCreateBranch(branchCreateResponse.updatedUser);
     }
 
-    console.log(noteCreateResponse);
-
     onSave(noteCreateResponse.newNote);
   }
 
@@ -188,15 +188,15 @@ export default function EditorPageHeader({
       {
         !isChanged
         && <ArrowsWrapper>
-          {/* {
-            note.previous_version && */}
-          <Arrow direction='left' />
-          {/* } */}
+          {
+            currentNote?.previous_version
+            && <Arrow direction='left' />
+          }
           <Blank />
-          {/* {
-            note.next_version && */}
-          <Arrow direction='right' />
-          {/* } */}
+          {
+            currentNote?.next_version
+            && <Arrow direction='right' />
+          }
         </ArrowsWrapper>
       }
       <ToggleButtonWrapper>
