@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SET_IS_PRIVATE, INIT_BRANCH_LIST } from '../constants';
+import { SET_IS_PRIVATE, INIT_BRANCH_LIST } from '../constants/actionTypes';
 
 const hasToken = (
   state = !!localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN),
@@ -7,7 +7,7 @@ const hasToken = (
 ) => {
   switch (action.type) {
     case 'setHasToken':
-      return (state = !!localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN));
+      return state = !!localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN);
     default:
       return state;
   }
@@ -16,7 +16,7 @@ const hasToken = (
 const currentUser = (state = null, action) => {
   switch (action.type) {
     case 'setCurrentUser':
-      return (state = action.user);
+      return state = action.user;
     default:
       return state;
   }
@@ -40,11 +40,55 @@ const branchList = (state = [], action) => {
   }
 };
 
+const isShowChangesMode = (state = false, action) => {
+  switch (action.type) {
+    case 'toggleShowChangesMode':
+      return !state;
+    default:
+      return state;
+  }
+};
+
+const isChanged = (state = false, action) => {
+  switch (action.type) {
+    case 'setIsChangedToTrue':
+      return true;
+    case 'setIsChangedToFalse':
+      return false;
+    default:
+      return state;
+  }
+};
+
+const newNoteCandidate = (state = null, action) => {
+  switch (action.type) {
+    case 'setNewNoteCandidate':
+      return action.newNote;
+    case 'removeNewNoteCandidate':
+      return null;
+    default:
+      return state;
+  }
+};
+
+const currentNote = (state = null, action) => {
+  switch (action.type) {
+    case 'setCurrentNote':
+      return action.note;
+    default:
+      return state;
+  }
+};
+
 const appReducer = combineReducers({
   hasToken,
   currentUser,
   isPrivate,
-  branchList
+  branchList,
+  isShowChangesMode,
+  isChanged,
+  newNoteCandidate,
+  currentNote,
 });
 
 export default function rootReducer(state, action) {

@@ -1,7 +1,5 @@
 export default async function fetchBranchList(currentUser, isPrivate, searchQuery) {
   try {
-    // isPrivate ? console.log('private note fetch called') : console.log('recent note fetch called');
-    console.log('search Query ajax');
     const userId = currentUser._id;
     const query = searchQuery || '';
 
@@ -20,6 +18,7 @@ export default async function fetchBranchList(currentUser, isPrivate, searchQuer
     response = await response.json();
     return response.data;
   } catch (err) {
+    console.log('여기');
     console.error(err, 'note list error');
   }
 }

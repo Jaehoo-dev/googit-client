@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const GoogleAuthBtn = styled.button`
+export const StyledGoogleAuthButton = styled.button`
   display: flex;
   background: white;
   color: #444;
@@ -33,23 +32,3 @@ const GoogleAuthBtn = styled.button`
     font-family: 'Roboto', sans-serif;
   }
 `;
-
-export default function GoogleAuthButton({
-  signupOrLogin,
-  onClick,
-}) {
-  function clickHandler() {
-    onClick();
-  }
-
-  return (
-    <GoogleAuthBtn onClick={clickHandler}>
-      <img
-        className='icon'
-        src='/images/G-logo.png'
-        alt=''
-      />
-      <span className='buttonText'>{signupOrLogin} with Google</span>
-    </GoogleAuthBtn>
-  );
-}

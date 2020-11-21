@@ -30,7 +30,12 @@ export default function ProfileIcon({ handleOnClick }) {
           <Button toggleModal={toggleModal}>계정관리</Button>
         </Link>
         <Link to='/'>
-          <Button toggleModal={toggleModal}>로그아웃</Button>
+          <Button
+            handleOnClick={handleOnClick}
+            toggleModal={toggleModal}
+          >
+            로그아웃
+          </Button>
         </Link>
       </Modal>
     </Wrapper>
