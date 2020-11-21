@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import EditorPage from '../../pages/EditorPage';
-import { toggleShowChangesMode, setIsChangedToTrue, setIsChangedToFalse, setNewNoteCandidate, removeNewNoteCandidate, setCurrentNote } from '../../actions';
+import EditorPage from '../pages/EditorPage';
+import { toggleShowChangesMode, setIsChangedToTrue, setIsChangedToFalse, setNewNoteCandidate, removeNewNoteCandidate, setCurrentNote } from '../actions';
 
 function mapDispatchToProps(dispatch) {
   return {

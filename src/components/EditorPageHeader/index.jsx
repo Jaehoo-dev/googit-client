@@ -16,11 +16,10 @@ import {
 } from './styledComponents';
 import Button, {
   homeButtonTheme,
-  showChangesButtonTheme,
   deleteButtonTheme,
-  shareButtonTheme,
+  coralButtonTheme,
   saveButtonTheme,
-} from '../Button';
+} from '../shared/Button';
 
 export default function EditorPageHeader({
   isShowChangesMode,
@@ -60,7 +59,7 @@ export default function EditorPageHeader({
         <ShowChangesButtonWrapper>
           {
             currentNote
-            && <ThemeProvider theme={showChangesButtonTheme}>
+            && <ThemeProvider theme={coralButtonTheme}>
               <Button onClick={onShowChangesModeToggle}>
                 {
                   isShowChangesMode ? '수정사항 숨기기' : '수정사항 보기'
@@ -89,7 +88,7 @@ export default function EditorPageHeader({
         <ShareButtonWrapper>
           {
             currentNote
-            && <ThemeProvider theme={shareButtonTheme}>
+            && <ThemeProvider theme={coralButtonTheme}>
               <Button>공유</Button>
             </ThemeProvider>
           }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Entrance from '../../components/Entrance';
-import AppMain from '../../components/AppMain';
+import MainPage from '../../pages/MainPage';
 import Loading from '../../components/shared/Loading';
 import fetchBranchList from '../../api/branchListFetch';
 import EditorPage from '../../containers/EditorContainer';
@@ -14,7 +14,7 @@ export default function App({
   onLogout,
   onCreateBranch,
   togglePrivateMode,
-  isPrivate,
+  isPrivateMode,
   getBranchList,
   noteList,
   currentNote,
@@ -41,50 +41,50 @@ export default function App({
 
   useEffect(() => {
     async function loadNoteList() {
-      const branchList = await fetchBranchList(currentUser, isPrivate, keyword);
+      const branchList = await fetchBranchList(currentUser, isPrivateMode, keyword);
 
       getBranchList(branchList);
     }
 
     if (currentUser) loadNoteList();
-  }, [currentUser, isPrivate, keyword]);
+  }, [currentUser, isPrivateMode, keyword]);
 
   function handleInput(e) {
-    const query = e.target.keywords.value;
+    const query = e.target.keyword.value;
 
     if (!query) return;
 
-    setKeyword(e.target.keywords.value);
+    setKeyword(query);
   }
 
   return (
     <>
-      {/* {
+      {
         !hasToken
         && <Entrance onLogin={onLogin} />
       }
       {
         hasToken && !currentUser
         && <Loading text='정보를 불러오고 있어요' />
-      } */}
-      {/* {
+      }
+      {
         hasToken && currentUser
-        && <AppMain
+        && <MainPage
           onLogout={onLogout}
-          isPrivate={isPrivate}
+          isPrivateMode={isPrivateMode}
           handleOnClick={togglePrivateMode}
           currentUser={currentUser}
           handleInput={handleInput}
           onLoad={getBranchList}
         />
-      } */}
-      {
+      }
+      {/* {
         hasToken && currentUser
         && <EditorPage
           currentNote={currentNote}
           onCreateBranch={onCreateBranch}
         />
-      }
+      } */}
     </>
   );
 }

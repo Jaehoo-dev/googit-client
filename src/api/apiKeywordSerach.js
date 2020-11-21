@@ -1,9 +1,9 @@
 //userinput을 escape해야하나?
 //태그가 들어오면? 리액트가 알아서 이스케이프?
 
-export async function apiSearchNoteByKeywords(keyword) {
+export async function apiSearchNoteByKeyword(keyword) {
   try {
-    console.log('search by keywords fetch');
+    console.log('search by keyword fetch');
     let response = await fetch(`/users/123123/branches?q=${keyword}`, {
       method: 'GET',
       mode: 'cors',
@@ -11,7 +11,7 @@ export async function apiSearchNoteByKeywords(keyword) {
     response = response.json();
     return response;
   } catch (err) {
-    console.error(err, 'apiKeywords error');
+    console.error(err, 'apiKeyword error');
   }
 }
 

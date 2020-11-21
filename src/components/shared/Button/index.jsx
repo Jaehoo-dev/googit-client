@@ -5,12 +5,8 @@ export default function Button({
   children,
   onClick,
 }) {
-  function clickHandler() {
-    onClick();
-  }
-
   return (
-    <StyledButton onClick={clickHandler}>
+    <StyledButton onClick={onClick}>
       {children}
     </StyledButton>
   );
@@ -22,18 +18,13 @@ export const homeButtonTheme = {
   fontWeight: 900,
 };
 
-export const showChangesButtonTheme = {
-  backgroundColor: '#f08080',
-  fontSize: '16px',
-};
-
 export const deleteButtonTheme = {
   color: 'red',
   backgroundColor: 'white',
   fontSize: '12px',
 };
 
-export const shareButtonTheme = {
+export const coralButtonTheme = {
   backgroundColor: '#f08080',
   fontSize: '16px',
 };
@@ -41,4 +32,8 @@ export const shareButtonTheme = {
 export const saveButtonTheme = {
   fontSize: '18px',
   fontWeight: 700,
+};
+
+export const searchButtonTheme = {
+  backgroundColor: 'transparent'
 };

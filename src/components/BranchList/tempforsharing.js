@@ -17,9 +17,7 @@ export default function SharingFunc({ currentUser }) {
     setIsModalOpen(!isModalOpen);
   }
 
-
   useEffect(() => {
-
     async function createBranchSharingInfo() {
 
       const res = await fetch('http://localhost:4000/users/:user_id/branches/5fb381c8664091175a0e7b3f/share', {
@@ -34,8 +32,8 @@ export default function SharingFunc({ currentUser }) {
           sharingInfo
         })
       });
-
     }
+
     if (!isEmpty(sharingInfo)) createBranchSharingInfo();
   }, [sharingInfo]);
 
@@ -56,9 +54,6 @@ export default function SharingFunc({ currentUser }) {
     setEmail('');
     setSharingInfo(sharingInfo);
   }
-
-
-
 
   return (
     <Wrapper>

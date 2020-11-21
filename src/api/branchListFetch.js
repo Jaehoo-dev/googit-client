@@ -1,12 +1,11 @@
-export default async function fetchBranchList(currentUser, isPrivate, searchQuery) {
+export default async function fetchBranchList(currentUser, isPrivateMode, searchQuery) {
   try {
     const userId = currentUser._id;
     const query = searchQuery || '';
 
-    let fetchUrl = `http://localhost:4000/users/${userId}/branches/?q=${query}&private=${isPrivate}&limit=10`;
-    // let fetchUrl = `http://localhost:4000/users/${userId}/branches/?q=${query}&private=${isPrivate}&limit=10&skip=${skip}`;
+    const fetchUrl = `http://localhost:4000/users/${userId}/branches/?q=${query}&private=${isPrivateMode}&limit=10`;
 
-    let response = await fetch(fetchUrl, {
+    const res = await fetch(fetchUrl, {
       method: 'GET',
       mode: 'cors',
       headers: {
@@ -15,7 +14,8 @@ export default async function fetchBranchList(currentUser, isPrivate, searchQuer
       }
     });
 
-    response = await response.json();
+    const response = await res.json();
+
     return response.data;
   } catch (err) {
     console.log('여기');
