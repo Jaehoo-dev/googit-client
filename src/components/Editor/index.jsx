@@ -1,36 +1,7 @@
 import React, { useRef, useEffect } from 'react';
-import styled from 'styled-components';
+import { Wrapper, TitleBlock, ContentBlock, SubmitButton } from './styledComponents';
 import Toolbar from '../Toolbar';
 import dompurify from 'dompurify';
-
-const Wrapper = styled.div`
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 85px;
-  margin-bottom: 20px;
-  width: 560px;
-  border-radius: .5em;
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
-`;
-
-const TitleBlock = styled.div`
-  padding: 0 20px 0 20px;
-
-  h2 {
-    margin-block-end: 0;
-  }
-`;
-
-const ContentBlock = styled.div`
-  padding: 0 20px 20px 20px;
-  margin-top: 15px;
-`;
-
-const SubmitButton = styled.button`
-  position: relative;
-  top: 100px;
-`;
 
 export default function Editor({
   onNoteChange,
@@ -38,10 +9,6 @@ export default function Editor({
   currentBranch,
   currentNote,
 }) {
-  // const currentNote = {
-  //   title: 'Title',
-  //   content: 'Magna do ex.&nbsp;<div>Lorem ad <b>pariatur</b> ut&nbsp; ut. or <span style="background-color: yellow;">commodo</span> laboris est. Duis proident. Eiusmod anim excepteur id mollit Lorem dolor mollit in proident. Esse aliquip eiusmod in eu exercitation culpa magna sint labore reprehenderit. Excepteur nostrud eiusmod irure eu laboris enim ipsum incididunt irure exercitation duis nulla mollit. Duis ut adipisicing ad officia culpa eu aute reprehenderit deserunt cupidatat ex cillum. Ut pariatur dolore reprehenderit sint occaecat magna.<script>alert("hi")</script></div>'
-  // };
   const sanitizer = dompurify.sanitize;
   const titleRef = useRef();
   const contentRef = useRef();
@@ -128,7 +95,6 @@ export default function Editor({
           }}
         />
       </Wrapper>
-      <SubmitButton onClick={submitHandler}>제출</SubmitButton>
     </>
   );
 }

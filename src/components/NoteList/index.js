@@ -6,7 +6,6 @@ import NoteListBody from './NoteListBody';
 
 const Wrapper = styled.div`
   margin-top: 6em;
-  
 `;
 
 export default function AppNoteList({ isPrivate }) {
@@ -20,7 +19,8 @@ export default function AppNoteList({ isPrivate }) {
   const tempNote = [1, 'title1', 'han', 20201116, 'shared'];
 
   notes = [];
-  for (var i = 0; i < 10; i++) {
+
+  for (let i = 0; i < 10; i++) {
     notes.push(tempNote);
   }
 

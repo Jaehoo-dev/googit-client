@@ -4,7 +4,7 @@ import { IslandWrapper } from '../shared/IslandWrapper';
 import GoogleAuthButton from './GoogleAuthButton';
 import { auth, provider } from '../../config/firebase';
 
-export default function AppEntrance({ onLogin }) {
+export default function Entrance({ onLogin }) {
   const history = useHistory();
   const { pathname } = useLocation();
 

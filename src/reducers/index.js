@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SET_IS_PRIVATE, INIT_BRANCH_LIST } from '../constants';
+import { SET_IS_PRIVATE, INIT_BRANCH_LIST } from '../constants/actionTypes';
 
 const hasToken = (
   state = !!localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN),

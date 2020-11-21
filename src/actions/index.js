@@ -1,4 +1,4 @@
-import { SET_IS_PRIVATE, INIT_BRANCH_LIST } from '../constants';
+import { SET_IS_PRIVATE, INIT_BRANCH_LIST } from '../constants/actionTypes';
 
 export const setCurrentUser = user => ({
   type: 'setCurrentUser',
