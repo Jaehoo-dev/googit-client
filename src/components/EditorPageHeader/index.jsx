@@ -51,7 +51,7 @@ export default function EditorPageHeader({
   }
 
   function displayPreviousNote() {
-    // currentNote
+
   }
 
   return (

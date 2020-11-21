@@ -51,10 +51,6 @@ export default function Editor({
   }
 
   function submitHandler() {
-    // const title = document.getElementById('title').textContent;
-    // const content = document.getElementById('content').innerHTML;
-
-    // console.log({ title, content });
     console.log({
       title: titleRef.current,
       content: sanitizer(contentRef.current),

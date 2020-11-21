@@ -18,8 +18,6 @@ export default function EditorPage({
   currentNote,
   onNoteLoad,
 }) {
-  // if !isLatestNote, contentEditable=false
-
   const history = useHistory();
 
   function homeButtonClickHandler() {
