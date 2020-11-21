@@ -24,7 +24,7 @@ const Header = styled.header`
   }
 `;
 
-export default function AppHeader({ onLogout, isPrivate, handleOnClick, handleInput, currentUser }) {
+export default function MainHeader({ onLogout, isPrivate, handleOnClick, handleInput, currentUser }) {
   const history = useHistory();
 
   async function logoutClickHandler() {

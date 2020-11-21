@@ -1,9 +1,27 @@
 import React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import Button from '../../Button';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   margin-left: 2em;
+`;
+
+const Button = styled.button`
+  margin-top: 5px;
+  color: #04040a !important;
+  text-decoration: none;
+  background: #9e9ea8;
+  padding: 10px;
+  border: 1px solid #9e9ea8 !important;
+  display: inline-block;
+  transition: all 0.4s ease 0s;
+  border-radius: 20px;
+
+  &:hover {
+    color: #ffffff !important;
+    background: #f6b93b;
+    border-color: #f6b93b !important;
+    transition: all 0.4s ease 0s;
+  }
 `;
 
 export default function PrivateNoteModeButton({ buttonMode, handleOnClick }) {
@@ -12,9 +30,7 @@ export default function PrivateNoteModeButton({ buttonMode, handleOnClick }) {
 
   return (
     <Wrapper>
-      <ThemeProvider>
-        <Button onClick={handleOnClick}>{content}</Button>
-      </ThemeProvider>
+      <Button onClick={handleOnClick}>{content}</Button>
     </Wrapper>
   );
 }

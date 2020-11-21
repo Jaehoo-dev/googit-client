@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Entrance from '../../components/Entrance';
-import AppMain from '../../components/AppMain';
+import MainPage from '../../pages/MainPage';
 import Loading from '../../components/shared/Loading';
 import fetchBranchList from '../../api/branchListFetch';
 import EditorPage from '../../containers/EditorContainer';
@@ -59,17 +59,17 @@ export default function App({
 
   return (
     <>
-      {/* {
+      {
         !hasToken
         && <Entrance onLogin={onLogin} />
       }
       {
         hasToken && !currentUser
         && <Loading text='정보를 불러오고 있어요' />
-      } */}
-      {/* {
+      }
+      {
         hasToken && currentUser
-        && <AppMain
+        && <MainPage
           onLogout={onLogout}
           isPrivate={isPrivate}
           handleOnClick={togglePrivateMode}
@@ -77,14 +77,14 @@ export default function App({
           handleInput={handleInput}
           onLoad={getBranchList}
         />
-      } */}
-      {
+      }
+      {/* {
         hasToken && currentUser
         && <EditorPage
           currentNote={currentNote}
           onCreateBranch={onCreateBranch}
         />
-      }
+      } */}
     </>
   );
 }
