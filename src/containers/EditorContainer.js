@@ -26,8 +26,8 @@ function mapStateToProps(state) {
     currentNote: state.currentNote,
     isShowChangesMode: state.isShowChangesMode,
     isChanged: state.isChanged,
-    // isLatestNote: state.isLastNote,
     newNoteCandidate: state.newNoteCandidate,
+    authorName: state.authorName,
   };
 }
 

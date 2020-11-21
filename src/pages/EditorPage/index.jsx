@@ -16,6 +16,7 @@ export default function EditorPage({
   onCreateBranch,
   onSave,
   currentNote,
+  onNoteLoad,
 }) {
   // if !isLatestNote, contentEditable=false
 
@@ -62,6 +63,7 @@ export default function EditorPage({
         isChanged={isChanged}
         onHomeButtonClick={homeButtonClickHandler}
         onSubmit={submitHandler}
+        onNoteLoad={onNoteLoad}
       />
       <Editor
         onEditorFocusOrBlur={onEditorFocusOrBlur}
