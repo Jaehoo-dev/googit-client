@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, Link, useHistory } from 'react-router-dom';
-import { IslandWrapper } from '../shared/IslandWrapper';
+import { IslandWrapper } from '../shared/IslandWrapper/IslandWrapper';
 import GoogleAuthButton from './GoogleAuthButton';
 import { auth, provider } from '../../config/firebase';
 

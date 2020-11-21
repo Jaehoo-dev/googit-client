@@ -14,7 +14,7 @@ export default function App({
   onLogout,
   onCreateBranch,
   togglePrivateMode,
-  isPrivate,
+  isPrivateMode,
   getBranchList,
   noteList,
   currentNote,
@@ -41,20 +41,20 @@ export default function App({
 
   useEffect(() => {
     async function loadNoteList() {
-      const branchList = await fetchBranchList(currentUser, isPrivate, keyword);
+      const branchList = await fetchBranchList(currentUser, isPrivateMode, keyword);
 
       getBranchList(branchList);
     }
 
     if (currentUser) loadNoteList();
-  }, [currentUser, isPrivate, keyword]);
+  }, [currentUser, isPrivateMode, keyword]);
 
   function handleInput(e) {
-    const query = e.target.keywords.value;
+    const query = e.target.keyword.value;
 
     if (!query) return;
 
-    setKeyword(e.target.keywords.value);
+    setKeyword(query);
   }
 
   return (
@@ -71,7 +71,7 @@ export default function App({
         hasToken && currentUser
         && <MainPage
           onLogout={onLogout}
-          isPrivate={isPrivate}
+          isPrivateMode={isPrivateMode}
           handleOnClick={togglePrivateMode}
           currentUser={currentUser}
           handleInput={handleInput}

@@ -4,22 +4,21 @@ import BranchList from '../../components/BranchList';
 
 export default function AppMain({
   onLogout,
-  isPrivate,
+  isPrivateMode,
   handleOnClick,
   currentUser,
-  onLoad,
   handleInput,
 }) {
   return (
     <>
       <MainHeader
-        isPrivate={isPrivate}
+        isPrivateMode={isPrivateMode}
         handleOnClick={handleOnClick}
         onLogout={onLogout}
         handleInput={handleInput}
         currentUser={currentUser}
       />
-      <BranchList isPrivate={isPrivate} currentUser={currentUser} />
+      <BranchList isPrivateMode={isPrivateMode} currentUser={currentUser} />
     </>
   );
 }

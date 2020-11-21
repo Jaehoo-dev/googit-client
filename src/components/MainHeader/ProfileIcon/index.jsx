@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import { Wrapper, ProfileImg } from '../styledComponents';
+import { ThemeProvider } from 'styled-components';
 import { Link } from 'react-router-dom';
 import Modal, { ModalCloseButton } from '../../shared/Modal';
-import Button from '../../shared/Button';
+import Button, { coralButtonTheme } from '../../shared/Button';
 
-const Wrapper = styled.div`
-  margin-right: 2em;
-`;
-
-const ProfileImg = styled.img`
-  width: 1em;
-`;
-
-export default function ProfileIcon({ handleOnClick }) {
+export default function ProfileIcon({ onClick }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   function toggleModal() {
     setIsModalOpen(!isModalOpen);
+  }
+
+  function clickHandler() {
+    onClick();
   }
 
   return (
@@ -27,15 +24,16 @@ export default function ProfileIcon({ handleOnClick }) {
       <Modal isOpen={isModalOpen} toggleModal={toggleModal} >
         <ModalCloseButton toggleModal={toggleModal} />
         <Link to='/profile/edit'>
-          <Button toggleModal={toggleModal}>계정관리</Button>
+          <ThemeProvider theme={coralButtonTheme}>
+            <Button toggleModal={toggleModal}>계정관리</Button>
+          </ThemeProvider>
         </Link>
         <Link to='/'>
-          <Button
-            handleOnClick={handleOnClick}
-            toggleModal={toggleModal}
-          >
-            로그아웃
-          </Button>
+          <ThemeProvider theme={coralButtonTheme}>
+            <Button onClick={clickHandler} toggleModal={toggleModal}>
+              로그아웃
+            </Button>
+          </ThemeProvider>
         </Link>
       </Modal>
     </Wrapper>

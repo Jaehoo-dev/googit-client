@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   margin-top: 6em;
 `;
 
-export default function BranchList({ isPrivate, currentUser }) {
+export default function BranchList({ isPrivateMode, currentUser }) {
   let notes;
 
   const tempNote = [1, 'title1', 'han', 20201116, 'shared'];
