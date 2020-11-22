@@ -8,6 +8,7 @@ export default function AppMain({
   handleOnClick,
   currentUser,
   handleInput,
+  branchList
 }) {
   return (
     <>
@@ -18,7 +19,11 @@ export default function AppMain({
         handleInput={handleInput}
         currentUser={currentUser}
       />
-      <BranchList isPrivateMode={isPrivateMode} currentUser={currentUser} />
+      <BranchList
+        isPrivateMode={isPrivateMode}
+        currentUser={currentUser}
+        branchList={branchList}
+      />
     </>
   );
 }

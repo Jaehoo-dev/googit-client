@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Entrance from '../../components/Entrance';
 import MainPage from '../../pages/MainPage';
 import Loading from '../../components/shared/Loading';
-import fetchBranchList from '../../api/branchListFetch';
+import requestBranchList from '../../api/requestBranchList';
 import EditorPage from '../../containers/EditorContainer';
 import requestCurrentUser from '../../api/requestCurrentUser';
 
@@ -16,7 +16,7 @@ export default function App({
   togglePrivateMode,
   isPrivateMode,
   getBranchList,
-  noteList,
+  branchList,
   currentNote,
 }) {
   const history = useHistory();
@@ -40,13 +40,12 @@ export default function App({
   }, []);
 
   useEffect(() => {
-    async function loadNoteList() {
-      const branchList = await fetchBranchList(currentUser, isPrivateMode, keyword);
-
+    async function loadBranchList() {
+      const branchList = await requestBranchList(currentUser, isPrivateMode, keyword);
       getBranchList(branchList);
     }
 
-    if (currentUser) loadNoteList();
+    if (currentUser) loadBranchList();
   }, [currentUser, isPrivateMode, keyword]);
 
   function handleInput(event) {
@@ -59,7 +58,7 @@ export default function App({
 
   return (
     <>
-      {/* {
+      {
         !hasToken
         && <Entrance onLogin={onLogin} />
       }
@@ -75,16 +74,17 @@ export default function App({
           handleOnClick={togglePrivateMode}
           currentUser={currentUser}
           handleInput={handleInput}
+          branchList={branchList}
           onLoad={getBranchList}
         />
-      } */}
-      {
+      }
+      {/* {
         hasToken && currentUser
         && <EditorPage
           currentNote={currentNote}
           onCreateBranch={onCreateBranch}
         />
-      }
+      } */}
     </>
   );
 }

@@ -28,7 +28,7 @@ function mapStateToProps(state) {
     hasToken: state.hasToken,
     currentUser: state.currentUser,
     isPrivateMode: state.isPrivateMode,
-    noteList: state.noteList,
+    branchList: state.branchList,
     currentNote: state.currentNote,
   };
 }

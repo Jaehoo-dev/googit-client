@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import Modal, { ModalCloseButton, themeSharing } from '../../shared/Modal';
+import Modal, { ModalCloseButton, themeSharing } from '../shared/Modal'
 import { isEmpty } from 'lodash';
 
 const Wrapper = styled.div`
@@ -20,7 +20,7 @@ export default function SharingFunc({ currentUser }) {
   useEffect(() => {
     async function createBranchSharingInfo() {
 
-      const res = await fetch('http://localhost:4000/users/:user_id/branches/5fb381c8664091175a0e7b3f/share', {
+      const res = await fetch('http://localhost:4000/users/:user_id/branches/5fb804bd3e0ce3ba997161e0/share', {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -32,8 +32,16 @@ export default function SharingFunc({ currentUser }) {
           sharingInfo
         })
       });
-    }
 
+      if (res.result === 'failure') {
+        alert('이미 공유된 유저입니다.');
+        return;
+      }
+
+      alert('성공적으로 공유 되었습니다.')
+      setIsModalOpen(!isModalOpen);
+      return;
+    }
     if (!isEmpty(sharingInfo)) createBranchSharingInfo();
   }, [sharingInfo]);
 

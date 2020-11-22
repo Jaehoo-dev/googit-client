@@ -1,11 +1,11 @@
-export default async function fetchBranchList(currentUser, isPrivateMode, searchQuery) {
+export default async function requestBranchList(currentUser, isPrivateMode, searchQuery) {
   try {
     const userId = currentUser._id;
     const query = searchQuery || '';
 
     const fetchUrl = `http://localhost:4000/users/${userId}/branches/?q=${query}&private=${isPrivateMode}&limit=10`;
 
-    const res = await fetch(fetchUrl, {
+    let response = await fetch(fetchUrl, {
       method: 'GET',
       mode: 'cors',
       headers: {
@@ -14,11 +14,16 @@ export default async function fetchBranchList(currentUser, isPrivateMode, search
       }
     });
 
-    const response = await res.json();
+    response = await response.json();
+
+    if (response.result === 'failure') {
+      alert('브랜치를 받아오는 중 문제가 생겼어요');
+
+      return;
+    }
 
     return response.data;
   } catch (err) {
-    console.log('여기');
     console.error(err, 'note list error');
   }
 }

@@ -12,13 +12,14 @@ const Wrapper = styled.div`
 
   section {
     display: grid;
-    grid-template-columns: 2em 2fr 1fr 10em 5em;
+    grid-template-columns: 2em 1fr 1fr 15em 5em;
     grid-gap: 1em;
     align-items: center;
+    padding: 0 2em;
   }
 `;
 
-export default function NoteListHead() {
+export default function BranchListHead() {
   return (
     <Wrapper>
       <section>
