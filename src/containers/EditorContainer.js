@@ -1,20 +1,27 @@
 import { connect } from 'react-redux';
 import EditorPage from '../pages/EditorPage';
-import { toggleShowChangesMode, setIsChangedToTrue, setIsChangedToFalse, setNewNoteCandidate, removeNewNoteCandidate, setCurrentNote } from '../actions';
+import {
+  toggleShowChangesMode,
+  setIsChangedToTrue,
+  setIsChangedToFalse,
+  setNewBlocksCandidate,
+  removeNewBlocksCandidate,
+  setCurrentNote,
+} from '../actions';
 
 function mapDispatchToProps(dispatch) {
   return {
     onShowChangesModeToggle() {
       dispatch(toggleShowChangesMode());
     },
-    onNoteChange(newNote, isChanged) {
-      dispatch(setNewNoteCandidate(newNote));
+    onNoteChange(blocks, isChanged) {
+      dispatch(setNewBlocksCandidate(blocks));
       if (isChanged) return;
       dispatch(setIsChangedToTrue());
     },
     onSave(note) {
       dispatch(setIsChangedToFalse());
-      dispatch(removeNewNoteCandidate());
+      dispatch(removeNewBlocksCandidate());
       dispatch(setCurrentNote(note));
     },
   };
@@ -26,8 +33,8 @@ function mapStateToProps(state) {
     currentNote: state.currentNote,
     isShowChangesMode: state.isShowChangesMode,
     isChanged: state.isChanged,
-    // isLatestNote: state.isLastNote,
-    newNoteCandidate: state.newNoteCandidate,
+    newBlocksCandidate: state.newBlocksCandidate,
+    authorName: state.authorName,
   };
 }
 

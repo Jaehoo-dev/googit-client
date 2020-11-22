@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Header = styled.header`
   position: fixed;
-  min-width: 576px;
+  min-width: 1120px;
   width: 100%;
   top: 0;
   left: 0;
@@ -40,7 +40,7 @@ export const LeftWrapper = styled.div`
   display: flex;
   position: absolute;
   left: 10px;
-  width: 340px;
+  width: 330px;
   justify-content: space-around;
   align-items: center;
 `;
@@ -49,7 +49,7 @@ export const RightWrapper = styled.div`
   display: flex;
   position: absolute;
   right: 20px;
-  width: 240px;
+  width: 180px;
   justify-content: space-around;
   align-items: center;
 `;
@@ -84,5 +84,5 @@ export const ShowChangesButtonWrapper = styled.div`
 
 export const ModifyRecordWrapper = styled.div`
   position: absolute;
-  left: 370px;
+  left: 360px;
 `;

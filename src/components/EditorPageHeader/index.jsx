@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import {
   Header,
@@ -20,6 +20,7 @@ import Button, {
   coralButtonTheme,
   saveButtonTheme,
 } from '../shared/Button';
+import requestNoteAuthor from '../../api/requestNoteAuthor';
 
 export default function EditorPageHeader({
   isShowChangesMode,
@@ -29,12 +30,28 @@ export default function EditorPageHeader({
   onHomeButtonClick,
   onSubmit,
 }) {
+  const [authorName, setAuthorName] = useState(null);
+
+  useEffect(() => {
+    if (!currentNote) return;
+
+    getNoteAuthorName();
+
+    async function getNoteAuthorName() {
+      setAuthorName(await requestNoteAuthor(currentNote.created_by));
+    }
+  }, [currentNote]);
+
   function homeButtonClickHandler() {
     onHomeButtonClick();
   }
 
   function submitHandler() {
     onSubmit();
+  }
+
+  function displayPreviousNote() {
+
   }
 
   return (
@@ -48,7 +65,7 @@ export default function EditorPageHeader({
         <ArrowsWrapper>
           {
             currentNote?.previous_version
-            && <Arrow direction='left' />
+            && <Arrow direction='left' onClick={displayPreviousNote} />
           }
           <Blank />
           {
@@ -72,7 +89,7 @@ export default function EditorPageHeader({
       <ModifyRecordWrapper>
         {
           isShowChangesMode
-            ? `${currentNote.created_by}가 ${currentNote.updated_at}에 수정함`
+            ? `${authorName}가 ${currentNote.updated_at}에 수정함`
             : null
         }
       </ModifyRecordWrapper>

@@ -7,18 +7,16 @@ import requestCreateNote from '../../api/requestCreateNote';
 
 export default function EditorPage({
   currentUser,
-  onEditorFocusOrBlur,
   isShowChangesMode,
   onShowChangesModeToggle,
   isChanged,
   onNoteChange,
-  newNoteCandidate,
+  newBlocksCandidate,
   onCreateBranch,
   onSave,
   currentNote,
+  onNoteLoad,
 }) {
-  // if !isLatestNote, contentEditable=false
-
   const history = useHistory();
 
   function homeButtonClickHandler() {
@@ -28,26 +26,26 @@ export default function EditorPage({
   async function submitHandler() {
     const isBrandNew = !currentNote;
 
-    let branchCreateResponse;
+    let branchCreationResponse;
 
     if (isBrandNew) {
-      branchCreateResponse = await requestCreateBranch(currentUser);
+      branchCreationResponse = await requestCreateBranch(currentUser);
 
-      if (!branchCreateResponse) return;
+      if (!branchCreationResponse) return;
     }
 
     const branchId
       = isBrandNew
-        ? branchCreateResponse.branchId
-        : currentNote?.parent;
+        ? branchCreationResponse.branchId
+        : currentNote.parent;
 
     const noteCreateResponse
-      = await requestCreateNote(newNoteCandidate, currentUser, branchId);
+      = await requestCreateNote(newBlocksCandidate, currentUser, branchId);
 
     if (!noteCreateResponse) return;
 
     if (isBrandNew) {
-      onCreateBranch(branchCreateResponse.updatedUser);
+      onCreateBranch(branchCreationResponse.updatedUser);
     }
 
     onSave(noteCreateResponse.newNote);
@@ -62,9 +60,9 @@ export default function EditorPage({
         isChanged={isChanged}
         onHomeButtonClick={homeButtonClickHandler}
         onSubmit={submitHandler}
+        onNoteLoad={onNoteLoad}
       />
       <Editor
-        onEditorFocusOrBlur={onEditorFocusOrBlur}
         onNoteChange={onNoteChange}
         isChanged={isChanged}
       />

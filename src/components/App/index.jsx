@@ -49,8 +49,8 @@ export default function App({
     if (currentUser) loadNoteList();
   }, [currentUser, isPrivateMode, keyword]);
 
-  function handleInput(e) {
-    const query = e.target.keyword.value;
+  function handleInput(event) {
+    const query = event.target.keyword.value;
 
     if (!query) return;
 
@@ -59,7 +59,7 @@ export default function App({
 
   return (
     <>
-      {
+      {/* {
         !hasToken
         && <Entrance onLogin={onLogin} />
       }
@@ -77,14 +77,14 @@ export default function App({
           handleInput={handleInput}
           onLoad={getBranchList}
         />
-      }
-      {/* {
+      } */}
+      {
         hasToken && currentUser
         && <EditorPage
           currentNote={currentNote}
           onCreateBranch={onCreateBranch}
         />
-      } */}
+      }
     </>
   );
 }
