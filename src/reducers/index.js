@@ -40,7 +40,7 @@ const branchList = (state = [], action) => {
   }
 };
 
-const isShowChangesMode = (state = false, action) => {
+const isShowModificationsMode = (state = false, action) => {
   switch (action.type) {
     case 'toggleShowChangesMode':
       return !state;
@@ -49,11 +49,11 @@ const isShowChangesMode = (state = false, action) => {
   }
 };
 
-const isChanged = (state = false, action) => {
+const isModified = (state = false, action) => {
   switch (action.type) {
-    case 'setIsChangedToTrue':
+    case 'setIsModifiedToTrue':
       return true;
-    case 'setIsChangedToFalse':
+    case 'setIsModifiedToFalse':
       return false;
     default:
       return state;
@@ -73,8 +73,17 @@ const newBlocksCandidate = (state = null, action) => {
 
 const currentNote = (state = null, action) => {
   switch (action.type) {
-    case 'setCurrentNote':
+    case 'setCurrentNoteAndBranch':
       return action.note;
+    default:
+      return state;
+  }
+};
+
+const currentBranch = (state = null, action) => {
+  switch (action.type) {
+    case 'setCurrentNoteAndBranch':
+      return action.branch;
     default:
       return state;
   }
@@ -85,10 +94,11 @@ const appReducer = combineReducers({
   currentUser,
   isPrivateMode,
   branchList,
-  isShowChangesMode,
-  isChanged,
+  isShowModificationsMode,
+  isModified,
   newBlocksCandidate,
   currentNote,
+  currentBranch,
 });
 
 export default function rootReducer(state, action) {

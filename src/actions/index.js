@@ -26,12 +26,12 @@ export const toggleShowChangesMode = () => ({
   type: 'toggleShowChangesMode',
 });
 
-export const setIsChangedToTrue = () => ({
-  type: 'setIsChangedToTrue',
+export const setIsModifiedToTrue = () => ({
+  type: 'setIsModifiedToTrue',
 });
 
-export const setIsChangedToFalse = () => ({
-  type: 'setIsChangedToFalse',
+export const setIsModifiedToFalse = () => ({
+  type: 'setIsModifiedToFalse',
 });
 
 export const setNewBlocksCandidate = newNote => ({
@@ -43,7 +43,8 @@ export const removeNewBlocksCandidate = () => ({
   type: 'removeNewBlocksCandidate',
 });
 
-export const setCurrentNote = note => ({
-  type: 'setCurrentNote',
+export const setCurrentNoteAndBranch = (note, branch) => ({
+  type: 'setCurrentNoteAndBranch',
   note,
+  branch,
 });

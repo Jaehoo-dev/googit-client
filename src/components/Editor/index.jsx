@@ -6,8 +6,8 @@ import HoveringToolbar from './HoveringToolbar';
 import Leaf from './Leaf';
 
 export default function Editor({
-  onNoteChange,
-  isChanged,
+  onNoteModify,
+  isModified,
 }) {
   const editor = useMemo(() => withReact(createEditor()), []);
   const [value, setValue] = useState([
@@ -30,7 +30,7 @@ export default function Editor({
           if (newValue === value) return;
 
           setValue(newValue);
-          onNoteChange(newValue, isChanged);
+          onNoteModify(newValue, isModified);
         }}
       >
         <HoveringToolbar />
