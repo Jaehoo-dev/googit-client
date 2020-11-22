@@ -1,17 +1,44 @@
-import React from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import { Wrapper } from './styledComponents';
-import Slate from '../SlateJs';
+import { createEditor } from 'slate';
+import { Slate, Editable, withReact } from 'slate-react';
+import HoveringToolbar from './HoveringToolbar';
+import Leaf from './Leaf';
 
 export default function Editor({
   onNoteChange,
   isChanged,
 }) {
+  const editor = useMemo(() => withReact(createEditor()), []);
+  const [value, setValue] = useState([
+    {
+      type: 'paragraph',
+      children: [{ text: '' }],
+    },
+  ]);
+
+  const renderLeaf = useCallback(props => {
+    return <Leaf {...props} />;
+  }, []);
+
   return (
     <Wrapper>
       <Slate
-        onNoteChange={onNoteChange}
-        isChanged={isChanged}
-      />
+        editor={editor}
+        value={value}
+        onChange={newValue => {
+          if (newValue === value) return;
+
+          setValue(newValue);
+          onNoteChange(newValue, isChanged);
+        }}
+      >
+        <HoveringToolbar />
+        <Editable
+          renderLeaf={renderLeaf}
+          placeholder='내용을 입력하세요.'
+        />
+      </Slate>
     </Wrapper>
   );
 }
