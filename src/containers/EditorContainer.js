@@ -27,6 +27,9 @@ function mapDispatchToProps(dispatch) {
     onNoteLoad(note, branch) {
       dispatch(setCurrentNoteAndBranch(note, branch));
     },
+    onNoteChange(note, branch) {
+      dispatch(setCurrentNoteAndBranch(note, branch));
+    }
   };
 }
 

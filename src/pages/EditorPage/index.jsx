@@ -18,6 +18,7 @@ export default function EditorPage({
   currentNote,
   currentBranch,
   onNoteLoad,
+  onNoteChange,
 }) {
   const history = useHistory();
 
@@ -73,14 +74,18 @@ export default function EditorPage({
       <EditorPageHeader
         currentUser={currentUser}
         currentNote={currentNote}
+        currentBranch={currentBranch}
         isShowModificationsMode={isShowModificationsMode}
         onShowModificationsModeToggle={onShowModificationsModeToggle}
         isModified={isModified}
         onHomeButtonClick={homeButtonClickHandler}
         onSubmit={submitHandler}
         onNoteLoad={onNoteLoad}
+        onNoteChange={onNoteChange}
       />
       <Editor
+        currentNote={currentNote}
+        currentBranch={currentBranch}
         onNoteModify={onNoteModify}
         isModified={isModified}
       />

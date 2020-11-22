@@ -5,6 +5,7 @@ import {
   Arrow,
   Blank,
   ArrowsWrapper,
+  ArrowWrapper,
   ModifyRecordWrapper,
   HomeButtonWrapper,
   ShowChangesButtonWrapper,
@@ -32,6 +33,7 @@ export default function EditorPageHeader({
   currentNote,
   onHomeButtonClick,
   onSubmit,
+  onNoteChange,
 }) {
   const [authorName, setAuthorName] = useState(null);
 
@@ -53,9 +55,11 @@ export default function EditorPageHeader({
     onSubmit();
   }
 
-  async function displayPreviousNote() {
+  async function displayLinkedNote(version) {
     const note
-      = await requestNote(currentUser._id, currentNote.previous_version);
+      = version === 'previous'
+        ? await requestNote(currentUser._id, currentNote.previous_version)
+        : await requestNote(currentUser._id, currentNote.next_version);
 
     if (!note) return;
 
@@ -64,7 +68,7 @@ export default function EditorPageHeader({
 
     if (!branch) return;
 
-    console.log(note, branch);
+    onNoteChange(note, branch);
   }
 
   return (
@@ -76,15 +80,25 @@ export default function EditorPageHeader({
           </ThemeProvider>
         </HomeButtonWrapper>
         <ArrowsWrapper>
-          {
-            currentNote?.previous_version
-            && <Arrow direction='left' onClick={displayPreviousNote} />
-          }
+          <ArrowWrapper>
+            {
+              currentNote?.previous_version
+              && <Arrow
+                direction='left'
+                onClick={displayLinkedNote.bind(null, 'previous')}
+              />
+            }
+          </ArrowWrapper>
           <Blank />
-          {
-            currentNote?.next_version
-            && <Arrow direction='right' />
-          }
+          <ArrowWrapper>
+            {
+              currentNote?.next_version
+              && <Arrow
+                direction='right'
+                onClick={displayLinkedNote.bind(null, 'next')}
+              />
+            }
+          </ArrowWrapper>
         </ArrowsWrapper>
         <ShowChangesButtonWrapper>
           {

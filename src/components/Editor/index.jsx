@@ -4,10 +4,12 @@ import { createEditor } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
 import HoveringToolbar from './HoveringToolbar';
 import Leaf from './Leaf';
+import { useEffect } from 'react';
 
 export default function Editor({
   onNoteModify,
   isModified,
+  currentNote,
 }) {
   const editor = useMemo(() => withReact(createEditor()), []);
   const [value, setValue] = useState([
@@ -16,6 +18,12 @@ export default function Editor({
       children: [{ text: '' }],
     },
   ]);
+
+  useEffect(() => {
+    if (!currentNote) return;
+
+    setValue(currentNote.blocks);
+  }, [currentNote]);
 
   const renderLeaf = useCallback(props => {
     return <Leaf {...props} />;
