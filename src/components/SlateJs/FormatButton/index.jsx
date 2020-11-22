@@ -1,13 +1,13 @@
 import React from 'react';
 import { useSlate } from 'slate-react';
 import { Editor, Transforms, Text } from 'slate';
-import { Button } from '../components';
 import FormatBoldIcon from '@material-ui/icons/FormatBold';
 import FormatItalicIcon from '@material-ui/icons/FormatItalic';
 import FormatUnderlinedIcon from '@material-ui/icons/FormatUnderlined';
 import FormatStrikethroughIcon from '@material-ui/icons/FormatStrikethrough';
 import FormatSizeIcon from '@material-ui/icons/FormatSize';
 import HighlightIcon from '@material-ui/icons/Highlight';
+import { cx, css } from '@emotion/css';
 
 export default function FormatButton({ format, icon }) {
   const editor = useSlate();
@@ -51,3 +51,33 @@ function isFormatActive(editor, format) {
 
   return !!match;
 };
+
+const Button = React.forwardRef(
+  (
+    {
+      className,
+      active,
+      reversed,
+      ...props
+    },
+    ref
+  ) => (
+      <span
+        {...props}
+        ref={ref}
+        className={cx(
+          className,
+          css`
+          cursor: pointer;
+          color: ${reversed
+              ? active
+                ? 'white'
+                : '#aaa'
+              : active
+                ? 'black'
+                : '#ccc'};
+        `
+        )}
+      />
+    )
+);

@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import { ReactEditor, useSlate } from 'slate-react';
 import { Editor } from 'slate';
-import { css } from '@emotion/css';
-import { Menu, Portal } from '../components';
+import { cx, css } from '@emotion/css';
 import { Range } from 'slate';
 import FormatButton from '../FormatButton';
 
@@ -81,3 +81,32 @@ export default function HoveringToolbar() {
     </Portal>
   );
 };
+
+
+export const Menu = React.forwardRef(
+  (
+    { className, ...props },
+    ref
+  ) => (
+      <div
+        {...props}
+        ref={ref}
+        className={cx(
+          className,
+          css`
+          & > * {
+            display: inline-block;
+          }
+          & > * + * {
+            margin-left: 15px;
+          }
+        `
+        )}
+      />
+    )
+);
+
+export const Portal = ({ children }) => {
+  return ReactDOM.createPortal(children, document.body);
+};
+
