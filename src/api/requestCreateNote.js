@@ -9,10 +9,11 @@ import {
 import { POST } from '../constants/httpMethods';
 
 export default async function requestCreateNote(
-  newNoteCandidate,
+  newBlocksCandidate,
   currentUser,
   branchId,
 ) {
+  console.log('request');
   const noteCreateRes = await fetch(
     `${HOST}${PORT}${USERS}/${currentUser._id}${BRANCHES}/${branchId}${NOTES}${NEW}`,
     {
@@ -21,12 +22,12 @@ export default async function requestCreateNote(
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN)}`,
       },
-      body: JSON.stringify(newNoteCandidate)
+      body: JSON.stringify(newBlocksCandidate)
     }
   );
-  console.log(noteCreateRes);
 
   const noteCreateResponse = await noteCreateRes.json();
+  console.log(noteCreateResponse);
 
   if (noteCreateResponse.result === 'failure') {
     alert('쪽지를 만들다가 문제가 생겼어요');

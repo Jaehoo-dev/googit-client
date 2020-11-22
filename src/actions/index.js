@@ -34,13 +34,13 @@ export const setIsChangedToFalse = () => ({
   type: 'setIsChangedToFalse',
 });
 
-export const setNewNoteCandidate = newNote => ({
-  type: 'setNewNoteCandidate',
+export const setNewBlocksCandidate = newNote => ({
+  type: 'setNewBlocksCandidate',
   newNote,
 });
 
-export const removeNewNoteCandidate = () => ({
-  type: 'removeNewNoteCandidate',
+export const removeNewBlocksCandidate = () => ({
+  type: 'removeNewBlocksCandidate',
 });
 
 export const setCurrentNote = note => ({

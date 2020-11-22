@@ -60,11 +60,11 @@ const isChanged = (state = false, action) => {
   }
 };
 
-const newNoteCandidate = (state = null, action) => {
+const newBlocksCandidate = (state = null, action) => {
   switch (action.type) {
-    case 'setNewNoteCandidate':
+    case 'setNewBlocksCandidate':
       return action.newNote;
-    case 'removeNewNoteCandidate':
+    case 'removeNewBlocksCandidate':
       return null;
     default:
       return state;
@@ -87,7 +87,7 @@ const appReducer = combineReducers({
   branchList,
   isShowChangesMode,
   isChanged,
-  newNoteCandidate,
+  newBlocksCandidate,
   currentNote,
 });
 
