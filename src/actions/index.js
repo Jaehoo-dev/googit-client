@@ -1,4 +1,4 @@
-import { SET_IS_PRIVATE_MODE, INIT_BRANCH_LIST } from '../constants/actionTypes';
+import { SET_IS_PRIVATE_MODE, ADD_BRANCH_LIST } from '../constants/actionTypes';
 
 export const setCurrentUser = user => ({
   type: 'setCurrentUser',
@@ -17,9 +17,9 @@ export const setIsPrivateMode = () => ({
   type: SET_IS_PRIVATE_MODE,
 });
 
-export const initializeBranchList = noteList => ({
-  type: INIT_BRANCH_LIST,
-  payload: noteList
+export const addBranchList = branchList => ({
+  type: ADD_BRANCH_LIST,
+  payload: branchList
 });
 
 export const toggleShowChangesMode = () => ({

@@ -1,12 +1,19 @@
-export default async function requestBranchList(currentUser, isPrivateMode, searchQuery) {
+import { HOST, PORT, USERS, BRANCHES, LIMIT_NUMBER } from '../constants/urls';
+import { GET } from '../constants/httpMethods';
+
+export default async function requestBranchList(
+  currentUser, isPrivateMode, keyword, skip
+) {
   try {
     const userId = currentUser._id;
-    const query = searchQuery || '';
+    keyword = keyword || '';
 
-    const fetchUrl = `http://localhost:4000/users/${userId}/branches/?q=${query}&private=${isPrivateMode}&limit=10`;
+    const fetchUrl = `
+      ${HOST}${PORT}${USERS}/${userId}${BRANCHES}/?q=${keyword}&private=${isPrivateMode}&limit=${LIMIT_NUMBER}&skip=${skip}
+    `;
 
     let response = await fetch(fetchUrl, {
-      method: 'GET',
+      method: GET,
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',

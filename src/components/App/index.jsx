@@ -21,6 +21,7 @@ export default function App({
 }) {
   const history = useHistory();
   const [keyword, setKeyword] = useState('');
+  const [skippedBranchNumber, setSkippedBranchNumber] = useState(0);
 
   useEffect(() => {
     if (!hasToken) {
@@ -40,13 +41,17 @@ export default function App({
   }, []);
 
   useEffect(() => {
+    console.log(skippedBranchNumber,'skiped')
     async function loadBranchList() {
-      const branchList = await requestBranchList(currentUser, isPrivateMode, keyword);
+      const branchList = await requestBranchList(
+        currentUser, isPrivateMode, keyword, skippedBranchNumber
+      );
+      console.log(branchList,'blbl');
       getBranchList(branchList);
     }
 
     if (currentUser) loadBranchList();
-  }, [currentUser, isPrivateMode, keyword]);
+  }, [currentUser, isPrivateMode, keyword, skippedBranchNumber]);
 
   function handleInput(event) {
     const query = event.target.keyword.value;
@@ -55,6 +60,11 @@ export default function App({
 
     setKeyword(query);
   }
+
+  function skipBranch() {
+    setSkippedBranchNumber(skippedBranchNumber + 10);
+  }
+
 
   return (
     <>
@@ -76,6 +86,7 @@ export default function App({
           handleInput={handleInput}
           branchList={branchList}
           onLoad={getBranchList}
+          onScroll={skipBranch}
         />
       }
       {/* {

@@ -24,7 +24,7 @@ export default function BranchListEntry({ branchContent, count }) {
 
   return (
     <Wrapper>
-      <div>{count}</div>
+      <div>{count + 1}</div>
       <div>{title}</div>
       <div>{branchContent.email}</div>
       <div>{`${date} ${time}`}</div>

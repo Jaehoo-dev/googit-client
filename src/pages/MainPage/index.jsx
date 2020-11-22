@@ -8,7 +8,8 @@ export default function AppMain({
   handleOnClick,
   currentUser,
   handleInput,
-  branchList
+  branchList,
+  onScroll
 }) {
   return (
     <>
@@ -23,6 +24,7 @@ export default function AppMain({
         isPrivateMode={isPrivateMode}
         currentUser={currentUser}
         branchList={branchList}
+        onScroll={onScroll}
       />
     </>
   );
