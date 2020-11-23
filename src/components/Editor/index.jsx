@@ -1,10 +1,9 @@
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import { Wrapper } from './styledComponents';
 import { createEditor } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
 import HoveringToolbar from './HoveringToolbar';
 import Leaf from './Leaf';
-import { useEffect } from 'react';
 
 export default function Editor({
   onNoteModify,
