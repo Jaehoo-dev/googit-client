@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { ThemeProvider } from 'styled-components';
 import {
   Header,
   Arrow,
@@ -20,11 +19,12 @@ import Button, {
   deleteButtonTheme,
   coralButtonTheme,
   saveButtonTheme,
-} from '../shared/Button';
+} from '../shared/Button/index new';
 import requestNoteAuthor from '../../api/requestNoteAuthor';
 import requestNote from '../../api/requestNote';
 import requestBranch from '../../api/requestBranch';
-import SharingButton from '../BranchList/tempforsharing';
+
+import SharingButton from './ShareButton';
 
 export default function EditorPageHeader({
   currentUser,
@@ -32,9 +32,12 @@ export default function EditorPageHeader({
   onShowModificationsModeToggle,
   isModified,
   currentNote,
+  currentBranch,
   onHomeButtonClick,
   onSubmit,
   onNoteChange,
+  sharedUsers,
+  onSharedUsersLoad
 }) {
   const [authorName, setAuthorName] = useState(null);
 
@@ -76,9 +79,7 @@ export default function EditorPageHeader({
     <Header>
       <LeftWrapper>
         <HomeButtonWrapper>
-          <ThemeProvider theme={homeButtonTheme}>
-            <Button onClick={homeButtonClickHandler}>구깃</Button>
-          </ThemeProvider>
+          <Button theme={homeButtonTheme} onClick={homeButtonClickHandler}>구깃</Button>
         </HomeButtonWrapper>
         <ArrowsWrapper>
           <ArrowWrapper>
@@ -104,15 +105,13 @@ export default function EditorPageHeader({
         <ShowChangesButtonWrapper>
           {
             currentNote
-            && <ThemeProvider theme={coralButtonTheme}>
-              <Button onClick={onShowModificationsModeToggle}>
+            && <Button theme={coralButtonTheme} onClick={onShowModificationsModeToggle}>
                 {
                   isShowModificationsMode
                     ? '수정사항 숨기기'
                     : '수정사항 보기'
                 }
               </Button>
-            </ThemeProvider>
           }
         </ShowChangesButtonWrapper>
       </LeftWrapper>
@@ -127,23 +126,27 @@ export default function EditorPageHeader({
         <DeleteButtonWrapper>
           {
             currentNote
-            && <ThemeProvider theme={deleteButtonTheme}>
-              <Button>삭제</Button>
-            </ThemeProvider>
+            && <Button theme={deleteButtonTheme}>삭제</Button>
           }
         </DeleteButtonWrapper>
         <ShareButtonWrapper>
           {
             currentNote
-            && <SharingButton currentUser={currentUser}>공유</SharingButton>
+            && <SharingButton
+                  currentUser={currentUser}
+                  currentNote={currentNote}
+                  sharedUsers={sharedUsers}
+                  onSharedUsersLoad={onSharedUsersLoad}
+                >
+                  공유
+                </SharingButton>
           }
         </ShareButtonWrapper>
         <SaveButtonWrapper>
           {
             isModified
-            && <ThemeProvider theme={saveButtonTheme}>
-              <Button onClick={submitHandler}>저장</Button>
-            </ThemeProvider>
+            && <Button theme={saveButtonTheme} onClick={submitHandler}>저장</Button>
+
           }
         </SaveButtonWrapper>
       </RightWrapper>

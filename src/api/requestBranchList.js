@@ -2,15 +2,14 @@ import { HOST, PORT, USERS, BRANCHES, LIMIT_NUMBER } from '../constants/urls';
 import { GET } from '../constants/httpMethods';
 
 export default async function requestBranchList(
-  currentUser, isPrivateMode, keyword, skip
+  currentUser, isPrivateMode
 ) {
   try {
     const userId = currentUser._id;
-    keyword = keyword || '';
 
-    const fetchUrl = `
-      ${HOST}${PORT}${USERS}/${userId}${BRANCHES}/?q=${keyword}&private=${isPrivateMode}&limit=${LIMIT_NUMBER}&skip=${skip}
-    `;
+    const fetchUrl = isPrivateMode
+      ? `http://localhost:4000/users/${userId}/branches/private` //?q=${keyword}&limit=${LIMIT_NUMBER}&skip=${skip}
+      : `http://localhost:4000/users/${userId}/branches/`
 
     let response = await fetch(fetchUrl, {
       method: GET,

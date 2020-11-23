@@ -33,6 +33,12 @@ export const coralButtonTheme = {
   fontSize: '16px',
 };
 
+export const shareButtonTheme = {
+  backgroundColor: '#f08080',
+  width: '5em',
+  height: '2em',
+};
+
 export const saveButtonTheme = {
   fontSize: '18px',
   fontWeight: 700,
