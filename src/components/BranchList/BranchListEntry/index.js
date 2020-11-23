@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
   margin-top: 1em;
@@ -19,16 +20,18 @@ export default function BranchListEntry({ branchContent, count }) {
   const isShared = !!branchContent.branch.shared_users_info.length;
   const title = branchContent.latest_note.blocks[0].children[0].text;
   const updatedAt = branchContent.branch.updated_at;
-  const date = updatedAt.substring(0,10);
-  const time = updatedAt.substring(11,16);
+  const date = updatedAt.substring(0, 10);
+  const time = updatedAt.substring(11, 16);
 
   return (
-    <Wrapper>
-      <div>{count + 1}</div>
-      <div>{title}</div>
-      <div>{branchContent.email}</div>
-      <div>{`${date} ${time}`}</div>
-      <div>{isShared ? 'O' : 'X'}</div>
-    </Wrapper>
+    <Link to={`/notes/${branchContent.latest_note._id}`}>
+      <Wrapper>
+        <div>{count + 1}</div>
+        <div>{title}</div>
+        <div>{branchContent.email}</div>
+        <div>{`${date} ${time}`}</div>
+        <div>{isShared ? 'O' : 'X'}</div>
+      </Wrapper>
+    </Link>
   );
 }

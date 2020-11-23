@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Switch, Route } from 'react-router-dom';
 import Entrance from '../../components/Entrance';
 import MainPage from '../../pages/MainPage';
 import Loading from '../../components/shared/Loading';
@@ -41,12 +41,11 @@ export default function App({
   }, []);
 
   useEffect(() => {
-    console.log(skippedBranchNumber,'skiped')
     async function loadBranchList() {
       const branchList = await requestBranchList(
         currentUser, isPrivateMode, keyword, skippedBranchNumber
       );
-      console.log(branchList,'blbl');
+
       getBranchList(branchList);
     }
 
@@ -78,24 +77,27 @@ export default function App({
       }
       {
         hasToken && currentUser
-        && <MainPage
-          onLogout={onLogout}
-          isPrivateMode={isPrivateMode}
-          handleOnClick={togglePrivateMode}
-          currentUser={currentUser}
-          handleInput={handleInput}
-          branchList={branchList}
-          onLoad={getBranchList}
-          onScroll={skipBranch}
-        />
+        && <Switch>
+          <Route exact path='/'>
+            <MainPage
+              onLogout={onLogout}
+              isPrivateMode={isPrivateMode}
+              handleOnClick={togglePrivateMode}
+              currentUser={currentUser}
+              handleInput={handleInput}
+              branchList={branchList}
+              onLoad={getBranchList}
+              onScroll={skipBranch}
+            />
+          </Route>
+          <Route path='/notes'>
+            <EditorPage
+              currentNote={currentNote}
+              onCreateBranch={onCreateBranch}
+            />
+          </Route>
+        </Switch>
       }
-      {/* {
-        hasToken && currentUser
-        && <EditorPage
-          currentNote={currentNote}
-          onCreateBranch={onCreateBranch}
-        />
-      } */}
     </>
   );
 }
