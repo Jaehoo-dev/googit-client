@@ -19,8 +19,8 @@ export default function BranchListEntry({
   branchContent,
   count,
   setCurrentNoteAndBranch,
+  createRef,
 }) {
-  console.log(branchContent);
   const isShared = !!branchContent.branch.shared_users_info.length;
   const title = branchContent.latest_note.blocks[0].children[0].text;
   const updatedAt = branchContent.branch.updated_at;
@@ -30,11 +30,11 @@ export default function BranchListEntry({
   function NoteListEntryClickHandler(note, branch) {
     setCurrentNoteAndBranch(note, branch);
   }
-
   return (
     <Link to={`/notes/${branchContent.latest_note._id}`}>
       <Wrapper
         onClick={NoteListEntryClickHandler.bind(null, branchContent.latest_note, branchContent.branch)}
+        ref={createRef}
       >
         <div>{count + 1}</div>
         <div>{title}</div>

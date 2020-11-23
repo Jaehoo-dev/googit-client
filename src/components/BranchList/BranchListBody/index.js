@@ -11,52 +11,56 @@ const Wrapper = styled.div`
   padding: 1em 3em;
   font-size: 1em;
   text-align: center;
-  border: 2px solid purple;
   display: flex;
   flex-direction: column;
 `;
 
 const BranchContainer = styled.div`
-    margin-top: 1em;
-    padding-bottom: 1em;
-    overflow: scroll;
-    border: 1px solid pink;
-  `;
+  margin-top: 1em;
+  padding-bottom: 1em;
+`;
 
 export default function BranchListBody({
   branchList,
   onScroll,
   setCurrentNoteAndBranch,
+  createRef,
+  onHomeToEditorPageModify
 }) {
-  console.log(branchList);
+
   function createBranchEntry() {
-    return branchList.map((branch, i) => (
-      <BranchListEntry
-        key={i}
-        branchContent={branch}
-        count={i}
-        setCurrentNoteAndBranch={setCurrentNoteAndBranch}
-      />
-    ));
+    return branchList.map((branch, i) => {
+      return (i === branchList.length - 3)
+        ? <BranchListEntry
+          key={i}
+          setCurrentNoteAndBranch={setCurrentNoteAndBranch}
+          branchContent={branch}
+          count={i}
+          onClick={onHomeToEditorPageModify}
+          createRef={createRef}
+        />
+        : <BranchListEntry
+          key={i}
+          setCurrentNoteAndBranch={setCurrentNoteAndBranch}
+          branchContent={branch}
+          count={i}
+          onClick={onHomeToEditorPageModify}
+        />;
+    });
   }
 
-  function scrollHandler(event) {
-    const { offsetHeight, scrollTop, scrollHeight } = event.target;
-    if (offsetHeight + scrollTop > scrollHeight) {
-      console.log('exec');
-      onScroll();
-    }
+  function clickHandler() {
+    onHomeToEditorPageModify();
   }
-
 
   return (
     <Wrapper>
       <Link to='/notes/new'>
-        <Button theme={createNewBranchTheme}>
+        <Button theme={createNewBranchTheme} onClick={clickHandler}>
           새로운 노트 만들기 +
       </Button>
       </Link>
-      <BranchContainer onScroll={scrollHandler}>
+      <BranchContainer>
         {branchList && createBranchEntry()}
       </BranchContainer>
     </Wrapper>

@@ -2,6 +2,8 @@ import React from 'react';
 import { Wrapper } from './styledComponents';
 import NoteListHead from './BranchListHead';
 import NoteListBody from './BranchListBody';
+import Tempforsharing from './tempforsharing';
+
 
 export default function BranchList({
   isPrivateMode,
@@ -9,6 +11,8 @@ export default function BranchList({
   branchList,
   onScroll,
   setCurrentNoteAndBranch,
+  createRef,
+  onHomeToEditorPageModify
 }) {
 
   return (
@@ -18,6 +22,8 @@ export default function BranchList({
         branchList={branchList}
         onScroll={onScroll}
         setCurrentNoteAndBranch={setCurrentNoteAndBranch}
+        createRef={createRef}
+        onHomeToEditorPageModify={onHomeToEditorPageModify}
       />
     </Wrapper>
   );

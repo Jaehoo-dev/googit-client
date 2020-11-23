@@ -7,6 +7,7 @@ import {
   setNewBlocksCandidate,
   removeNewBlocksCandidate,
   setCurrentNoteAndBranch,
+  setIsEditorPageToFalse
 } from '../actions';
 
 function mapDispatchToProps(dispatch) {
@@ -29,6 +30,9 @@ function mapDispatchToProps(dispatch) {
     },
     onNoteChange(note, branch) {
       dispatch(setCurrentNoteAndBranch(note, branch));
+    },
+    onEditorPageModifyToHome() {
+      dispatch(setIsEditorPageToFalse());
     }
   };
 }
