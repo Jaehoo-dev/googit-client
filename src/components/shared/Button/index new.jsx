@@ -1,14 +1,18 @@
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
 import { StyledButton } from './styledComponents';
 
 export default function Button({
   children,
   onClick,
+  theme
 }) {
   return (
-    <StyledButton onClick={onClick}>
-      {children}
-    </StyledButton>
+    <ThemeProvider theme={theme}>
+      <StyledButton onClick={onClick}>
+        {children}
+      </StyledButton>
+    </ThemeProvider>
   );
 }
 
@@ -39,5 +43,5 @@ export const searchButtonTheme = {
 };
 
 export const createNewBranchTheme = {
-
+  height: '3em',
 };

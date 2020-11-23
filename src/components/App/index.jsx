@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Entrance from '../../components/Entrance';
 import MainPage from '../../pages/MainPage';
 import Loading from '../../components/shared/Loading';
-import fetchBranchList from '../../api/branchListFetch';
+import requestBranchList from '../../api/requestBranchList';
 import EditorPage from '../../containers/EditorContainer';
 import requestCurrentUser from '../../api/requestCurrentUser';
 
@@ -16,11 +16,12 @@ export default function App({
   togglePrivateMode,
   isPrivateMode,
   getBranchList,
-  noteList,
+  branchList,
   currentNote,
 }) {
   const history = useHistory();
   const [keyword, setKeyword] = useState('');
+  const [skippedBranchNumber, setSkippedBranchNumber] = useState(0);
 
   useEffect(() => {
     if (!hasToken) {
@@ -40,14 +41,17 @@ export default function App({
   }, []);
 
   useEffect(() => {
-    async function loadNoteList() {
-      const branchList = await fetchBranchList(currentUser, isPrivateMode, keyword);
-
+    console.log(skippedBranchNumber,'skiped')
+    async function loadBranchList() {
+      const branchList = await requestBranchList(
+        currentUser, isPrivateMode, keyword, skippedBranchNumber
+      );
+      console.log(branchList,'blbl');
       getBranchList(branchList);
     }
 
-    if (currentUser) loadNoteList();
-  }, [currentUser, isPrivateMode, keyword]);
+    if (currentUser) loadBranchList();
+  }, [currentUser, isPrivateMode, keyword, skippedBranchNumber]);
 
   function handleInput(event) {
     const query = event.target.keyword.value;
@@ -57,9 +61,14 @@ export default function App({
     setKeyword(query);
   }
 
+  function skipBranch() {
+    setSkippedBranchNumber(skippedBranchNumber + 10);
+  }
+
+
   return (
     <>
-      {/* {
+      {
         !hasToken
         && <Entrance onLogin={onLogin} />
       }
@@ -75,16 +84,18 @@ export default function App({
           handleOnClick={togglePrivateMode}
           currentUser={currentUser}
           handleInput={handleInput}
+          branchList={branchList}
           onLoad={getBranchList}
+          onScroll={skipBranch}
         />
-      } */}
-      {
+      }
+      {/* {
         hasToken && currentUser
         && <EditorPage
           currentNote={currentNote}
           onCreateBranch={onCreateBranch}
         />
-      }
+      } */}
     </>
   );
 }

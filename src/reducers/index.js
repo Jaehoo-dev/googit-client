@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SET_IS_PRIVATE_MODE, INIT_BRANCH_LIST } from '../constants/actionTypes';
+import { SET_IS_PRIVATE_MODE, ADD_BRANCH_LIST } from '../constants/actionTypes';
 
 const hasToken = (
   state = !!localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN),
@@ -33,8 +33,8 @@ const isPrivateMode = (state = false, action) => {
 
 const branchList = (state = [], action) => {
   switch (action.type) {
-    case INIT_BRANCH_LIST:
-      return action.payload;
+    case ADD_BRANCH_LIST:
+      return [...state, ...action.payload];
     default:
       return state;
   }

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setCurrentUser, setHasToken, initializeStore, setIsPrivateMode, initializeBranchList } from '../actions';
+import { setCurrentUser, setHasToken, initializeStore, setIsPrivateMode, addBranchList } from '../actions';
 import App from '../components/App';
 
 function mapDispatchToProps(dispatch) {
@@ -18,7 +18,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(setIsPrivateMode());
     },
     getBranchList(branchList) {
-      dispatch(initializeBranchList(branchList));
+      dispatch(addBranchList(branchList));
     }
   };
 }
@@ -28,7 +28,7 @@ function mapStateToProps(state) {
     hasToken: state.hasToken,
     currentUser: state.currentUser,
     isPrivateMode: state.isPrivateMode,
-    noteList: state.noteList,
+    branchList: state.branchList,
     currentNote: state.currentNote,
   };
 }

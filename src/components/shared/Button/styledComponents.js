@@ -10,6 +10,8 @@ export const StyledButton = styled.button`
   font-size: ${props => props.theme.fontSize};
   font-weight: ${props => props.theme.fontWeight};
   color: ${props => props.theme.color};
+  width: ${props => props.theme.width};
+  height: ${props => props.theme.height};
 
   &:hover {
     cursor: pointer;
