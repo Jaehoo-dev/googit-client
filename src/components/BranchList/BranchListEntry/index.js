@@ -15,17 +15,27 @@ const Wrapper = styled.div`
   padding: 0 2em;
 `;
 
-export default function BranchListEntry({ branchContent, count }) {
-
+export default function BranchListEntry({
+  branchContent,
+  count,
+  setCurrentNoteAndBranch,
+}) {
+  console.log(branchContent);
   const isShared = !!branchContent.branch.shared_users_info.length;
   const title = branchContent.latest_note.blocks[0].children[0].text;
   const updatedAt = branchContent.branch.updated_at;
   const date = updatedAt.substring(0, 10);
   const time = updatedAt.substring(11, 16);
 
+  function NoteListEntryClickHandler(note, branch) {
+    setCurrentNoteAndBranch(note, branch);
+  }
+
   return (
     <Link to={`/notes/${branchContent.latest_note._id}`}>
-      <Wrapper>
+      <Wrapper
+        onClick={NoteListEntryClickHandler.bind(null, branchContent.latest_note, branchContent.branch)}
+      >
         <div>{count + 1}</div>
         <div>{title}</div>
         <div>{branchContent.email}</div>

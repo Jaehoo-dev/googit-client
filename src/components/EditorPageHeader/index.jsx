@@ -24,6 +24,7 @@ import Button, {
 import requestNoteAuthor from '../../api/requestNoteAuthor';
 import requestNote from '../../api/requestNote';
 import requestBranch from '../../api/requestBranch';
+import SharingButton from '../BranchList/tempforsharing';
 
 export default function EditorPageHeader({
   currentUser,
@@ -106,7 +107,9 @@ export default function EditorPageHeader({
             && <ThemeProvider theme={coralButtonTheme}>
               <Button onClick={onShowModificationsModeToggle}>
                 {
-                  isShowModificationsMode ? '수정사항 숨기기' : '수정사항 보기'
+                  isShowModificationsMode
+                    ? '수정사항 숨기기'
+                    : '수정사항 보기'
                 }
               </Button>
             </ThemeProvider>
@@ -132,9 +135,7 @@ export default function EditorPageHeader({
         <ShareButtonWrapper>
           {
             currentNote
-            && <ThemeProvider theme={coralButtonTheme}>
-              <Button>공유</Button>
-            </ThemeProvider>
+            && <SharingButton currentUser={currentUser}>공유</SharingButton>
           }
         </ShareButtonWrapper>
         <SaveButtonWrapper>
