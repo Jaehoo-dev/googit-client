@@ -18,6 +18,7 @@ export default function App({
   onFetchBranchList,
   branchList,
   currentNote,
+  setCurrentNoteAndBranch,
 }) {
   const history = useHistory();
   const [keyword, setKeyword] = useState('');
@@ -92,6 +93,7 @@ export default function App({
               branchList={branchList}
               onLoad={onFetchBranchList}
               onScroll={skipBranch}
+              setCurrentNoteAndBranch={setCurrentNoteAndBranch}
             />
           </Route>
           <Route path='/notes'>

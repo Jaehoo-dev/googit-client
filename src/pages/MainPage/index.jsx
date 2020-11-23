@@ -9,7 +9,8 @@ export default function AppMain({
   currentUser,
   handleInput,
   branchList,
-  onScroll
+  onScroll,
+  setCurrentNoteAndBranch,
 }) {
   return (
     <>
@@ -25,6 +26,7 @@ export default function AppMain({
         currentUser={currentUser}
         branchList={branchList}
         onScroll={onScroll}
+        setCurrentNoteAndBranch={setCurrentNoteAndBranch}
       />
     </>
   );

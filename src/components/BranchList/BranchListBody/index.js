@@ -23,11 +23,20 @@ const BranchContainer = styled.div`
     border: 1px solid pink;
   `;
 
-export default function BranchListBody({ branchList, onScroll }) {
+export default function BranchListBody({
+  branchList,
+  onScroll,
+  setCurrentNoteAndBranch,
+}) {
   console.log(branchList);
   function createBranchEntry() {
     return branchList.map((branch, i) => (
-      <BranchListEntry key={i} branchContent={branch} count={i} />
+      <BranchListEntry
+        key={i}
+        branchContent={branch}
+        count={i}
+        setCurrentNoteAndBranch={setCurrentNoteAndBranch}
+      />
     ));
   }
 

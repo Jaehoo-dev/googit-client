@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setCurrentUser, setHasToken, initializeStore, setIsPrivateMode, setBranchList } from '../actions';
+import { setCurrentUser, setHasToken, initializeStore, setIsPrivateMode, setBranchList, setCurrentNoteAndBranch } from '../actions';
 import App from '../components/App';
 
 function mapDispatchToProps(dispatch) {
@@ -19,7 +19,10 @@ function mapDispatchToProps(dispatch) {
     },
     onFetchBranchList(branchList) {
       dispatch(setBranchList(branchList));
-    }
+    },
+    setCurrentNoteAndBranch(note, branch) {
+      dispatch(setCurrentNoteAndBranch(note, branch));
+    },
   };
 }
 

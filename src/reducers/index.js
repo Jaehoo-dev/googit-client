@@ -34,7 +34,7 @@ const isPrivateMode = (state = false, action) => {
 const branchList = (state = [], action) => {
   switch (action.type) {
     case SET_BRANCH_LIST:
-      return action.payload;
+      return action.payload || [];
     default:
       return state;
   }

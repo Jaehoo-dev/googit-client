@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import EditorPageHeader from '../../components/EditorPageHeader';
 import Editor from '../../components/Editor';
+import Compare from '../../components/Compare';
 import requestCreateBranch from '../../api/requestCreateBranch';
 import requestCreateNote from '../../api/requestCreateNote';
 import requestBranch from '../../api/requestBranch';
@@ -84,11 +85,21 @@ export default function EditorPage({
         onNoteChange={onNoteChange}
       />
       <Editor
+        currentUser={currentUser}
         currentNote={currentNote}
         currentBranch={currentBranch}
         onNoteModify={onNoteModify}
         isModified={isModified}
+        isShowModificationsMode={isShowModificationsMode}
       />
+      {/* <Compare
+        currentUser={currentUser}
+        currentNote={currentNote}
+        currentBranch={currentBranch}
+        onNoteModify={onNoteModify}
+        isModified={isModified}
+        isShowModificationsMode={isShowModificationsMode}
+      /> */}
     </>
   );
 }

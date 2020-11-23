@@ -9,6 +9,7 @@ export default function Editor({
   onNoteModify,
   isModified,
   currentNote,
+  isShowModificationsMode,
 }) {
   const editor = useMemo(() => withReact(createEditor()), []);
   const [value, setValue] = useState([
@@ -23,6 +24,10 @@ export default function Editor({
 
     setValue(currentNote.blocks);
   }, [currentNote]);
+
+  useEffect(() => {
+
+  }, [isShowModificationsMode]);
 
   const renderLeaf = useCallback(props => {
     return <Leaf {...props} />;
@@ -43,7 +48,7 @@ export default function Editor({
         <HoveringToolbar />
         <Editable
           renderLeaf={renderLeaf}
-          placeholder='내용을 입력하세요.'
+          placeholder='줄을 자주 바꿔주세요.'
         />
       </Slate>
     </Wrapper>
