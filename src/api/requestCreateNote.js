@@ -13,7 +13,6 @@ export default async function requestCreateNote(
   currentUser,
   branchId,
 ) {
-  console.log('request');
   const noteCreateRes = await fetch(
     `${HOST}${PORT}${USERS}/${currentUser._id}${BRANCHES}/${branchId}${NOTES}${NEW}`,
     {
@@ -27,7 +26,6 @@ export default async function requestCreateNote(
   );
 
   const noteCreateResponse = await noteCreateRes.json();
-  console.log(noteCreateResponse);
 
   if (noteCreateResponse.result === 'failure') {
     alert('쪽지를 만들다가 문제가 생겼어요');

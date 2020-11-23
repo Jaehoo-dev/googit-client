@@ -2,37 +2,44 @@ import { connect } from 'react-redux';
 import EditorPage from '../pages/EditorPage';
 import {
   toggleShowChangesMode,
-  setIsChangedToTrue,
-  setIsChangedToFalse,
+  setIsModifiedToTrue,
+  setIsModifiedToFalse,
   setNewBlocksCandidate,
   removeNewBlocksCandidate,
-  setCurrentNote,
+  setCurrentNoteAndBranch,
 } from '../actions';
 
 function mapDispatchToProps(dispatch) {
   return {
-    onShowChangesModeToggle() {
+    onShowModificationsModeToggle() {
       dispatch(toggleShowChangesMode());
     },
-    onNoteChange(blocks, isChanged) {
+    onNoteModify(blocks, isModified) {
       dispatch(setNewBlocksCandidate(blocks));
-      if (isChanged) return;
-      dispatch(setIsChangedToTrue());
+      if (isModified) return;
+      dispatch(setIsModifiedToTrue());
     },
-    onSave(note) {
-      dispatch(setIsChangedToFalse());
+    onSave(note, branch) {
+      dispatch(setIsModifiedToFalse());
       dispatch(removeNewBlocksCandidate());
-      dispatch(setCurrentNote(note));
+      dispatch(setCurrentNoteAndBranch(note, branch));
     },
+    onNoteLoad(note, branch) {
+      dispatch(setCurrentNoteAndBranch(note, branch));
+    },
+    onNoteChange(note, branch) {
+      dispatch(setCurrentNoteAndBranch(note, branch));
+    }
   };
 }
 
 function mapStateToProps(state) {
   return {
     currentUser: state.currentUser,
+    currentBranch: state.currentBranch,
     currentNote: state.currentNote,
-    isShowChangesMode: state.isShowChangesMode,
-    isChanged: state.isChanged,
+    isShowModificationsMode: state.isShowModificationsMode,
+    isModified: state.isModified,
     newBlocksCandidate: state.newBlocksCandidate,
     authorName: state.authorName,
   };

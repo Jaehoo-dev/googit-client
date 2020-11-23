@@ -1,23 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import EditorPageHeader from '../../components/EditorPageHeader';
 import Editor from '../../components/Editor';
 import requestCreateBranch from '../../api/requestCreateBranch';
 import requestCreateNote from '../../api/requestCreateNote';
+import requestBranch from '../../api/requestBranch';
 
 export default function EditorPage({
   currentUser,
-  isShowChangesMode,
-  onShowChangesModeToggle,
-  isChanged,
-  onNoteChange,
+  isShowModificationsMode,
+  onShowModificationsModeToggle,
+  isModified,
+  onNoteModify,
   newBlocksCandidate,
   onCreateBranch,
   onSave,
   currentNote,
+  currentBranch,
   onNoteLoad,
+  onNoteChange,
 }) {
   const history = useHistory();
+
+  useEffect(() => {
+    if (!currentNote) return;
+
+    const branch = getBranch();
+
+    onNoteLoad(currentNote, branch);
+
+    async function getBranch() {
+      return await requestBranch(currentUser._id, currentNote.parent);
+    }
+  }, []);
 
   function homeButtonClickHandler() {
     history.push('/');
@@ -36,7 +51,7 @@ export default function EditorPage({
 
     const branchId
       = isBrandNew
-        ? branchCreationResponse.branchId
+        ? branchCreationResponse.newBranch._id
         : currentNote.parent;
 
     const noteCreateResponse
@@ -48,23 +63,31 @@ export default function EditorPage({
       onCreateBranch(branchCreationResponse.updatedUser);
     }
 
-    onSave(noteCreateResponse.newNote);
+    onSave(
+      noteCreateResponse.newNote,
+      noteCreateResponse.updatedBranch
+    );
   }
 
   return (
     <>
       <EditorPageHeader
+        currentUser={currentUser}
         currentNote={currentNote}
-        isShowChangesMode={isShowChangesMode}
-        onShowChangesModeToggle={onShowChangesModeToggle}
-        isChanged={isChanged}
+        currentBranch={currentBranch}
+        isShowModificationsMode={isShowModificationsMode}
+        onShowModificationsModeToggle={onShowModificationsModeToggle}
+        isModified={isModified}
         onHomeButtonClick={homeButtonClickHandler}
         onSubmit={submitHandler}
         onNoteLoad={onNoteLoad}
+        onNoteChange={onNoteChange}
       />
       <Editor
-        onNoteChange={onNoteChange}
-        isChanged={isChanged}
+        currentNote={currentNote}
+        currentBranch={currentBranch}
+        onNoteModify={onNoteModify}
+        isModified={isModified}
       />
     </>
   );

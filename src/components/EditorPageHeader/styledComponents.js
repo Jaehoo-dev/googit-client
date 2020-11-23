@@ -36,6 +36,10 @@ export const ArrowsWrapper = styled.div`
   width: 120px;
 `;
 
+export const ArrowWrapper = styled.div`
+  width: 52px;
+`;
+
 export const LeftWrapper = styled.div`
   display: flex;
   position: absolute;
