@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useHistory, Switch, Route } from 'react-router-dom';
 import Entrance from '../../components/Entrance';
 import MainPage from '../../pages/MainPage';
@@ -6,6 +6,7 @@ import Loading from '../../components/shared/Loading';
 import requestBranchList from '../../api/requestBranchList';
 import EditorPage from '../../containers/EditorContainer';
 import requestCurrentUser from '../../api/requestCurrentUser';
+import BranchList from '../BranchList';
 
 export default function App({
   hasToken,
@@ -19,10 +20,23 @@ export default function App({
   branchList,
   currentNote,
   setCurrentNoteAndBranch,
+  onHomeToEditorPageModify,
+  isEditorPage,
+  onUpdateBranchList
 }) {
   const history = useHistory();
   const [keyword, setKeyword] = useState('');
   const [skippedBranchNumber, setSkippedBranchNumber] = useState(0);
+  const [branchNumber, setBranchNumber] = useState(0);
+
+  const observer = useRef(new IntersectionObserver((entries) => {
+    const first = entries[0];
+    // console.log('inf scroll');
+    if (first.isIntersecting) {
+      setSkippedBranchNumber(skippedBranchNumber + 15);
+    }
+  }, { threshold: 1 }));
+  const [observedElement, setObservedElement] = useState(null);
 
   useEffect(() => {
     if (!hasToken) {
@@ -42,9 +56,12 @@ export default function App({
   }, []);
 
   useEffect(() => {
-    if (currentUser) loadBranchList();
+
+    if (!currentUser) return;
+    loadBranchList();
 
     async function loadBranchList() {
+
       const branchList
         = await requestBranchList(
           currentUser,
@@ -53,8 +70,14 @@ export default function App({
           skippedBranchNumber
         );
 
-      onFetchBranchList(branchList);
+      console.log(branchList, 'triggered?');
+      onUpdateBranchList(branchList);
+      // onFetchBranchList(branchList);
     }
+
+    return (() => {
+      console.log('unmount');
+    });
   }, [currentUser, isPrivateMode, keyword, skippedBranchNumber]);
 
   function handleInput(event) {
@@ -68,6 +91,24 @@ export default function App({
   function skipBranch() {
     setSkippedBranchNumber(skippedBranchNumber + 10);
   }
+
+  function createObservedElement(element) {
+    setObservedElement(element);
+  }
+
+  useEffect(() => {
+    const currentElement = observedElement;
+    const currentObserver = observer.current;
+
+    if (currentElement) {
+      currentObserver.observe(currentElement);
+    }
+    return () => {
+      if (currentElement) {
+        currentObserver.unobserve(currentElement);
+      }
+    };
+  }, [observedElement]);
 
 
   return (
@@ -94,6 +135,8 @@ export default function App({
               onLoad={onFetchBranchList}
               onScroll={skipBranch}
               setCurrentNoteAndBranch={setCurrentNoteAndBranch}
+              createRef={createObservedElement}
+              onHomeToEditorPageModify={onHomeToEditorPageModify}
             />
           </Route>
           <Route path='/notes'>

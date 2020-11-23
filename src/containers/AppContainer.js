@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import { setCurrentUser, setHasToken, initializeStore, setIsPrivateMode, setBranchList, setCurrentNoteAndBranch } from '../actions';
+import { setCurrentUser, setHasToken, initializeStore, setIsPrivateMode, initBranchList, setCurrentNoteAndBranch, setIsEditorPageToTrue, updateBranchList } from '../actions';
+
 import App from '../components/App';
 
 function mapDispatchToProps(dispatch) {
@@ -18,11 +19,17 @@ function mapDispatchToProps(dispatch) {
       dispatch(setIsPrivateMode());
     },
     onFetchBranchList(branchList) {
-      dispatch(setBranchList(branchList));
+      dispatch(initBranchList(branchList));
     },
     setCurrentNoteAndBranch(note, branch) {
       dispatch(setCurrentNoteAndBranch(note, branch));
     },
+    onHomeToEditorPageModify() {
+      dispatch(setIsEditorPageToTrue());
+    },
+    onUpdateBranchList(branchList) {
+      dispatch(updateBranchList(branchList));
+    }
   };
 }
 
@@ -33,6 +40,8 @@ function mapStateToProps(state) {
     isPrivateMode: state.isPrivateMode,
     branchList: state.branchList,
     currentNote: state.currentNote,
+    isModified: state.isModified,
+    isEditorPage: state.isEditorPage
   };
 }
 

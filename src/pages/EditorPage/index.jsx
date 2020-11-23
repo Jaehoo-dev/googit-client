@@ -20,6 +20,7 @@ export default function EditorPage({
   currentBranch,
   onNoteLoad,
   onNoteChange,
+  onEditorPageModifyToHome
 }) {
   const history = useHistory();
 
@@ -36,6 +37,7 @@ export default function EditorPage({
   }, []);
 
   function homeButtonClickHandler() {
+    onEditorPageModifyToHome();
     history.push('/');
   }
 

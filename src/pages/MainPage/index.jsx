@@ -11,7 +11,10 @@ export default function AppMain({
   branchList,
   onScroll,
   setCurrentNoteAndBranch,
+  createRef,
+  onHomeToEditorPageModify
 }) {
+
   return (
     <>
       <MainHeader
@@ -27,6 +30,8 @@ export default function AppMain({
         branchList={branchList}
         onScroll={onScroll}
         setCurrentNoteAndBranch={setCurrentNoteAndBranch}
+        createRef={createRef}
+        onHomeToEditorPageModify={onHomeToEditorPageModify}
       />
     </>
   );

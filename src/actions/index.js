@@ -1,4 +1,4 @@
-import { SET_IS_PRIVATE_MODE, SET_BRANCH_LIST } from '../constants/actionTypes';
+import { SET_IS_PRIVATE_MODE, INIT_BRANCH_LIST, SET_IS_EDITOR_PAGE_TO_FALSE, SET_IS_EDITOR_PAGE_TO_TRUE, UPDATE_BRANCH_LIST } from '../constants/actionTypes';
 
 export const setCurrentUser = user => ({
   type: 'setCurrentUser',
@@ -15,11 +15,6 @@ export const initializeStore = () => ({
 
 export const setIsPrivateMode = () => ({
   type: SET_IS_PRIVATE_MODE,
-});
-
-export const setBranchList = branchList => ({
-  type: SET_BRANCH_LIST,
-  payload: branchList
 });
 
 export const toggleShowChangesMode = () => ({
@@ -47,4 +42,22 @@ export const setCurrentNoteAndBranch = (note, branch) => ({
   type: 'setCurrentNoteAndBranch',
   note,
   branch,
+});
+
+export const setIsEditorPageToFalse = () => ({
+  type: SET_IS_EDITOR_PAGE_TO_FALSE
+});
+
+export const setIsEditorPageToTrue = () => ({
+  type: SET_IS_EDITOR_PAGE_TO_TRUE
+});
+
+export const updateBranchList = (branchList) => ({
+  type: UPDATE_BRANCH_LIST,
+  payload: branchList
+});
+
+export const initBranchList = (branchList) => ({
+  type: INIT_BRANCH_LIST,
+  payload: branchList
 });
