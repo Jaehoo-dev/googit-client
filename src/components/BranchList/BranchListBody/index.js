@@ -24,7 +24,7 @@ const BranchContainer = styled.div`
   `;
 
 export default function BranchListBody({ branchList, onScroll }) {
-  console.log(branchList.length, 'in branch body');
+  console.log(branchList);
   function createBranchEntry() {
     return branchList.map((branch, i) => (
       <BranchListEntry key={i} branchContent={branch} count={i} />

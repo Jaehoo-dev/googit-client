@@ -15,7 +15,7 @@ export default function App({
   onCreateBranch,
   togglePrivateMode,
   isPrivateMode,
-  getBranchList,
+  onFetchBranchList,
   branchList,
   currentNote,
 }) {
@@ -41,15 +41,19 @@ export default function App({
   }, []);
 
   useEffect(() => {
-    async function loadBranchList() {
-      const branchList = await requestBranchList(
-        currentUser, isPrivateMode, keyword, skippedBranchNumber
-      );
-
-      getBranchList(branchList);
-    }
-
     if (currentUser) loadBranchList();
+
+    async function loadBranchList() {
+      const branchList
+        = await requestBranchList(
+          currentUser,
+          isPrivateMode,
+          keyword,
+          skippedBranchNumber
+        );
+
+      onFetchBranchList(branchList);
+    }
   }, [currentUser, isPrivateMode, keyword, skippedBranchNumber]);
 
   function handleInput(event) {
@@ -86,7 +90,7 @@ export default function App({
               currentUser={currentUser}
               handleInput={handleInput}
               branchList={branchList}
-              onLoad={getBranchList}
+              onLoad={onFetchBranchList}
               onScroll={skipBranch}
             />
           </Route>
