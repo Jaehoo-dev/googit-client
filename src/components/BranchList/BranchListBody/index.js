@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import BranchListEntry from '../BranchListEntry';
-import Button, { createNewBranchTheme } from '../../shared/Button/index new'
+import Button, { createNewBranchTheme } from '../../shared/Button/index new';
 
 const Wrapper = styled.div`
   width: 80%;
@@ -23,17 +24,17 @@ const BranchContainer = styled.div`
   `;
 
 export default function BranchListBody({ branchList, onScroll }) {
-  console.log(branchList.length, 'in branch body')
+  console.log(branchList.length, 'in branch body');
   function createBranchEntry() {
     return branchList.map((branch, i) => (
-      <BranchListEntry key={i} branchContent={branch} count={i}/>
+      <BranchListEntry key={i} branchContent={branch} count={i} />
     ));
   }
 
   function scrollHandler(event) {
-    const { offsetHeight, scrollTop, scrollHeight } = event.target
+    const { offsetHeight, scrollTop, scrollHeight } = event.target;
     if (offsetHeight + scrollTop > scrollHeight) {
-      console.log('exec')
+      console.log('exec');
       onScroll();
     }
   }
@@ -41,11 +42,13 @@ export default function BranchListBody({ branchList, onScroll }) {
 
   return (
     <Wrapper>
-      <Button theme={createNewBranchTheme}>
-        새로운 노트 만들기 +
+      <Link to='/notes/new'>
+        <Button theme={createNewBranchTheme}>
+          새로운 노트 만들기 +
       </Button>
+      </Link>
       <BranchContainer onScroll={scrollHandler}>
-        { branchList && createBranchEntry() }
+        {branchList && createBranchEntry()}
       </BranchContainer>
     </Wrapper>
   );
