@@ -22,7 +22,8 @@ export default function EditorPage({
   onNoteChange,
   sharedUsers,
   onSharedUsersLoad,
-  onClick
+  onClick,
+  onHomeButtonClick,
 }) {
   const history = useHistory();
 
@@ -40,6 +41,8 @@ export default function EditorPage({
 
   function homeButtonClickHandler() {
     history.push('/');
+
+    onHomeButtonClick();
   }
 
   async function submitHandler() {

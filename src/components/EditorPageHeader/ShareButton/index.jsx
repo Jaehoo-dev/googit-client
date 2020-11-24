@@ -20,12 +20,10 @@ export default function SharingButton({ currentUser, currentNote, onSharedUsersL
 
     async function loadSharedUsers() {
       const sharedUsers = await requestSharedUsers(currentUser, currentNote);
-      console.log(sharedUsers, 'sharedUsers');
+
       if (sharedUsers) onSharedUsersLoad(sharedUsers);
     }
   }, [isSubmitted]);
-
-
 
   function handleOnChange(event) {
     setEmail(event.target.value);
@@ -63,7 +61,7 @@ export default function SharingButton({ currentUser, currentNote, onSharedUsersL
               <option value='read only'>read only</option>
               <option value='write'>write</option>
             </select>
-            <Button theme={shareButtonTheme}>공유하기</Button>
+            <Button theme={shareButtonTheme}>공유</Button>
           </StyledForm>
           <SharedUserList>
             공유 유저리스트

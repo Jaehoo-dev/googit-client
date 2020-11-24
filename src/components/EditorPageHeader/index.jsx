@@ -85,7 +85,12 @@ export default function EditorPageHeader({
     <Header>
       <LeftWrapper>
         <HomeButtonWrapper>
-          <Button theme={homeButtonTheme} onClick={homeButtonClickHandler}>구깃</Button>
+          <Button
+            theme={homeButtonTheme}
+            onClick={homeButtonClickHandler}
+          >
+            구깃
+          </Button>
         </HomeButtonWrapper>
         <ArrowsWrapper>
           <ArrowWrapper>

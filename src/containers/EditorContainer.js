@@ -33,6 +33,9 @@ function mapDispatchToProps(dispatch) {
     },
     onSharedUsersLoad(sharedUsers) {
       dispatch(setSharedUsers(sharedUsers));
+    },
+    onHomeButtonClick() {
+      dispatch(setCurrentNoteAndBranch(null, null));
     }
   };
 }
