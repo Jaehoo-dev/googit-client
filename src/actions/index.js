@@ -1,4 +1,9 @@
-import { SET_IS_PRIVATE_MODE, SET_BRANCH_LIST } from '../constants/actionTypes';
+import {
+  SET_IS_PRIVATE_MODE,
+  SET_BRANCH_LIST,
+  UPDATE_BRANCH_LIST,
+  SET_SHARED_USERS
+} from '../constants/actionTypes';
 
 export const setCurrentUser = user => ({
   type: 'setCurrentUser',
@@ -15,11 +20,6 @@ export const initializeStore = () => ({
 
 export const setIsPrivateMode = () => ({
   type: SET_IS_PRIVATE_MODE,
-});
-
-export const setBranchList = branchList => ({
-  type: SET_BRANCH_LIST,
-  payload: branchList
 });
 
 export const toggleShowChangesMode = () => ({
@@ -47,4 +47,19 @@ export const setCurrentNoteAndBranch = (note, branch) => ({
   type: 'setCurrentNoteAndBranch',
   note,
   branch,
+});
+
+export const updateBranchList = (branchList) => ({
+  type: UPDATE_BRANCH_LIST,
+  payload: branchList
+});
+
+export const setBranchList = (branchList) => ({
+  type: SET_BRANCH_LIST,
+  payload: branchList
+});
+
+export const setSharedUsers = (sharedUsers) => ({
+  type: SET_SHARED_USERS,
+  sharedUsers,
 });

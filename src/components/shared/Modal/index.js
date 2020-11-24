@@ -1,6 +1,6 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -42,23 +42,33 @@ ModalContainer.defaultProps = {
   }
 };
 
-export const themeSharing = {
-  backgroundColor: 'yellowgreen',
-  width: '60em',
-  height: '30em',
-  top: '20%',
-  left: '25%'
+export const profileIconTheme = {
+  width: '20em',
+  height: '10em',
+  backgroundColor: 'white',
+  top: '75px',
+  left: '83.3%'
+}
+
+export const sharingModalTheme = {
+  backgroundColor: 'white',
+  width: '50em',
+  height: '25em',
+  top: '14%',
+  left: '23%'
 };
 
-export default function Modal({ isOpen, children, toggleModal }) {
+export default function Modal({ isOpen, children, toggleModal, theme }) {
   if (!isOpen) return null;
 
   return createPortal(
     <>
       <Overlay onClick={toggleModal} />
-      <ModalContainer>
-        {children}
-      </ModalContainer>
+      <ThemeProvider theme={theme}>
+        <ModalContainer>
+          {children}
+        </ModalContainer>
+      </ThemeProvider>
     </>,
     document.getElementById('portal'));
 }

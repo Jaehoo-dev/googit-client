@@ -7,6 +7,7 @@ import {
   setNewBlocksCandidate,
   removeNewBlocksCandidate,
   setCurrentNoteAndBranch,
+  setSharedUsers
 } from '../actions';
 
 function mapDispatchToProps(dispatch) {
@@ -29,6 +30,9 @@ function mapDispatchToProps(dispatch) {
     },
     onNoteChange(note, branch) {
       dispatch(setCurrentNoteAndBranch(note, branch));
+    },
+    onSharedUsersLoad(sharedUsers) {
+      dispatch(setSharedUsers(sharedUsers));
     }
   };
 }
@@ -42,6 +46,7 @@ function mapStateToProps(state) {
     isModified: state.isModified,
     newBlocksCandidate: state.newBlocksCandidate,
     authorName: state.authorName,
+    sharedUsers: state.sharedUsers
   };
 }
 

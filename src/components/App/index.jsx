@@ -6,6 +6,7 @@ import Loading from '../../components/shared/Loading';
 import requestBranchList from '../../api/requestBranchList';
 import EditorPage from '../../containers/EditorContainer';
 import requestCurrentUser from '../../api/requestCurrentUser';
+import { throttle } from 'lodash';
 
 export default function App({
   hasToken,
@@ -15,14 +16,15 @@ export default function App({
   onCreateBranch,
   togglePrivateMode,
   isPrivateMode,
-  onFetchBranchList,
+  onSetBranchList,
+  onUpdateBranchList,
   branchList,
   currentNote,
   setCurrentNoteAndBranch,
 }) {
   const history = useHistory();
   const [keyword, setKeyword] = useState('');
-  const [skippedBranchNumber, setSkippedBranchNumber] = useState(0);
+  const [skip, setSkip] = useState(0);
 
   useEffect(() => {
     if (!hasToken) {
@@ -42,20 +44,39 @@ export default function App({
   }, []);
 
   useEffect(() => {
+    console.log(isPrivateMode, 'privateMode');
     if (currentUser) loadBranchList();
 
     async function loadBranchList() {
-      const branchList
-        = await requestBranchList(
-          currentUser,
-          isPrivateMode,
-          keyword,
-          skippedBranchNumber
-        );
+      const response = await requestBranchList(currentUser, isPrivateMode, skip);
 
-      onFetchBranchList(branchList);
+      if (!response) return;
+      return (!skip)
+        ? onSetBranchList(response)
+        : onUpdateBranchList(response);
     }
-  }, [currentUser, isPrivateMode, keyword, skippedBranchNumber]);
+  }, [currentUser, isPrivateMode, skip]);
+
+  useEffect(() => {
+    const throttledScrollHandler = throttle(scrollHandler, 2000);
+    function scrollHandler() {
+      const { offsetHeight, scrollTop, scrollHeight } = document.documentElement;
+
+      if (offsetHeight + scrollTop > scrollHeight * 1.05) {
+        setSkip(skip + 13);
+      }
+    }
+
+    window.addEventListener('scroll', throttledScrollHandler);
+
+    return (() => {
+      window.removeEventListener('scroll', throttledScrollHandler);
+    });
+  }, [branchList]);
+
+  function skipInitializer() {
+    setSkip(0);
+  }
 
   function handleInput(event) {
     const query = event.target.keyword.value;
@@ -64,11 +85,6 @@ export default function App({
 
     setKeyword(query);
   }
-
-  function skipBranch() {
-    setSkippedBranchNumber(skippedBranchNumber + 10);
-  }
-
 
   return (
     <>
@@ -87,19 +103,20 @@ export default function App({
             <MainPage
               onLogout={onLogout}
               isPrivateMode={isPrivateMode}
-              handleOnClick={togglePrivateMode}
+              togglePrivateMode={togglePrivateMode}
               currentUser={currentUser}
               handleInput={handleInput}
               branchList={branchList}
-              onLoad={onFetchBranchList}
-              onScroll={skipBranch}
+              onLoad={onSetBranchList}
               setCurrentNoteAndBranch={setCurrentNoteAndBranch}
+              skipInitializer={skipInitializer}
             />
           </Route>
           <Route path='/notes'>
             <EditorPage
               currentNote={currentNote}
               onCreateBranch={onCreateBranch}
+              onClick={skipInitializer}
             />
           </Route>
         </Switch>

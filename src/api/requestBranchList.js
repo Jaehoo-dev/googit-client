@@ -1,20 +1,16 @@
 import { HOST, PORT, USERS, BRANCHES, LIMIT_NUMBER } from '../constants/urls';
 import { GET } from '../constants/httpMethods';
 
-export default async function requestBranchList(
-  currentUser, isPrivateMode, keyword, skip
-) {
+export default async function requestBranchList(currentUser, isPrivateMode, skip) {
   try {
-    const userId = currentUser._id;
-    keyword = keyword || '';
+    console.log(isPrivateMode, 'load notes');
 
-    const fetchUrl = `
-      ${HOST}${PORT}${USERS}/${userId}${BRANCHES}/?q=${keyword}&private=${isPrivateMode}&limit=${LIMIT_NUMBER}&skip=${skip}
-    `;
+    const fetchUrl = isPrivateMode
+      ? `http://localhost:4000/users/${currentUser._id}/branches/private/?limit=13&skip=${skip}`
+      : `http://localhost:4000/users/${currentUser._id}/branches/?limit=13&skip=${skip}`;
 
     let response = await fetch(fetchUrl, {
       method: GET,
-      mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN)}`,
@@ -23,14 +19,15 @@ export default async function requestBranchList(
 
     response = await response.json();
 
-    if (response.result === 'failure') {
-      alert('브랜치를 받아오는 중 문제가 생겼어요');
-
+    if (!response) return;
+    if (response.result === 'no more branches') {
+      alert(`${response.message}`);
       return;
     }
 
     return response.data;
+
   } catch (err) {
-    console.error(err, 'note list error');
+    alert(err);
   }
 }

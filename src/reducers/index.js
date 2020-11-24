@@ -1,5 +1,10 @@
 import { combineReducers } from 'redux';
-import { SET_IS_PRIVATE_MODE, SET_BRANCH_LIST } from '../constants/actionTypes';
+import {
+  SET_IS_PRIVATE_MODE,
+  SET_BRANCH_LIST,
+  UPDATE_BRANCH_LIST,
+  SET_SHARED_USERS,
+} from '../constants/actionTypes';
 
 const hasToken = (
   state = !!localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN),
@@ -34,7 +39,9 @@ const isPrivateMode = (state = false, action) => {
 const branchList = (state = [], action) => {
   switch (action.type) {
     case SET_BRANCH_LIST:
-      return action.payload || [];
+      return action.payload;
+    case UPDATE_BRANCH_LIST:
+      return [...state, ...action.payload];
     default:
       return state;
   }
@@ -89,6 +96,15 @@ const currentBranch = (state = null, action) => {
   }
 };
 
+const sharedUsers = (state = [], action) => {
+  switch (action.type) {
+    case SET_SHARED_USERS:
+      return action.sharedUsers;
+    default:
+      return state;
+  }
+};
+
 const appReducer = combineReducers({
   hasToken,
   currentUser,
@@ -99,6 +115,7 @@ const appReducer = combineReducers({
   newBlocksCandidate,
   currentNote,
   currentBranch,
+  sharedUsers
 });
 
 export default function rootReducer(state, action) {

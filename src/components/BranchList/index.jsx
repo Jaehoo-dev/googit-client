@@ -7,7 +7,6 @@ export default function BranchList({
   isPrivateMode,
   currentUser,
   branchList,
-  onScroll,
   setCurrentNoteAndBranch,
 }) {
 
@@ -16,7 +15,6 @@ export default function BranchList({
       <NoteListHead />
       <NoteListBody
         branchList={branchList}
-        onScroll={onScroll}
         setCurrentNoteAndBranch={setCurrentNoteAndBranch}
       />
     </Wrapper>
