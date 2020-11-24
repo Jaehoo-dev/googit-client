@@ -20,9 +20,7 @@ export default function App({
   onUpdateBranchList,
   branchList,
   currentNote,
-  setCurrentNoteAndBranch,
-  isEditorPage,
-
+  setCurrentNoteAndBranch
 }) {
   const history = useHistory();
   const [keyword, setKeyword] = useState('');
@@ -46,18 +44,18 @@ export default function App({
   }, []);
 
   useEffect(() => {
-
+    console.log(isPrivateMode, 'privateMode');
     if (currentUser) loadBranchList();
 
     async function loadBranchList() {
-      const response = await requestBranchList(currentUser, skip);
+      const response = await requestBranchList(currentUser, isPrivateMode, skip);
 
       if (!response) return;
       return (!skip)
         ? onSetBranchList(response)
         : onUpdateBranchList(response);
     }
-  }, [currentUser, skip]);
+  }, [currentUser, isPrivateMode, skip]);
 
   useEffect(() => {
     const throttledScrollHandler = throttle(scrollHandler, 2000);
@@ -105,12 +103,13 @@ export default function App({
             <MainPage
               onLogout={onLogout}
               isPrivateMode={isPrivateMode}
-              handleOnClick={togglePrivateMode}
+              togglePrivateMode={togglePrivateMode}
               currentUser={currentUser}
               handleInput={handleInput}
               branchList={branchList}
               onLoad={onSetBranchList}
               setCurrentNoteAndBranch={setCurrentNoteAndBranch}
+              skipInitializer={skipInitializer}
             />
           </Route>
           <Route path='/notes'>

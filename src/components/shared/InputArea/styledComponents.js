@@ -7,5 +7,3 @@ export const StyledInputArea = styled.input`
     outline: none;
   }
 `;
-
-

@@ -91,14 +91,14 @@ export const ModifyRecordWrapper = styled.div`
   left: 360px;
 `;
 
-const ModalContentWrapper = styled.div`
+export const ModalContentWrapper = styled.div`
   width: 50em;
   height: 23em;
   display: grid;
   grid-template-rows: 2em 2em 1fr;
 `;
 
-const StyledForm = styled.form`
+export const StyledForm = styled.form`
   padding: 0 2em;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
@@ -106,6 +106,6 @@ const StyledForm = styled.form`
   align-items: center;
 `;
 
-const SharedUserList = styled.div`
+export const SharedUserList = styled.div`
   padding: 0 2em;
 `;

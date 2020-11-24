@@ -6,7 +6,7 @@ import PrivateNotesToggleButton from './PrivateNotesToggleButton';
 import SearchBar from './SearchBar';
 import ProfileIcon from './ProfileIcon';
 
-export default function MainHeader({ onLogout, isPrivateMode, handleOnClick, handleInput, currentUser }) {
+export default function MainHeader({ onLogout, isPrivateMode, clickHandler, handleInput, currentUser }) {
   const history = useHistory();
 
   async function logoutClickHandler() {
@@ -19,7 +19,7 @@ export default function MainHeader({ onLogout, isPrivateMode, handleOnClick, han
   return (
     <Header>
       <section>
-        <PrivateNotesToggleButton buttonMode={isPrivateMode} onClick={handleOnClick} />
+        <PrivateNotesToggleButton buttonMode={isPrivateMode} onClick={clickHandler} />
         <SearchBar handleInput={handleInput} currentUser={currentUser} />
         <ProfileIcon onClick={logoutClickHandler} />
       </section>

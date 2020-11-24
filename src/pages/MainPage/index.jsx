@@ -5,18 +5,25 @@ import BranchList from '../../components/BranchList';
 export default function AppMain({
   onLogout,
   isPrivateMode,
-  handleOnClick,
+  togglePrivateMode,
   currentUser,
   handleInput,
   branchList,
   setCurrentNoteAndBranch,
+  skipInitializer,
 }) {
+
+  function clickHandler() {
+    togglePrivateMode();
+    skipInitializer();
+  }
+
 
   return (
     <>
       <MainHeader
         isPrivateMode={isPrivateMode}
-        handleOnClick={handleOnClick}
+        clickHandler={clickHandler}
         onLogout={onLogout}
         handleInput={handleInput}
         currentUser={currentUser}

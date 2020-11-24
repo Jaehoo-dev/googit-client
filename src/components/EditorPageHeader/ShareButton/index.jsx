@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import Modal, { ModalCloseButton, sharingModalTheme } from '../../shared/Modal';
 import Button, { coralButtonTheme, shareButtonTheme } from '../../shared/Button';
 import { ModalContentWrapper, StyledForm, SharedUserList } from '../styledComponents';

@@ -11,12 +11,13 @@ export default function BranchListBody({
 }) {
 
   function createBranchEntry() {
-    return branchList.map((branch, i) => (
+    return branchList.map((list, i) => (
       <BranchListEntry
         key={i}
         setCurrentNoteAndBranch={setCurrentNoteAndBranch}
-        branchContent={branch}
+        branchContent={list.branch}
         count={i}
+        creator={list.email}
       />
     ));
   }
