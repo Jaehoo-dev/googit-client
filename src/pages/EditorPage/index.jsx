@@ -20,9 +20,9 @@ export default function EditorPage({
   currentBranch,
   onNoteLoad,
   onNoteChange,
-  onEditorPageModifyToHome,
   sharedUsers,
   onSharedUsersLoad,
+  onClick
 }) {
   const history = useHistory();
 
@@ -39,7 +39,6 @@ export default function EditorPage({
   }, []);
 
   function homeButtonClickHandler() {
-    onEditorPageModifyToHome();
     history.push('/');
   }
 
@@ -89,6 +88,7 @@ export default function EditorPage({
         onNoteChange={onNoteChange}
         sharedUsers={sharedUsers}
         onSharedUsersLoad={onSharedUsersLoad}
+        onClick={onClick}
       />
       <Editor
         currentUser={currentUser}

@@ -7,7 +7,6 @@ import {
   setNewBlocksCandidate,
   removeNewBlocksCandidate,
   setCurrentNoteAndBranch,
-  setIsEditorPageToFalse,
   setSharedUsers
 } from '../actions';
 
@@ -32,11 +31,8 @@ function mapDispatchToProps(dispatch) {
     onNoteChange(note, branch) {
       dispatch(setCurrentNoteAndBranch(note, branch));
     },
-    onEditorPageModifyToHome() {
-      dispatch(setIsEditorPageToFalse());
-    },
     onSharedUsersLoad(sharedUsers) {
-      dispatch(setSharedUsers(sharedUsers))
+      dispatch(setSharedUsers(sharedUsers));
     }
   };
 }

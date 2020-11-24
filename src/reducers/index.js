@@ -1,9 +1,7 @@
 import { combineReducers } from 'redux';
-import { 
+import {
   SET_IS_PRIVATE_MODE,
-  SET_IS_EDITOR_PAGE_TO_FALSE,
-  SET_IS_EDITOR_PAGE_TO_TRUE,
-  INIT_BRANCH_LIST,
+  SET_BRANCH_LIST,
   UPDATE_BRANCH_LIST,
   SET_SHARED_USERS,
 } from '../constants/actionTypes';
@@ -40,7 +38,7 @@ const isPrivateMode = (state = false, action) => {
 
 const branchList = (state = [], action) => {
   switch (action.type) {
-    case INIT_BRANCH_LIST:
+    case SET_BRANCH_LIST:
       return action.payload;
     case UPDATE_BRANCH_LIST:
       return [...state, ...action.payload];
@@ -98,17 +96,6 @@ const currentBranch = (state = null, action) => {
   }
 };
 
-const isEditorPage = (state = false, action) => {
-  switch (action.type) {
-    case SET_IS_EDITOR_PAGE_TO_TRUE:
-      return true;
-    case SET_IS_EDITOR_PAGE_TO_FALSE:
-      return false;
-    default:
-      return state;
-  }
-};
-
 const sharedUsers = (state = [], action) => {
   switch (action.type) {
     case SET_SHARED_USERS:
@@ -128,7 +115,6 @@ const appReducer = combineReducers({
   newBlocksCandidate,
   currentNote,
   currentBranch,
-  isEditorPage,
   sharedUsers
 });
 

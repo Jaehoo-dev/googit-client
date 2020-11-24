@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, Switch, Route } from 'react-router-dom';
 import Entrance from '../../components/Entrance';
 import MainPage from '../../pages/MainPage';
@@ -6,7 +6,7 @@ import Loading from '../../components/shared/Loading';
 import requestBranchList from '../../api/requestBranchList';
 import EditorPage from '../../containers/EditorContainer';
 import requestCurrentUser from '../../api/requestCurrentUser';
-import BranchList from '../BranchList';
+import { throttle } from 'lodash';
 
 export default function App({
   hasToken,
@@ -16,17 +16,17 @@ export default function App({
   onCreateBranch,
   togglePrivateMode,
   isPrivateMode,
-  onFetchBranchList,
+  onSetBranchList,
+  onUpdateBranchList,
   branchList,
   currentNote,
   setCurrentNoteAndBranch,
-  onHomeToEditorPageModify,
   isEditorPage,
-  onUpdateBranchList
+
 }) {
   const history = useHistory();
   const [keyword, setKeyword] = useState('');
-  const [skippedBranchNumber, setSkippedBranchNumber] = useState(0);
+  const [skip, setSkip] = useState(0);
 
   useEffect(() => {
     if (!hasToken) {
@@ -46,25 +46,39 @@ export default function App({
   }, []);
 
   useEffect(() => {
-    // console.log('load notes');
 
-    // if (currentUser) requestBranchList(currentUser)
+    if (currentUser) loadBranchList();
 
-    // async function requestBranchList(currentUser) {
-    //   let response = await fetch(
-    //     `http://localhost:4000/users/${currentUser._id}/branches`,{
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         Authorization: `Bearer ${localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN)}`,
-    //       }
-    //     }
-    //   );
+    async function loadBranchList() {
+      const response = await requestBranchList(currentUser, skip);
 
-    //   response = await response.json();
-    //   console.log(response);
-    // }
+      if (!response) return;
+      return (!skip)
+        ? onSetBranchList(response)
+        : onUpdateBranchList(response);
+    }
+  }, [currentUser, skip]);
 
-  }, [currentUser]);
+  useEffect(() => {
+    const throttledScrollHandler = throttle(scrollHandler, 2000);
+    function scrollHandler() {
+      const { offsetHeight, scrollTop, scrollHeight } = document.documentElement;
+
+      if (offsetHeight + scrollTop > scrollHeight * 1.05) {
+        setSkip(skip + 13);
+      }
+    }
+
+    window.addEventListener('scroll', throttledScrollHandler);
+
+    return (() => {
+      window.removeEventListener('scroll', throttledScrollHandler);
+    });
+  }, [branchList]);
+
+  function skipInitializer() {
+    setSkip(0);
+  }
 
   function handleInput(event) {
     const query = event.target.keyword.value;
@@ -72,10 +86,6 @@ export default function App({
     if (!query) return;
 
     setKeyword(query);
-  }
-
-  function skipBranch() {
-    setSkippedBranchNumber(skippedBranchNumber + 10);
   }
 
   return (
@@ -99,16 +109,15 @@ export default function App({
               currentUser={currentUser}
               handleInput={handleInput}
               branchList={branchList}
-              onLoad={onFetchBranchList}
-              onScroll={skipBranch}
+              onLoad={onSetBranchList}
               setCurrentNoteAndBranch={setCurrentNoteAndBranch}
-              onHomeToEditorPageModify={onHomeToEditorPageModify}
             />
           </Route>
           <Route path='/notes'>
             <EditorPage
               currentNote={currentNote}
               onCreateBranch={onCreateBranch}
+              onClick={skipInitializer}
             />
           </Route>
         </Switch>

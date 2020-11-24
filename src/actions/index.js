@@ -1,10 +1,8 @@
 import {
   SET_IS_PRIVATE_MODE,
-  INIT_BRANCH_LIST,
-  SET_IS_EDITOR_PAGE_TO_FALSE,
-  SET_IS_EDITOR_PAGE_TO_TRUE,
+  SET_BRANCH_LIST,
   UPDATE_BRANCH_LIST,
-  SET_SHARED_USERS 
+  SET_SHARED_USERS
 } from '../constants/actionTypes';
 
 export const setCurrentUser = user => ({
@@ -51,25 +49,17 @@ export const setCurrentNoteAndBranch = (note, branch) => ({
   branch,
 });
 
-export const setIsEditorPageToFalse = () => ({
-  type: SET_IS_EDITOR_PAGE_TO_FALSE
-});
-
-export const setIsEditorPageToTrue = () => ({
-  type: SET_IS_EDITOR_PAGE_TO_TRUE
-});
-
 export const updateBranchList = (branchList) => ({
   type: UPDATE_BRANCH_LIST,
   payload: branchList
 });
 
-export const initBranchList = (branchList) => ({
-  type: INIT_BRANCH_LIST,
+export const setBranchList = (branchList) => ({
+  type: SET_BRANCH_LIST,
   payload: branchList
 });
 
 export const setSharedUsers = (sharedUsers) => ({
   type: SET_SHARED_USERS,
   sharedUsers,
-})
+});
