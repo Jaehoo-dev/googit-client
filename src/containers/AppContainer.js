@@ -24,7 +24,7 @@ function mapDispatchToProps(dispatch) {
     onUpdateBranchList(branchList) {
       dispatch(updateBranchList(branchList));
     },
-    setCurrentNoteAndBranch(note, branch) {
+    onNoteListEntryClick(note, branch) {
       dispatch(setCurrentNoteAndBranch(note, branch));
     }
   };

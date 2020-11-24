@@ -7,7 +7,7 @@ export default function BranchList({
   isPrivateMode,
   currentUser,
   branchList,
-  setCurrentNoteAndBranch,
+  onNoteListEntryClick,
 }) {
 
   return (
@@ -15,7 +15,7 @@ export default function BranchList({
       <NoteListHead />
       <NoteListBody
         branchList={branchList}
-        setCurrentNoteAndBranch={setCurrentNoteAndBranch}
+        onNoteListEntryClick={onNoteListEntryClick}
       />
     </Wrapper>
   );

@@ -10,6 +10,8 @@ export default function Editor({
   isModified,
   currentNote,
   isShowModificationsMode,
+  hasWritingPermission,
+  checkHasWritingPermission,
 }) {
   const editor = useMemo(() => withReact(createEditor()), []);
   const [value, setValue] = useState([
@@ -20,14 +22,12 @@ export default function Editor({
   ]);
 
   useEffect(() => {
+    checkHasWritingPermission();
+
     if (!currentNote) return;
 
     setValue(currentNote.blocks);
   }, [currentNote]);
-
-  useEffect(() => {
-
-  }, [isShowModificationsMode]);
 
   const renderLeaf = useCallback(props => {
     return <Leaf {...props} />;
@@ -49,6 +49,7 @@ export default function Editor({
         <Editable
           renderLeaf={renderLeaf}
           placeholder='줄을 자주 바꿔주세요.'
+          readOnly={!hasWritingPermission}
         />
       </Slate>
     </Wrapper>

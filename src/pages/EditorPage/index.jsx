@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import EditorPageHeader from '../../components/EditorPageHeader';
 import Editor from '../../components/Editor';
 import Compare from '../../components/Compare';
 import requestCreateBranch from '../../api/requestCreateBranch';
 import requestCreateNote from '../../api/requestCreateNote';
-import requestBranch from '../../api/requestBranch';
+import requestBranchSharingInfo from '../../api/requestBranchSharingInfo';
 
 export default function EditorPage({
   currentUser,
@@ -25,19 +25,8 @@ export default function EditorPage({
   onClick,
   onHomeButtonClick,
 }) {
+  const [hasWritingPermission, setHasWritingPermission] = useState(undefined);
   const history = useHistory();
-
-  useEffect(() => {
-    if (!currentNote) return;
-
-    const branch = getBranch();
-
-    onNoteLoad(currentNote, branch);
-
-    async function getBranch() {
-      return await requestBranch(currentUser._id, currentNote.parent);
-    }
-  }, []);
 
   function homeButtonClickHandler() {
     history.push('/');
@@ -76,6 +65,30 @@ export default function EditorPage({
     );
   }
 
+  async function checkHasWritingPermission() {
+    if (!currentNote) return setHasWritingPermission(true);
+
+    if (currentNote._id !== currentBranch.latest_note._id) {
+      return setHasWritingPermission(false);
+    }
+
+    if (currentBranch.created_by === currentUser._id) {
+      return setHasWritingPermission(true);
+    }
+
+    const sharedUserInfoIds = currentBranch.shared_users_info;
+
+    for (let i = 0; i < sharedUserInfoIds.length; i++) {
+      const branchSharingInfo
+        = await requestBranchSharingInfo(currentUser._id, sharedUserInfoIds[i]);
+
+      if (branchSharingInfo.has_writing_permission) {
+        return setHasWritingPermission(true);
+      }
+    }
+    return setHasWritingPermission(false);
+  }
+
   return (
     <>
       <EditorPageHeader
@@ -100,6 +113,8 @@ export default function EditorPage({
         onNoteModify={onNoteModify}
         isModified={isModified}
         isShowModificationsMode={isShowModificationsMode}
+        checkHasWritingPermission={checkHasWritingPermission}
+        hasWritingPermission={hasWritingPermission}
       />
       {/* <Compare
         currentUser={currentUser}

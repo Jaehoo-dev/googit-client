@@ -3,7 +3,6 @@
 
 export async function apiSearchNoteByKeyword(keyword) {
   try {
-    console.log('search by keyword fetch');
     let response = await fetch(`/users/123123/branches?q=${keyword}`, {
       method: 'GET',
       mode: 'cors',

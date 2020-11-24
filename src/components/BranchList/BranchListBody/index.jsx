@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { BranchListBodyWrapper, BranchContainer } from '../styledComponents';
 import BranchListEntry from '../BranchListEntry';
@@ -7,14 +6,14 @@ import Button, { createNewBranchTheme } from '../../shared/Button';
 
 export default function BranchListBody({
   branchList,
-  setCurrentNoteAndBranch,
+  onNoteListEntryClick,
 }) {
 
-  function createBranchEntry() {
+  function createBranchEntries() {
     return branchList.map((list, i) => (
       <BranchListEntry
         key={i}
-        setCurrentNoteAndBranch={setCurrentNoteAndBranch}
+        onNoteListEntryClick={onNoteListEntryClick}
         branchContent={list.branch}
         count={i}
         creator={list.email}
@@ -30,7 +29,7 @@ export default function BranchListBody({
         </Button>
       </Link>
       <BranchContainer>
-        {branchList && createBranchEntry()}
+        {branchList && createBranchEntries()}
       </BranchContainer>
     </BranchListBodyWrapper>
   );

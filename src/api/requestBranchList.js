@@ -3,8 +3,6 @@ import { GET } from '../constants/httpMethods';
 
 export default async function requestBranchList(currentUser, isPrivateMode, skip) {
   try {
-    console.log(isPrivateMode, 'load notes');
-
     const fetchUrl = isPrivateMode
       ? `http://localhost:4000/users/${currentUser._id}/branches/private/?limit=13&skip=${skip}`
       : `http://localhost:4000/users/${currentUser._id}/branches/?limit=13&skip=${skip}`;
@@ -20,6 +18,7 @@ export default async function requestBranchList(currentUser, isPrivateMode, skip
     response = await response.json();
 
     if (!response) return;
+
     if (response.result === 'no more branches') {
       alert(`${response.message}`);
       return;

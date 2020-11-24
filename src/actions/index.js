@@ -43,11 +43,13 @@ export const removeNewBlocksCandidate = () => ({
   type: 'removeNewBlocksCandidate',
 });
 
-export const setCurrentNoteAndBranch = (note, branch) => ({
-  type: 'setCurrentNoteAndBranch',
-  note,
-  branch,
-});
+export const setCurrentNoteAndBranch = (note, branch) => {
+  return ({
+    type: 'setCurrentNoteAndBranch',
+    note,
+    branch,
+  });
+};
 
 export const updateBranchList = branchList => ({
   type: UPDATE_BRANCH_LIST,

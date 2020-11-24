@@ -20,7 +20,7 @@ export default function App({
   onUpdateBranchList,
   branchList,
   currentNote,
-  setCurrentNoteAndBranch,
+  onNoteListEntryClick,
 }) {
   const history = useHistory();
   const [keyword, setKeyword] = useState('');
@@ -44,7 +44,6 @@ export default function App({
   }, []);
 
   useEffect(() => {
-    console.log(isPrivateMode, 'privateMode');
     if (currentUser) loadBranchList();
 
     async function loadBranchList() {
@@ -108,7 +107,7 @@ export default function App({
               handleInput={handleInput}
               branchList={branchList}
               onLoad={onSetBranchList}
-              setCurrentNoteAndBranch={setCurrentNoteAndBranch}
+              onNoteListEntryClick={onNoteListEntryClick}
               skipInitializer={skipInitializer}
             />
           </Route>
