@@ -19,7 +19,7 @@ import Button, {
   deleteButtonTheme,
   coralButtonTheme,
   saveButtonTheme,
-} from '../shared/Button/index new';
+} from '../shared/Button';
 import requestNoteAuthor from '../../api/requestNoteAuthor';
 import requestNote from '../../api/requestNote';
 import requestBranch from '../../api/requestBranch';
@@ -37,7 +37,8 @@ export default function EditorPageHeader({
   onSubmit,
   onNoteChange,
   sharedUsers,
-  onSharedUsersLoad
+  onSharedUsersLoad,
+  onClick
 }) {
   const [authorName, setAuthorName] = useState(null);
 
@@ -57,6 +58,7 @@ export default function EditorPageHeader({
 
   function submitHandler() {
     onSubmit();
+    onClick();
   }
 
   async function displayLinkedNote(version) {
@@ -106,12 +108,12 @@ export default function EditorPageHeader({
           {
             currentNote
             && <Button theme={coralButtonTheme} onClick={onShowModificationsModeToggle}>
-                {
-                  isShowModificationsMode
-                    ? '수정사항 숨기기'
-                    : '수정사항 보기'
-                }
-              </Button>
+              {
+                isShowModificationsMode
+                  ? '수정사항 숨기기'
+                  : '수정사항 보기'
+              }
+            </Button>
           }
         </ShowChangesButtonWrapper>
       </LeftWrapper>
@@ -133,12 +135,12 @@ export default function EditorPageHeader({
           {
             currentNote
             && <SharingButton
-                  currentUser={currentUser}
-                  currentNote={currentNote}
-                  sharedUsers={sharedUsers}
-                  onSharedUsersLoad={onSharedUsersLoad}
-                >
-                  공유
+              currentUser={currentUser}
+              currentNote={currentNote}
+              sharedUsers={sharedUsers}
+              onSharedUsersLoad={onSharedUsersLoad}
+            >
+              공유
                 </SharingButton>
           }
         </ShareButtonWrapper>

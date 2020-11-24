@@ -3,7 +3,7 @@ import { Wrapper, ProfileImg } from '../styledComponents';
 // import { ThemeProvider } from 'styled-components';
 import { Link } from 'react-router-dom';
 import Modal, { ModalCloseButton, profileIconTheme } from '../../shared/Modal';
-import Button, { coralButtonTheme } from '../../shared/Button/index new';
+import Button, { coralButtonTheme } from '../../shared/Button';
 
 export default function ProfileIcon({ onClick }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,8 +27,8 @@ export default function ProfileIcon({ onClick }) {
           <Button theme={coralButtonTheme} toggleModal={toggleModal}>계정관리</Button>
         </Link>
         <Link to='/'>
-            <Button theme={coralButtonTheme} onClick={clickHandler} toggleModal={toggleModal}>
-              로그아웃
+          <Button theme={coralButtonTheme} onClick={clickHandler} toggleModal={toggleModal}>
+            로그아웃
             </Button>
         </Link>
       </Modal>

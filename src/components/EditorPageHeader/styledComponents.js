@@ -90,3 +90,22 @@ export const ModifyRecordWrapper = styled.div`
   position: absolute;
   left: 360px;
 `;
+
+const ModalContentWrapper = styled.div`
+  width: 50em;
+  height: 23em;
+  display: grid;
+  grid-template-rows: 2em 2em 1fr;
+`;
+
+const StyledForm = styled.form`
+  padding: 0 2em;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-gap: 1em;
+  align-items: center;
+`;
+
+const SharedUserList = styled.div`
+  padding: 0 2em;
+`;

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Wrapper } from '../styledComponents';
-import { ThemeProvider } from 'styled-components';
 import Button, { coralButtonTheme } from '../../shared/Button';
 
 export default function PrivateNotesToggleButton({ buttonMode, onClick }) {
@@ -12,10 +11,7 @@ export default function PrivateNotesToggleButton({ buttonMode, onClick }) {
 
   return (
     <Wrapper>
-      <ThemeProvider theme={coralButtonTheme}>
-        <Button onClick={clickHandler}>{content}</Button>
-      </ThemeProvider>
+      <Button theme={coralButtonTheme} onClick={clickHandler}>{content}</Button>
     </Wrapper>
-
   );
 }

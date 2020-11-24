@@ -7,10 +7,7 @@ export default function BranchList({
   isPrivateMode,
   currentUser,
   branchList,
-  onScroll,
   setCurrentNoteAndBranch,
-  createRef,
-  onHomeToEditorPageModify
 }) {
 
   return (
@@ -18,10 +15,7 @@ export default function BranchList({
       <NoteListHead />
       <NoteListBody
         branchList={branchList}
-        onScroll={onScroll}
         setCurrentNoteAndBranch={setCurrentNoteAndBranch}
-        createRef={createRef}
-        onHomeToEditorPageModify={onHomeToEditorPageModify}
       />
     </Wrapper>
   );

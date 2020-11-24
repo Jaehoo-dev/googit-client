@@ -9,10 +9,7 @@ export default function AppMain({
   currentUser,
   handleInput,
   branchList,
-  onScroll,
   setCurrentNoteAndBranch,
-  createRef,
-  onHomeToEditorPageModify
 }) {
 
   return (
@@ -28,10 +25,7 @@ export default function AppMain({
         isPrivateMode={isPrivateMode}
         currentUser={currentUser}
         branchList={branchList}
-        onScroll={onScroll}
         setCurrentNoteAndBranch={setCurrentNoteAndBranch}
-        createRef={createRef}
-        onHomeToEditorPageModify={onHomeToEditorPageModify}
       />
     </>
   );
