@@ -20,7 +20,7 @@ export default function App({
   onUpdateBranchList,
   branchList,
   currentNote,
-  setCurrentNoteAndBranch
+  setCurrentNoteAndBranch,
 }) {
   const history = useHistory();
   const [keyword, setKeyword] = useState('');

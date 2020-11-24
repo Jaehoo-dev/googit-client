@@ -23,7 +23,6 @@ import Button, {
 import requestNoteAuthor from '../../api/requestNoteAuthor';
 import requestNote from '../../api/requestNote';
 import requestBranch from '../../api/requestBranch';
-
 import SharingButton from './ShareButton';
 
 export default function EditorPageHeader({
@@ -48,7 +47,12 @@ export default function EditorPageHeader({
     getNoteAuthorName();
 
     async function getNoteAuthorName() {
-      setAuthorName(await requestNoteAuthor(currentNote.created_by));
+      setAuthorName(
+        await requestNoteAuthor(
+          currentUser._id,
+          currentNote.created_by
+        )
+      );
     }
   }, [currentNote]);
 
@@ -81,7 +85,12 @@ export default function EditorPageHeader({
     <Header>
       <LeftWrapper>
         <HomeButtonWrapper>
-          <Button theme={homeButtonTheme} onClick={homeButtonClickHandler}>구깃</Button>
+          <Button
+            theme={homeButtonTheme}
+            onClick={homeButtonClickHandler}
+          >
+            구깃
+          </Button>
         </HomeButtonWrapper>
         <ArrowsWrapper>
           <ArrowWrapper>
@@ -141,7 +150,7 @@ export default function EditorPageHeader({
               onSharedUsersLoad={onSharedUsersLoad}
             >
               공유
-                </SharingButton>
+            </SharingButton>
           }
         </ShareButtonWrapper>
         <SaveButtonWrapper>

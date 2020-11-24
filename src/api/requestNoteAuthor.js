@@ -1,6 +1,6 @@
-export default async function requestNoteAuthor(authorId) {
+export default async function requestNoteAuthor(userId, authorId) {
   const res = await fetch(
-    `http://localhost:4000/users/${authorId}`,
+    `http://localhost:4000/users/${userId}/users/${authorId}`,
     {
       method: 'GET',
       headers: {
@@ -18,5 +18,5 @@ export default async function requestNoteAuthor(authorId) {
     return;
   }
 
-  return response.user.username;
+  return response.author.username;
 }
