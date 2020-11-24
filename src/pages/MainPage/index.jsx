@@ -24,6 +24,8 @@ export default function AppMain({
       <MainHeader
         isPrivateMode={isPrivateMode}
         clickHandler={clickHandler}
+        togglePrivateMode={togglePrivateMode}
+        skipInitializer={skipInitializer}
         onLogout={onLogout}
         handleInput={handleInput}
         currentUser={currentUser}
