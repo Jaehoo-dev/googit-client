@@ -17,7 +17,7 @@ export default function BranchListEntry({
   function NoteListEntryClickHandler(note, branch) {
     onNoteListEntryClick(note, branch);
   }
-
+  console.log(branchContent);
   return (
     <Link to={`/notes/${branchContent.latest_note._id}`}>
       <BranchListEntryWrapper

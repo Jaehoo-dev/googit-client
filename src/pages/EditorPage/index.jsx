@@ -68,6 +68,7 @@ export default function EditorPage({
   async function checkHasWritingPermission() {
     if (!currentNote) return setHasWritingPermission(true);
 
+    // should be latest_note not latest_note._id
     if (currentNote._id !== currentBranch.latest_note._id) {
       return setHasWritingPermission(false);
     }
@@ -82,10 +83,11 @@ export default function EditorPage({
       const branchSharingInfo
         = await requestBranchSharingInfo(currentUser._id, sharedUserInfoIds[i]);
 
-      if (branchSharingInfo.has_writing_permission) {
+      if (branchSharingInfo?.has_writing_permission) {
         return setHasWritingPermission(true);
       }
     }
+
     return setHasWritingPermission(false);
   }
 
