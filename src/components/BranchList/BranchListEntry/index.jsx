@@ -6,6 +6,7 @@ export default function BranchListEntry({
   branchContent,
   count,
   setCurrentNoteAndBranch,
+  creator,
 }) {
   const isShared = !!branchContent.shared_users_info.length;
   const title = branchContent.latest_note.blocks[0].children[0].text;
@@ -23,7 +24,7 @@ export default function BranchListEntry({
       >
         <div>{count + 1}</div>
         <div>{title}</div>
-        <div>{branchContent.email}</div>
+        <div>{creator}</div>
         <div>{`${date} ${time}`}</div>
         <div>{isShared ? 'O' : 'X'}</div>
       </BranchListEntryWrapper>
