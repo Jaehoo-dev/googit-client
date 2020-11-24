@@ -27,6 +27,16 @@ export default function App({
   const history = useHistory();
   const [keyword, setKeyword] = useState('');
   const [skippedBranchNumber, setSkippedBranchNumber] = useState(0);
+  const [branchNumber, setBranchNumber] = useState(0);
+
+  const observer = useRef(new IntersectionObserver((entries) => {
+    const first = entries[0];
+    // console.log('inf scroll');
+    if (first.isIntersecting) {
+      setSkippedBranchNumber(skippedBranchNumber + 15);
+    }
+  }, { threshold: 1 }));
+  const [observedElement, setObservedElement] = useState(null);
 
   useEffect(() => {
     if (!hasToken) {
@@ -46,25 +56,29 @@ export default function App({
   }, []);
 
   useEffect(() => {
-    // console.log('load notes');
 
-    // if (currentUser) requestBranchList(currentUser)
+    if (!currentUser) return;
+    loadBranchList();
 
-    // async function requestBranchList(currentUser) {
-    //   let response = await fetch(
-    //     `http://localhost:4000/users/${currentUser._id}/branches`,{
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         Authorization: `Bearer ${localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN)}`,
-    //       }
-    //     }
-    //   );
+    async function loadBranchList() {
 
-    //   response = await response.json();
-    //   console.log(response);
-    // }
+      const branchList
+        = await requestBranchList(
+          currentUser,
+          isPrivateMode,
+          keyword,
+          skippedBranchNumber
+        );
 
-  }, [currentUser]);
+      console.log(branchList, 'triggered?');
+      onUpdateBranchList(branchList);
+      // onFetchBranchList(branchList);
+    }
+
+    return (() => {
+      console.log('unmount');
+    });
+  }, [currentUser, isPrivateMode, keyword, skippedBranchNumber]);
 
   function handleInput(event) {
     const query = event.target.keyword.value;
@@ -77,6 +91,25 @@ export default function App({
   function skipBranch() {
     setSkippedBranchNumber(skippedBranchNumber + 10);
   }
+
+  function createObservedElement(element) {
+    setObservedElement(element);
+  }
+
+  useEffect(() => {
+    const currentElement = observedElement;
+    const currentObserver = observer.current;
+
+    if (currentElement) {
+      currentObserver.observe(currentElement);
+    }
+    return () => {
+      if (currentElement) {
+        currentObserver.unobserve(currentElement);
+      }
+    };
+  }, [observedElement]);
+
 
   return (
     <>
@@ -102,6 +135,7 @@ export default function App({
               onLoad={onFetchBranchList}
               onScroll={skipBranch}
               setCurrentNoteAndBranch={setCurrentNoteAndBranch}
+              createRef={createObservedElement}
               onHomeToEditorPageModify={onHomeToEditorPageModify}
             />
           </Route>

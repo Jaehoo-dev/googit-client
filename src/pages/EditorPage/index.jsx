@@ -20,7 +20,9 @@ export default function EditorPage({
   currentBranch,
   onNoteLoad,
   onNoteChange,
-  onEditorPageModifyToHome
+  onEditorPageModifyToHome,
+  sharedUsers,
+  onSharedUsersLoad,
 }) {
   const history = useHistory();
 
@@ -85,6 +87,8 @@ export default function EditorPage({
         onSubmit={submitHandler}
         onNoteLoad={onNoteLoad}
         onNoteChange={onNoteChange}
+        sharedUsers={sharedUsers}
+        onSharedUsersLoad={onSharedUsersLoad}
       />
       <Editor
         currentUser={currentUser}

@@ -7,7 +7,8 @@ import {
   setNewBlocksCandidate,
   removeNewBlocksCandidate,
   setCurrentNoteAndBranch,
-  setIsEditorPageToFalse
+  setIsEditorPageToFalse,
+  setSharedUsers
 } from '../actions';
 
 function mapDispatchToProps(dispatch) {
@@ -33,6 +34,9 @@ function mapDispatchToProps(dispatch) {
     },
     onEditorPageModifyToHome() {
       dispatch(setIsEditorPageToFalse());
+    },
+    onSharedUsersLoad(sharedUsers) {
+      dispatch(setSharedUsers(sharedUsers))
     }
   };
 }
@@ -46,6 +50,7 @@ function mapStateToProps(state) {
     isModified: state.isModified,
     newBlocksCandidate: state.newBlocksCandidate,
     authorName: state.authorName,
+    sharedUsers: state.sharedUsers
   };
 }
 

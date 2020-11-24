@@ -1,5 +1,12 @@
 import { combineReducers } from 'redux';
-import { SET_IS_PRIVATE_MODE, SET_IS_EDITOR_PAGE_TO_FALSE, SET_IS_EDITOR_PAGE_TO_TRUE, INIT_BRANCH_LIST, UPDATE_BRANCH_LIST } from '../constants/actionTypes';
+import { 
+  SET_IS_PRIVATE_MODE,
+  SET_IS_EDITOR_PAGE_TO_FALSE,
+  SET_IS_EDITOR_PAGE_TO_TRUE,
+  INIT_BRANCH_LIST,
+  UPDATE_BRANCH_LIST,
+  SET_SHARED_USERS,
+} from '../constants/actionTypes';
 
 const hasToken = (
   state = !!localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN),
@@ -36,7 +43,6 @@ const branchList = (state = [], action) => {
     case INIT_BRANCH_LIST:
       return action.payload;
     case UPDATE_BRANCH_LIST:
-      console.log(action.payload, 'in reducer');
       return [...state, ...action.payload];
     default:
       return state;
@@ -103,6 +109,15 @@ const isEditorPage = (state = false, action) => {
   }
 };
 
+const sharedUsers = (state = [], action) => {
+  switch (action.type) {
+    case SET_SHARED_USERS:
+      return action.sharedUsers;
+    default:
+      return state;
+  }
+};
+
 const appReducer = combineReducers({
   hasToken,
   currentUser,
@@ -114,6 +129,7 @@ const appReducer = combineReducers({
   currentNote,
   currentBranch,
   isEditorPage,
+  sharedUsers
 });
 
 export default function rootReducer(state, action) {
