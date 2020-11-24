@@ -7,7 +7,8 @@ import {
   setNewBlocksCandidate,
   removeNewBlocksCandidate,
   setCurrentNoteAndBranch,
-  setSharedUsers
+  setSharedUsers,
+  resetModificationStates,
 } from '../actions';
 
 function mapDispatchToProps(dispatch) {
@@ -35,8 +36,9 @@ function mapDispatchToProps(dispatch) {
       dispatch(setSharedUsers(sharedUsers));
     },
     onHomeButtonClick() {
+      dispatch(resetModificationStates());
       dispatch(setCurrentNoteAndBranch(null, null));
-    }
+    },
   };
 }
 

@@ -51,6 +51,8 @@ const isShowModificationsMode = (state = false, action) => {
   switch (action.type) {
     case 'toggleShowChangesMode':
       return !state;
+    case 'resetModificationStates':
+      return false;
     default:
       return state;
   }
@@ -61,6 +63,8 @@ const isModified = (state = false, action) => {
     case 'setIsModifiedToTrue':
       return true;
     case 'setIsModifiedToFalse':
+      return false;
+    case 'resetModificationStates':
       return false;
     default:
       return state;
