@@ -3,7 +3,7 @@ import { Form } from '../styledComponents';
 import SearchInput from './SearchInput';
 import SearchIcon from './SearchIcon';
 
-export default function SearchBar({ handleInput }) {
+export default function SearchBar({ handleInput, onSubmit }) {
   const [keyword, setKeyword] = useState('');
 
   function keywordChangeHandler(event) {
@@ -14,6 +14,7 @@ export default function SearchBar({ handleInput }) {
     event.preventDefault();
     if (!keyword) return;
     setKeyword('');
+    onSubmit();
     handleInput(event);
   }
 

@@ -1,11 +1,12 @@
 import { HOST, PORT, USERS, BRANCHES, LIMIT_NUMBER } from '../constants/urls';
 import { GET } from '../constants/httpMethods';
 
-export default async function requestBranchList(currentUser, isPrivateMode, skip) {
+export default async function requestBranchList(currentUser, isPrivateMode, skip, keyword) {
   try {
+    keyword = keyword || '';
     const fetchUrl = isPrivateMode
-      ? `http://localhost:4000/users/${currentUser._id}/branches/private/?limit=13&skip=${skip}`
-      : `http://localhost:4000/users/${currentUser._id}/branches/?limit=13&skip=${skip}`;
+      ? `http://localhost:4000/users/${currentUser._id}/branches/private/?limit=13&skip=${skip}&q=${keyword}`
+      : `http://localhost:4000/users/${currentUser._id}/branches/?limit=13&skip=${skip}&q=${keyword}`;
 
     let response = await fetch(fetchUrl, {
       method: GET,
