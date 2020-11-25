@@ -24,6 +24,7 @@ import requestNoteAuthor from '../../api/requestNoteAuthor';
 import requestNote from '../../api/requestNote';
 import requestBranch from '../../api/requestBranch';
 import SharingButton from './ShareButton';
+import HomeButton from '../HomeButton';
 
 export default function EditorPageHeader({
   currentUser,
@@ -84,14 +85,7 @@ export default function EditorPageHeader({
   return (
     <Header>
       <LeftWrapper>
-        <HomeButtonWrapper>
-          <Button
-            theme={homeButtonTheme}
-            onClick={homeButtonClickHandler}
-          >
-            구깃
-          </Button>
-        </HomeButtonWrapper>
+        <HomeButton onClick={homeButtonClickHandler} />
         <ArrowsWrapper>
           <ArrowWrapper>
             {

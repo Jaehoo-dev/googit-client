@@ -76,11 +76,6 @@ export const SaveButtonWrapper = styled.div`
   justify-content: center;
 `;
 
-export const HomeButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
 export const ShowChangesButtonWrapper = styled.div`
   display: flex;
   justify-content: center;

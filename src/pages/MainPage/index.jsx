@@ -11,7 +11,7 @@ export default function AppMain({
   branchList,
   onNoteListEntryClick,
   setCurrentNoteAndBranch,
-  onClick,
+  onPrivateNotesToggleClick,
 }) {
 
   return (
@@ -19,7 +19,7 @@ export default function AppMain({
       <MainHeader
         isPrivateMode={isPrivateMode}
         togglePrivateMode={togglePrivateMode}
-        onClick={onClick}
+        onPrivateNotesToggleClick={onPrivateNotesToggleClick}
         onLogout={onLogout}
         handleInput={handleInput}
         currentUser={currentUser}
