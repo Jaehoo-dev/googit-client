@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Wrapper, ProfileImg } from '../styledComponents';
-// import { ThemeProvider } from 'styled-components';
 import { Link } from 'react-router-dom';
 import Modal, { ModalCloseButton, profileIconTheme } from '../../shared/Modal';
 import Button, { coralButtonTheme } from '../../shared/Button';

@@ -14,12 +14,12 @@ export const Header = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1em 0;
+    padding: 0.5em 0;
   }
 `;
 
 export const Wrapper = styled.div`
-  margin-left: 2em;
+  margin: 0 2em;
 `;
 
 export const ProfileImg = styled.img`

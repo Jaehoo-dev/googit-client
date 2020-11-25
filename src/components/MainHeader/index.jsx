@@ -5,8 +5,16 @@ import { auth } from '../../config/firebase';
 import PrivateNotesToggleButton from './PrivateNotesToggleButton';
 import SearchBar from './SearchBar';
 import ProfileIcon from './ProfileIcon';
+import HomeButton from '../HomeButton';
 
-export default function MainHeader({ onLogout, isPrivateMode, handleInput, currentUser, onClick, togglePrivateMode }) {
+export default function MainHeader({
+  onLogout,
+  isPrivateMode,
+  handleInput,
+  currentUser,
+  onPrivateNotesToggleClick,
+  togglePrivateMode,
+}) {
   const history = useHistory();
 
   async function logoutClickHandler() {
@@ -16,17 +24,32 @@ export default function MainHeader({ onLogout, isPrivateMode, handleInput, curre
     history.push('/login');
   }
 
-  function clickHandler() {
-    onClick();
+  function privateNotesToggleHandler() {
+    onPrivateNotesToggleClick();
     togglePrivateMode();
   }
 
+  function searchHandler() {
+    onPrivateNotesToggleClick();
+  }
+
+  function homeButtonClickHandler() {
+    window.location.reload();
+  }
 
   return (
     <Header>
       <section>
-        <PrivateNotesToggleButton buttonMode={isPrivateMode} onClick={clickHandler} />
-        <SearchBar handleInput={handleInput} currentUser={currentUser} onSubmit={onClick} />
+        <HomeButton onClick={homeButtonClickHandler} />
+        <PrivateNotesToggleButton
+          buttonMode={isPrivateMode}
+          onClick={privateNotesToggleHandler}
+        />
+        <SearchBar
+          handleInput={handleInput}
+          currentUser={currentUser}
+          onSubmit={searchHandler}
+        />
         <ProfileIcon onClick={logoutClickHandler} />
       </section>
     </Header>

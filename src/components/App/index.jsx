@@ -29,6 +29,7 @@ export default function App({
   useEffect(() => {
     if (!hasToken) {
       history.push('/login');
+
       return;
     }
 
@@ -74,6 +75,8 @@ export default function App({
   }, [branchList]);
 
   function skipInitializer() {
+    if (!skip) return;
+
     setSkip(0);
   }
 
@@ -109,7 +112,7 @@ export default function App({
               onLoad={onSetBranchList}
               onNoteListEntryClick={onNoteListEntryClick}
               skipInitializer={skipInitializer}
-              onClick={skipInitializer}
+              onPrivateNotesToggleClick={skipInitializer}
             />
           </Route>
           <Route path='/notes'>
