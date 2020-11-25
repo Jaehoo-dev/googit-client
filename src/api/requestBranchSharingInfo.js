@@ -1,19 +1,15 @@
 export default async function requestBranchSharingInfo(userId, sharedUserInfoId) {
   try {
-    console.log(userId);
-    console.log(sharedUserInfoId);
     const res = await fetch(
       `http://localhost:4000/users/${userId}/branch-sharing-infos/${sharedUserInfoId}`,
       {
         method: 'GET',
-        mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN)}`,
         },
       }
     );
-    console.log(res);
 
     const response = await res.json();
 
@@ -22,9 +18,9 @@ export default async function requestBranchSharingInfo(userId, sharedUserInfoId)
 
       return;
     }
-    console.log(3);
+
     return response.branchSharingInfo;
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 }

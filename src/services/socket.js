@@ -8,6 +8,12 @@ export function emitJoinRoom(noteId) {
   socket.emit('join-room', noteId);
 }
 
+export function emitLeaveRoom(noteId) {
+  if (!noteId) return;
+
+  socket.emit('leave-room', noteId);
+}
+
 export function emitTyping(noteId, value) {
   if (!noteId) return;
 
