@@ -6,7 +6,7 @@ export default function SearchInput({ onChange, keyword }) {
     <StyledInputArea
       name='keyword'
       value={keyword}
-      placeholder='Plz type keyword!'
+      placeholder='검색어를 입력하세요'
       onChange={onChange}
     />
   );

@@ -24,9 +24,7 @@ export default async function requestBranchList(currentUser, isPrivateMode, skip
       alert(`${response.message}`);
       return;
     }
-
     return response.data;
-
   } catch (err) {
     alert(err);
   }

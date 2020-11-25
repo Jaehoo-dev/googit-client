@@ -12,8 +12,8 @@ function mapDispatchToProps(dispatch) {
     onLogout() {
       dispatch(initializeStore());
     },
-    onCreateBranch(updatedUser) {
-      dispatch(setCurrentUser(updatedUser));
+    onCreateBranch(user) {
+      dispatch(setCurrentUser(user));
     },
     togglePrivateMode() {
       dispatch(setIsPrivateMode());

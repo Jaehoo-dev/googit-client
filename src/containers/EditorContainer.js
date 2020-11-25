@@ -9,6 +9,7 @@ import {
   setCurrentNoteAndBranch,
   setSharedUsers,
   resetModificationStates,
+  setCurrentUser,
 } from '../actions';
 
 function mapDispatchToProps(dispatch) {
@@ -39,6 +40,11 @@ function mapDispatchToProps(dispatch) {
       dispatch(resetModificationStates());
       dispatch(setCurrentNoteAndBranch(null, null));
     },
+    onDeleteBranch(user) {
+      dispatch(resetModificationStates());
+      dispatch(setCurrentNoteAndBranch(null, null));
+      dispatch(setCurrentUser(user));
+    }
   };
 }
 

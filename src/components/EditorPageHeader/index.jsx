@@ -38,9 +38,14 @@ export default function EditorPageHeader({
   onNoteChange,
   sharedUsers,
   onSharedUsersLoad,
-  onClick
+  onClick,
+  onDeleteButtonClick,
 }) {
   const [authorName, setAuthorName] = useState(null);
+
+  function deleteButtonClickHandler() {
+    onDeleteButtonClick();
+  }
 
   useEffect(() => {
     if (!currentNote) return;
@@ -123,15 +128,20 @@ export default function EditorPageHeader({
       <ModifyRecordWrapper>
         {
           isShowModificationsMode
-            ? `${authorName}가 ${currentNote.updated_at}에 수정함`
+            ? `${authorName}(이)가 ${currentNote.updated_at}에 수정함`
             : null
         }
       </ModifyRecordWrapper>
       <RightWrapper>
         <DeleteButtonWrapper>
           {
-            currentNote
-            && <Button theme={deleteButtonTheme}>삭제</Button>
+            currentNote && (currentUser._id === currentNote.created_by) && (currentNote._id === currentBranch.latest_note)
+            && <Button
+              theme={deleteButtonTheme}
+              onClick={deleteButtonClickHandler}
+            >
+              삭제
+              </Button>
           }
         </DeleteButtonWrapper>
         <ShareButtonWrapper>
