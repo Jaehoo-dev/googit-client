@@ -4,7 +4,7 @@ import { createEditor } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
 import HoveringToolbar from './HoveringToolbar';
 import Leaf from './Leaf';
-import { emitJoinRoom, emitTyping, listenForTyping } from '../../services/socket';
+import { emitJoinRoom, emitLeaveRoom, emitTyping, listenForTyping } from '../../services/socket';
 
 export default function Editor({
   onNoteModify,
@@ -33,6 +33,8 @@ export default function Editor({
   useEffect(() => {
     emitJoinRoom(currentNote?._id);
     listenForTyping(setValue);
+
+    return () => emitLeaveRoom(currentNote?._id);
   }, []);
 
   const renderLeaf = useCallback(props => {
