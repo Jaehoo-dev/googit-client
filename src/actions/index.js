@@ -43,23 +43,29 @@ export const removeNewBlocksCandidate = () => ({
   type: 'removeNewBlocksCandidate',
 });
 
-export const setCurrentNoteAndBranch = (note, branch) => ({
-  type: 'setCurrentNoteAndBranch',
-  note,
-  branch,
-});
+export const setCurrentNoteAndBranch = (note, branch) => {
+  return ({
+    type: 'setCurrentNoteAndBranch',
+    note,
+    branch,
+  });
+};
 
-export const updateBranchList = (branchList) => ({
+export const updateBranchList = branchList => ({
   type: UPDATE_BRANCH_LIST,
   payload: branchList
 });
 
-export const setBranchList = (branchList) => ({
+export const setBranchList = branchList => ({
   type: SET_BRANCH_LIST,
   payload: branchList
 });
 
-export const setSharedUsers = (sharedUsers) => ({
+export const setSharedUsers = sharedUsers => ({
   type: SET_SHARED_USERS,
   sharedUsers,
+});
+
+export const resetModificationStates = () => ({
+  type: 'resetModificationStates',
 });

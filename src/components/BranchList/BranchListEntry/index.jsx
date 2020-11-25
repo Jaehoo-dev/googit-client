@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default function BranchListEntry({
   branchContent,
   count,
-  setCurrentNoteAndBranch,
+  onNoteListEntryClick,
   creator,
 }) {
   const isShared = !!branchContent.shared_users_info.length;
@@ -15,8 +15,9 @@ export default function BranchListEntry({
   const time = updatedAt.substring(11, 16);
 
   function NoteListEntryClickHandler(note, branch) {
-    setCurrentNoteAndBranch(note, branch);
+    onNoteListEntryClick(note, branch);
   }
+  console.log(branchContent);
   return (
     <Link to={`/notes/${branchContent.latest_note._id}`}>
       <BranchListEntryWrapper

@@ -9,7 +9,7 @@ export default function AppMain({
   currentUser,
   handleInput,
   branchList,
-  setCurrentNoteAndBranch,
+  onNoteListEntryClick,
   skipInitializer,
 }) {
 
@@ -34,7 +34,7 @@ export default function AppMain({
         isPrivateMode={isPrivateMode}
         currentUser={currentUser}
         branchList={branchList}
-        setCurrentNoteAndBranch={setCurrentNoteAndBranch}
+        onNoteListEntryClick={onNoteListEntryClick}
       />
     </>
   );
