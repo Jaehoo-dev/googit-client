@@ -44,7 +44,8 @@ export default function EditorPage({
 
       if (!branchCreationResponse) return;
     }
-
+    console.log(isBrandNew, 'isb');
+    console.log(branchCreationResponse, 'response branh');
     const branchId
       = isBrandNew
         ? branchCreationResponse.newBranch._id

@@ -8,9 +8,9 @@ export default function BranchListEntry({
   onNoteListEntryClick,
   creator,
 }) {
-  const isShared = !!branchContent.shared_users_info.length;
-  const title = branchContent.latest_note.blocks[0].children[0].text;
-  const updatedAt = branchContent.updated_at;
+  const isShared = !!branchContent.branch.shared_users_info.length;
+  const title = branchContent.latestNote.blocks[0].children[0].text;
+  const updatedAt = branchContent.branch.updated_at;
   const date = updatedAt.substring(0, 10);
   const time = updatedAt.substring(11, 16);
 
@@ -19,9 +19,9 @@ export default function BranchListEntry({
   }
 
   return (
-    <Link to={`/notes/${branchContent.latest_note._id}`}>
+    <Link to={`/notes/${branchContent.latestNote._id}`}>
       <BranchListEntryWrapper
-        onClick={NoteListEntryClickHandler.bind(null, branchContent.latest_note, branchContent)}
+        onClick={NoteListEntryClickHandler.bind(null, branchContent.latestNote, branchContent.branch)}
       >
         <div>{count + 1}</div>
         <div>{title}</div>

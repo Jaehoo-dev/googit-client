@@ -47,14 +47,14 @@ export default function App({
     if (currentUser) loadBranchList();
 
     async function loadBranchList() {
-      const response = await requestBranchList(currentUser, isPrivateMode, skip);
+      const response = await requestBranchList(currentUser, isPrivateMode, skip, keyword);
 
       if (!response) return;
       return (!skip)
         ? onSetBranchList(response)
         : onUpdateBranchList(response);
     }
-  }, [currentUser, isPrivateMode, skip]);
+  }, [currentUser, isPrivateMode, skip, keyword]);
 
   useEffect(() => {
     const throttledScrollHandler = throttle(scrollHandler, 2000);
@@ -78,11 +78,11 @@ export default function App({
   }
 
   function handleInput(event) {
-    const query = event.target.keyword.value;
+    const userInput = event.target.keyword.value;
 
-    if (!query) return;
+    if (!userInput) return;
 
-    setKeyword(query);
+    setKeyword(userInput);
   }
 
   return (
@@ -109,6 +109,7 @@ export default function App({
               onLoad={onSetBranchList}
               onNoteListEntryClick={onNoteListEntryClick}
               skipInitializer={skipInitializer}
+              onClick={skipInitializer}
             />
           </Route>
           <Route path='/notes'>

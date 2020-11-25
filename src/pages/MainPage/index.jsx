@@ -10,22 +10,16 @@ export default function AppMain({
   handleInput,
   branchList,
   onNoteListEntryClick,
-  skipInitializer,
+  setCurrentNoteAndBranch,
+  onClick,
 }) {
-
-  function clickHandler() {
-    togglePrivateMode();
-    skipInitializer();
-  }
-
 
   return (
     <>
       <MainHeader
         isPrivateMode={isPrivateMode}
-        clickHandler={clickHandler}
         togglePrivateMode={togglePrivateMode}
-        skipInitializer={skipInitializer}
+        onClick={onClick}
         onLogout={onLogout}
         handleInput={handleInput}
         currentUser={currentUser}
