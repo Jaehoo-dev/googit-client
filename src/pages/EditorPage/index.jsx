@@ -69,8 +69,7 @@ export default function EditorPage({
   async function checkHasWritingPermission() {
     if (!currentNote) return setHasWritingPermission(true);
 
-    // should be latest_note not latest_note._id
-    if (currentNote._id !== currentBranch.latest_note._id) {
+    if (currentNote._id !== currentBranch.latest_note) {
       return setHasWritingPermission(false);
     }
 
