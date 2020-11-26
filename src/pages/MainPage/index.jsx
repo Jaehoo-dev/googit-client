@@ -10,7 +10,6 @@ export default function AppMain({
   handleInput,
   branchList,
   onNoteListEntryClick,
-  setCurrentNoteAndBranch,
   onPrivateNotesToggleClick,
 }) {
 

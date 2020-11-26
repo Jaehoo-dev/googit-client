@@ -101,6 +101,32 @@ export const StyledForm = styled.form`
   align-items: center;
 `;
 
-export const SharedUserList = styled.div`
+export const SharedUserListWrapper = styled.div`
+  border: 1px solid pink;
   padding: 0 2em;
+  display: grid;
+  grid-template-rows: 3em 1fr;
+  grid-gap: 1em;
+`;
+
+export const SharedListHeader = styled.div`
+  border: 2px solid yellowgreen;
+  font-size: 1.2em;
+  padding-top: 0.8em;
+`;
+
+export const SharedUserListMain = styled.div`
+  border: 2px solid blue;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const PermissionUpdateForm = styled.form`
+  font-size: large;
+  display: grid;
+  grid-template-columns: 4fr 2fr 2fr;
+  grid-auto-flow: column;
+  grid-gap: 1em;
+  align-items: center;
+  justify-content: space-between;
 `;

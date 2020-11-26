@@ -67,6 +67,9 @@ function mapDispatchToProps(dispatch) {
     onUpdateBranchList(branchList) {
       dispatch(updateBranchList(branchList));
     },
+    onSharedUsersPermissionUpdate(sharedUsers) {
+      dispatch(setSharedUsers(sharedUsers));
+    }
   };
 }
 
