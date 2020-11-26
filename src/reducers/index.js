@@ -109,6 +109,17 @@ const sharedUsers = (state = [], action) => {
   }
 };
 
+const comparedNoteValue = (state = null, action) => {
+  switch (action.type) {
+    case 'toggleShowChangesMode':
+      return action.comparedNoteValue;
+    case 'resetModificationStates':
+      return null;
+    default:
+      return state;
+  }
+};
+
 const appReducer = combineReducers({
   hasToken,
   currentUser,
@@ -119,7 +130,8 @@ const appReducer = combineReducers({
   newBlocksCandidate,
   currentNote,
   currentBranch,
-  sharedUsers
+  sharedUsers,
+  comparedNoteValue,
 });
 
 export default function rootReducer(state, action) {

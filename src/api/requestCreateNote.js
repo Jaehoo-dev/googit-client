@@ -7,12 +7,14 @@ import {
   NEW,
 } from '../constants/urls';
 import { POST } from '../constants/httpMethods';
+import applyIdsLookingAhead from '../utils/applyIdsLookingAhead';
 
 export default async function requestCreateNote(
-  newBlocksCandidate,
+  blocks,
   currentUser,
   branchId,
 ) {
+  const blocksWithNewIds = applyIdsLookingAhead(blocks);
   const noteCreateRes = await fetch(
     `${HOST}${PORT}${USERS}/${currentUser._id}${BRANCHES}/${branchId}${NOTES}${NEW}`,
     {
@@ -21,7 +23,7 @@ export default async function requestCreateNote(
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN)}`,
       },
-      body: JSON.stringify(newBlocksCandidate)
+      body: JSON.stringify(blocksWithNewIds)
     }
   );
 

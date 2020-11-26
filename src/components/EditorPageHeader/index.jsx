@@ -94,7 +94,7 @@ export default function EditorPageHeader({
         <ArrowsWrapper>
           <ArrowWrapper>
             {
-              currentNote?.previous_version
+              currentNote?.previous_version && !isModified
               && <Arrow
                 direction='left'
                 onClick={displayLinkedNote.bind(null, 'previous')}
@@ -114,8 +114,11 @@ export default function EditorPageHeader({
         </ArrowsWrapper>
         <ShowChangesButtonWrapper>
           {
-            currentNote
-            && <Button theme={coralButtonTheme} onClick={onShowModificationsModeToggle}>
+            currentNote?.previous_version && !isModified
+            && <Button
+              theme={coralButtonTheme}
+              onClick={onShowModificationsModeToggle.bind(null, currentUser._id, currentNote)}
+            >
               {
                 isShowModificationsMode
                   ? '수정사항 숨기기'

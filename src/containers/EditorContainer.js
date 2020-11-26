@@ -10,12 +10,24 @@ import {
   setSharedUsers,
   resetModificationStates,
   setCurrentUser,
+  setPreviousNote,
+  setBranchList,
+  updateBranchList,
 } from '../actions';
+import requestNote from '../api/requestNote';
+import compareNoteChanges from '../utils/compareNoteChanges';
 
 function mapDispatchToProps(dispatch) {
   return {
-    onShowModificationsModeToggle() {
-      dispatch(toggleShowChangesMode());
+    async onShowModificationsModeToggle(userId, currentNote) {
+      const previousNote = await requestNote(userId, currentNote.previous_version);
+      console.log(previousNote);
+      console.log(currentNote);
+
+      compareNoteChanges(previousNote, currentNote);
+
+      let comparedNoteValue;
+      // dispatch(toggleShowChangesMode(comparedNoteValue));
     },
     onNoteModify(blocks, isModified) {
       dispatch(setNewBlocksCandidate(blocks));
@@ -41,10 +53,20 @@ function mapDispatchToProps(dispatch) {
       dispatch(setCurrentNoteAndBranch(null, null));
     },
     onDeleteBranch(user) {
-      dispatch(resetModificationStates());
-      dispatch(setCurrentNoteAndBranch(null, null));
       dispatch(setCurrentUser(user));
-    }
+      dispatch(setCurrentNoteAndBranch(null, null));
+      dispatch(resetModificationStates());
+    },
+    setPreviousNote(note) {
+      if (!note) return;
+      dispatch(setPreviousNote(note));
+    },
+    onSetBranchList(branchList) {
+      dispatch(setBranchList(branchList));
+    },
+    onUpdateBranchList(branchList) {
+      dispatch(updateBranchList(branchList));
+    },
   };
 }
 
@@ -53,11 +75,13 @@ function mapStateToProps(state) {
     currentUser: state.currentUser,
     currentBranch: state.currentBranch,
     currentNote: state.currentNote,
+    previousNote: state.previousNote,
     isShowModificationsMode: state.isShowModificationsMode,
     isModified: state.isModified,
     newBlocksCandidate: state.newBlocksCandidate,
     authorName: state.authorName,
-    sharedUsers: state.sharedUsers
+    sharedUsers: state.sharedUsers,
+    isPrivateMode: state.isPrivateMode,
   };
 }
 
