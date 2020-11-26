@@ -21,9 +21,10 @@ export default async function requestBranchList(currentUser, isPrivateMode, skip
     if (!response) return;
 
     if (response.result === 'no more branches') {
-      alert(`${response.message}`);
+      // alert(`${response.message}`);
       return;
     }
+
     return response.data;
   } catch (err) {
     alert(err);
