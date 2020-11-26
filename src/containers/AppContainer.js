@@ -38,6 +38,7 @@ function mapStateToProps(state) {
     branchList: state.branchList,
     currentNote: state.currentNote,
     isModified: state.isModified,
+    sharedUsers: state.sharedUsers
   };
 }
 

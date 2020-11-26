@@ -3,7 +3,7 @@ export default async function requestSharedUsers(currentUser, currentNote) {
   const noteId = currentNote.parent;
 
   const res = await fetch(
-    `http://localhost:4000/users/${userId}/branches/${noteId}/share/users`,
+    `${process.env.REACT_APP_SERVER_URL}:4000/users/${userId}/branches/${noteId}/share/users`,
     {
       method: 'GET',
       headers: {

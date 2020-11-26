@@ -1,6 +1,6 @@
 export default async function requestBranch(userId, branchId) {
   const res = await fetch(
-    `http://localhost:4000/users/${userId}/branches/${branchId}`,
+    `${process.env.REACT_APP_SERVER_URL}:4000/users/${userId}/branches/${branchId}`,
     {
       method: 'GET',
       headers: {

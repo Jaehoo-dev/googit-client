@@ -21,6 +21,7 @@ export default function App({
   branchList,
   currentNote,
   onNoteListEntryClick,
+  sharedUsers,
 }) {
   const history = useHistory();
   const [keyword, setKeyword] = useState('');
@@ -58,7 +59,7 @@ export default function App({
         ? onSetBranchList(response)
         : onUpdateBranchList(response);
     }
-  }, [currentUser, isPrivateMode, skip, keyword]);
+  }, [currentUser, isPrivateMode, skip, keyword, sharedUsers]);
 
   useEffect(() => {
     const throttledScrollHandler = throttle(scrollHandler, 2000);
