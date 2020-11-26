@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import EditorPage from '../pages/EditorPage';
 import {
-  toggleShowChangesMode,
   setIsModifiedToTrue,
   setIsModifiedToFalse,
   setNewBlocksCandidate,
@@ -23,7 +22,7 @@ function mapDispatchToProps(dispatch) {
       const previousNote = await requestNote(userId, currentNote.previous_version);
 
       compareNoteChanges(previousNote, currentNote);
-      let comparedNoteValue;
+      // let comparedNoteValue;
       // dispatch(toggleShowChangesMode(comparedNoteValue));
     },
     onNoteModify(blocks, isModified) {

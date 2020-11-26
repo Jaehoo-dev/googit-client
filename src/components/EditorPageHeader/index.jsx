@@ -6,7 +6,6 @@ import {
   ArrowsWrapper,
   ArrowWrapper,
   ModifyRecordWrapper,
-  HomeButtonWrapper,
   ShowChangesButtonWrapper,
   LeftWrapper,
   RightWrapper,
@@ -15,7 +14,6 @@ import {
   SaveButtonWrapper,
 } from './styledComponents';
 import Button, {
-  homeButtonTheme,
   deleteButtonTheme,
   coralButtonTheme,
   saveButtonTheme,
