@@ -1,4 +1,3 @@
-
 export default async function deletePermission(currentUser, currentNote, sharedUserEmail) {
   const response = await fetch(
     `${process.env.REACT_APP_SERVER_URL}:4000/users/${currentUser._id}/branches/${currentNote.parent}/permission/delete`, {
@@ -10,7 +9,6 @@ export default async function deletePermission(currentUser, currentNote, sharedU
     body: JSON.stringify({ sharedUserEmail })
   });
 
-  console.log(response, 're');
   if (response.ok) {
     alert('권한이 성공적으로 삭제되었습니다.');
     return;

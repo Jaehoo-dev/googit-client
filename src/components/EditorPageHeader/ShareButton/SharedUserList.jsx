@@ -9,7 +9,7 @@ export default function SharedUserList({ sharedUsers, submitHandler, onClick }) 
 
   return (
     <SharedUserListWrapper>
-      <SharedListHeader>공유 중인 유저</SharedListHeader>
+      <SharedListHeader>공유받은 이용자 목록</SharedListHeader>
       <SharedUserListMain>
         {sharedUsers && sharedUsers.map((user, i) => (
           <PermissionUpdateForm key={i} onSubmit={submitHandler}>

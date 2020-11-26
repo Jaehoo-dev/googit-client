@@ -4,9 +4,9 @@ import EditorPageHeader from '../../components/EditorPageHeader';
 import Editor from '../../components/Editor';
 import requestCreateBranch from '../../api/requestCreateBranch';
 import requestCreateNote from '../../api/requestCreateNote';
-import requestBranchSharingInfo from '../../api/requestBranchSharingInfo';
 import requestDeleteBranch from '../../api/requestDeleteBranch';
 import requestBranchList from '../../api/requestBranchList';
+import checkHasWritingPermission from '../../utils/checkHasWritingPermission';
 import uuid from 'uuid-random';
 
 export default function EditorPage({
@@ -99,31 +99,6 @@ export default function EditorPage({
     );
   }
 
-  async function checkHasWritingPermission() {
-    if (!currentNote) return setHasWritingPermission(true);
-
-    if (currentNote._id !== currentBranch.latest_note) {
-      return setHasWritingPermission(false);
-    }
-
-    if (currentBranch.created_by === currentUser._id) {
-      return setHasWritingPermission(true);
-    }
-
-    const sharedUserInfoIds = currentBranch.shared_users_info;
-
-    for (let i = 0; i < sharedUserInfoIds.length; i++) {
-      const branchSharingInfo
-        = await requestBranchSharingInfo(currentUser._id, sharedUserInfoIds[i]);
-
-      if (branchSharingInfo?.has_writing_permission) {
-        return setHasWritingPermission(true);
-      }
-    }
-
-    return setHasWritingPermission(false);
-  }
-
   async function deleteButtonClickHandler() {
     const isDeleteConfirmed
       = window.confirm('정말 삭제합니까? 수정기록도 지워집니다.');
@@ -166,7 +141,7 @@ export default function EditorPage({
         onNoteModify={onNoteModify}
         isModified={isModified}
         isShowModificationsMode={isShowModificationsMode}
-        checkHasWritingPermission={checkHasWritingPermission}
+        checkHasWritingPermission={checkHasWritingPermission.bind(null, currentUser, currentNote, currentBranch, setHasWritingPermission)}
         hasWritingPermission={hasWritingPermission}
       />
     </>

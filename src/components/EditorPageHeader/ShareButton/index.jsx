@@ -27,7 +27,7 @@ export default function SharingButton({ currentUser, currentNote, onSharedUsersL
 
       if (sharedUsers) onSharedUsersLoad(sharedUsers);
     }
-  }, [isSubmitted]); //homebutton
+  }, [isSubmitted]);
 
   function handleOnChange(event) {
     setEmail(event.target.value);
