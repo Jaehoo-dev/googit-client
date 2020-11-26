@@ -18,7 +18,7 @@ export default function SharingButton({ currentUser, currentNote, onSharedUsersL
     setIsModalOpen(!isModalOpen);
     setIsSubmitted(!isSubmitted);
   }
-  console.log(sharedUsers, 'a==ea-rg=aw0ieg0=w-ek');
+
   useEffect(() => {
     if (isModalOpen) loadSharedUsers();
 

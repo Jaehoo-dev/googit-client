@@ -102,7 +102,6 @@ export const StyledForm = styled.form`
 `;
 
 export const SharedUserListWrapper = styled.div`
-  border: 1px solid pink;
   padding: 0 2em;
   display: grid;
   grid-template-rows: 3em 1fr;
@@ -110,13 +109,11 @@ export const SharedUserListWrapper = styled.div`
 `;
 
 export const SharedListHeader = styled.div`
-  border: 2px solid yellowgreen;
   font-size: 1.2em;
   padding-top: 0.8em;
 `;
 
 export const SharedUserListMain = styled.div`
-  border: 2px solid blue;
   display: flex;
   flex-direction: column;
 `;

@@ -13,8 +13,8 @@ export const Header = styled.header`
     text-align: center;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0.5em 0;
+    justify-content: space-evenly;
+    padding: 1em 0;
   }
 `;
 
