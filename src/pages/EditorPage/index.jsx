@@ -6,6 +6,7 @@ import Compare from '../../components/Compare';
 import requestCreateBranch from '../../api/requestCreateBranch';
 import requestCreateNote from '../../api/requestCreateNote';
 import requestBranchSharingInfo from '../../api/requestBranchSharingInfo';
+import requestDeleteBranch from '../../api/requestDeleteBranch';
 
 export default function EditorPage({
   currentUser,
@@ -24,6 +25,7 @@ export default function EditorPage({
   onSharedUsersLoad,
   onClick,
   onHomeButtonClick,
+  onDeleteBranch,
 }) {
   const [hasWritingPermission, setHasWritingPermission] = useState(undefined);
   const history = useHistory();
@@ -44,8 +46,7 @@ export default function EditorPage({
 
       if (!branchCreationResponse) return;
     }
-    console.log(isBrandNew, 'isb');
-    console.log(branchCreationResponse, 'response branh');
+
     const branchId
       = isBrandNew
         ? branchCreationResponse.newBranch._id
@@ -91,6 +92,20 @@ export default function EditorPage({
     return setHasWritingPermission(false);
   }
 
+  async function deleteButtonClickHandler() {
+    const isDeleteConfirmed
+      = window.confirm('정말 삭제합니까? 수정기록도 지워집니다.');
+
+    if (!isDeleteConfirmed) return;
+
+    const branchDeleteResponse
+      = await requestDeleteBranch(currentUser, currentBranch);
+
+    onDeleteBranch(branchDeleteResponse.updatedUser);
+
+    history.push('/');
+  }
+
   return (
     <>
       <EditorPageHeader
@@ -107,6 +122,7 @@ export default function EditorPage({
         sharedUsers={sharedUsers}
         onSharedUsersLoad={onSharedUsersLoad}
         onClick={onClick}
+        onDeleteButtonClick={deleteButtonClickHandler}
       />
       <Editor
         currentUser={currentUser}
