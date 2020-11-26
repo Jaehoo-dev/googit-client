@@ -21,7 +21,7 @@ export default function SharedUserList({ sharedUsers, submitHandler, onClick }) 
             />
             <select name='permission'>
               <option>{user.permission}</option>
-              <option>{user.permission ? 'write' : 'read only'}</option>
+              <option>{user.permission === 'write' ? 'read only' : 'write'}</option>
             </select>
             <div>
               <Button

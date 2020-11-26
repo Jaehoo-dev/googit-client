@@ -18,7 +18,7 @@ export default function SharingButton({ currentUser, currentNote, onSharedUsersL
     setIsModalOpen(!isModalOpen);
     setIsSubmitted(!isSubmitted);
   }
-  console.log(sharedUsers, 'a==ea-rg=aw0ieg0=w-ek');
+
   useEffect(() => {
     if (isModalOpen) loadSharedUsers();
 
@@ -83,7 +83,7 @@ export default function SharingButton({ currentUser, currentNote, onSharedUsersL
         </Button>
       <Modal theme={sharingModalTheme} isOpen={isModalOpen} toggleModal={toggleModal} >
         <ModalContentWrapper>
-          <ModalCloseButton toggleModal={toggleModal} />
+          <ModalCloseButton onClick={toggleModal} />
           <StyledForm onSubmit={submitHandler}>
             <input onChange={handleOnChange} value={email} name='email' type='text' />
             <select name='permission'>
