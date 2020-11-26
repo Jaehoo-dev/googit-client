@@ -54,6 +54,10 @@ function mapDispatchToProps(dispatch) {
     },
     onDeleteBranch(user) {
       dispatch(setCurrentUser(user));
+    },
+    onSharedUsersPermissionUpdate(sharedUsers) {
+      dispatch(setSharedUsers(sharedUsers));
+    }
       dispatch(setCurrentNoteAndBranch(null, null));
       dispatch(resetModificationStates());
     },
