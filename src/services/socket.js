@@ -20,6 +20,7 @@ export function emitTyping(noteId, value) {
   socket.emit('sharing-note-typed', noteId, value);
 }
 
-export function listenForTyping(setValue) {
-  socket.on('sharing-note-typed', value => setValue(value));
+export function listenForTyping(previousValue, setValue) {
+  socket.on('sharing-note-typed', value => setValue([...previousValue, ...value]));
+  // socket.on('sharing-note-typed', value => setValue(prev => [...prev, ...value]));
 }

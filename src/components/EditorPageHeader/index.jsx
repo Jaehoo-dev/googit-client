@@ -152,6 +152,7 @@ export default function EditorPageHeader({
               currentNote={currentNote}
               sharedUsers={sharedUsers}
               onSharedUsersLoad={onSharedUsersLoad}
+              authorName={authorName}
             >
               공유
             </SharingButton>

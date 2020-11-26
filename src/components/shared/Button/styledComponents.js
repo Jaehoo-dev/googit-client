@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledButton = styled.button`
   text-decoration: none;
   background-color: ${props => props.theme.backgroundColor};
-  padding: 10px;
+  padding: ${props => props.theme.padding};
   border: none;
   display: inline-block;
   border-radius: 10px;

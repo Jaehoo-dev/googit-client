@@ -2,7 +2,7 @@ import {
   SET_IS_PRIVATE_MODE,
   SET_BRANCH_LIST,
   UPDATE_BRANCH_LIST,
-  SET_SHARED_USERS
+  SET_SHARED_USERS,
 } from '../constants/actionTypes';
 
 export const setCurrentUser = user => ({
