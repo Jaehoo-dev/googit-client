@@ -1,5 +1,5 @@
 export default async function requestCurrentUser() {
-  const res = await fetch('http://localhost:4000/users/current_user', {
+  const res = await fetch(`${process.env.REACT_APP_SERVER_URL}:4000/users/current_user`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
