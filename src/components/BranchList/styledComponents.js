@@ -29,9 +29,8 @@ export const BranchListEntryWrapper = styled.div`
   grid-template-columns: 2em 1fr 1fr 15em 5em;
   grid-gap: 1em;
   align-items: center;
-  border: 1px solid red;
+  border: 2.5px solid #f08080;
   border-radius: 1em;
-  background-color: coral;
   padding: 0 2em;
 `;
 

@@ -18,7 +18,7 @@ export default function ProfileIcon({ onClick }) {
   return (
     <Wrapper>
       <div onClick={toggleModal}>
-        <ProfileImg src={`${process.env.PUBLIC_URL}/images/G-logo.png`} alt='logo' />
+        <ProfileImg src={'/images/G-logo.png'} alt='logo' />
       </div>
       <Modal theme={profileIconTheme} isOpen={isModalOpen} toggleModal={toggleModal} >
         <ModalCloseButton toggleModal={toggleModal} />

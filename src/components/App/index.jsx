@@ -45,10 +45,13 @@ export default function App({
   }, []);
 
   useEffect(() => {
-    if (currentUser) loadBranchList();
+    if (!currentUser) return;
+
+    loadBranchList();
 
     async function loadBranchList() {
-      const response = await requestBranchList(currentUser, isPrivateMode, skip, keyword);
+      const response
+        = await requestBranchList(currentUser, isPrivateMode, skip, keyword);
 
       if (!response) return;
       return (!skip)
@@ -120,6 +123,7 @@ export default function App({
               currentNote={currentNote}
               onCreateBranch={onCreateBranch}
               onClick={skipInitializer}
+              skip={skip}
             />
           </Route>
         </Switch>

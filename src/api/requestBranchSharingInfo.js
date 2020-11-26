@@ -1,7 +1,7 @@
 export default async function requestBranchSharingInfo(userId, sharedUserInfoId) {
   try {
     const res = await fetch(
-      `http://localhost:4000/users/${userId}/branch-sharing-infos/${sharedUserInfoId}`,
+      `http://localhost:4000/users/${userId}/branch_sharing_infos/${sharedUserInfoId}`,
       {
         method: 'GET',
         headers: {

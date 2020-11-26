@@ -19,7 +19,12 @@ export default function BranchListEntry({
   }
 
   return (
-    <Link to={`/notes/${branchContent.latestNote._id}`}>
+    <Link
+      to={`/notes/${branchContent.branch.latest_note}`}
+      style={{
+        textDecoration: 'none',
+        color: 'black',
+      }}>
       <BranchListEntryWrapper
         onClick={NoteListEntryClickHandler.bind(null, branchContent.latestNote, branchContent.branch)}
       >

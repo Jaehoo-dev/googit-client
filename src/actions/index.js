@@ -22,8 +22,9 @@ export const setIsPrivateMode = () => ({
   type: SET_IS_PRIVATE_MODE,
 });
 
-export const toggleShowChangesMode = () => ({
+export const toggleShowChangesMode = comparedNoteValue => ({
   type: 'toggleShowChangesMode',
+  comparedNoteValue,
 });
 
 export const setIsModifiedToTrue = () => ({
@@ -68,4 +69,9 @@ export const setSharedUsers = sharedUsers => ({
 
 export const resetModificationStates = () => ({
   type: 'resetModificationStates',
+});
+
+export const setPreviousNote = note => ({
+  type: 'setPreviousNote',
+  note,
 });
