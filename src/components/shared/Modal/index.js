@@ -48,7 +48,7 @@ export const profileIconTheme = {
   backgroundColor: 'white',
   top: '75px',
   left: '83.3%'
-}
+};
 
 export const sharingModalTheme = {
   backgroundColor: 'white',
@@ -73,13 +73,15 @@ export default function Modal({ isOpen, children, toggleModal, theme }) {
     document.getElementById('portal'));
 }
 
-const CloseButton = styled.div`
+const CloseButton = styled.button`
   margin-left: 90%;
+  background-color: transparent;
+  border: none;
 `;
 
-export function ModalCloseButton({ toggleModal }) {
+export function ModalCloseButton({ onClick }) {
   return (
-    <CloseButton onClick={toggleModal}>
+    <CloseButton onClick={onClick}>
       <FontAwesomeIcon icon={faTimes} />
     </CloseButton>
   );

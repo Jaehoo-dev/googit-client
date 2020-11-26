@@ -5,16 +5,25 @@ import { StyledButton } from './styledComponents';
 export default function Button({
   children,
   onClick,
-  theme
+  name,
+  value,
+  theme,
 }) {
   return (
     <ThemeProvider theme={theme}>
-      <StyledButton onClick={onClick}>
+      <StyledButton name={name} value={value} onClick={onClick}>
         {children}
       </StyledButton>
     </ThemeProvider>
   );
 }
+
+export const permissionHandleButtonTheme = {
+  width: '5em',
+  height: '2em',
+  backgroundColor: 'yellowgreen',
+  border: '1px solid black',
+};
 
 export const homeButtonTheme = {
   backgroundColor: 'white',

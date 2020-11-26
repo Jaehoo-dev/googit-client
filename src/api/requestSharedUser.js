@@ -1,8 +1,7 @@
-export default async function requestSharedUsers( currentUser, currentNote ) {
+export default async function requestSharedUsers(currentUser, currentNote) {
   const userId = currentUser._id;
   const noteId = currentNote.parent;
-  // const branchId = currentBranch._id;  cuz of promising problem
-  
+
   const res = await fetch(
     `http://localhost:4000/users/${userId}/branches/${noteId}/share/users`,
     {
@@ -21,5 +20,5 @@ export default async function requestSharedUsers( currentUser, currentNote ) {
     return;
   }
 
-  return response.sharedUserEmails;
+  return response.data;
 }
