@@ -21,11 +21,8 @@ function mapDispatchToProps(dispatch) {
   return {
     async onShowModificationsModeToggle(userId, currentNote) {
       const previousNote = await requestNote(userId, currentNote.previous_version);
-      console.log(previousNote);
-      console.log(currentNote);
 
       compareNoteChanges(previousNote, currentNote);
-
       let comparedNoteValue;
       // dispatch(toggleShowChangesMode(comparedNoteValue));
     },
@@ -54,10 +51,6 @@ function mapDispatchToProps(dispatch) {
     },
     onDeleteBranch(user) {
       dispatch(setCurrentUser(user));
-    },
-    onSharedUsersPermissionUpdate(sharedUsers) {
-      dispatch(setSharedUsers(sharedUsers));
-    }
       dispatch(setCurrentNoteAndBranch(null, null));
       dispatch(resetModificationStates());
     },
@@ -71,6 +64,9 @@ function mapDispatchToProps(dispatch) {
     onUpdateBranchList(branchList) {
       dispatch(updateBranchList(branchList));
     },
+    onSharedUsersPermissionUpdate(sharedUsers) {
+      dispatch(setSharedUsers(sharedUsers));
+    }
   };
 }
 
