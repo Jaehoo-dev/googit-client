@@ -1,34 +1,101 @@
+import mergeSort from './mergeSort';
+
 export default function compareNoteChanges(previousNote, currentNote) {
-  const previousBlocks = previousNote.blocks;
-  const currentBlocks = currentNote.blocks;
+  const previousBlocks = JSON.parse(JSON.stringify(previousNote)).blocks;
+  const currentBlocks = JSON.parse(JSON.stringify(currentNote)).blocks;
+  const previousBlocksTable = {};
+  const currentBlocksTable = {};
 
-  console.log(previousBlocks);
-  console.log(currentBlocks);
+  previousBlocks.forEach((block, index) => {
+    const id = block.idLookingForwards;
 
-  const previousIdsTable = {};
-  const currentIdsTable = {};
-
-  previousBlocks.forEach(block => {
-    const id = block.idLookingAhead;
-
-    if (!previousIdsTable.hasOwnProperty(id)) {
-      previousIdsTable[id] = 0;
+    if (!previousBlocksTable.hasOwnProperty(id)) {
+      previousBlocksTable[id] = [];
     }
 
-    previousIdsTable[id] += 1;
+    previousBlocksTable[id].push({
+      index,
+      block,
+    });
+  });
+
+  currentBlocks.forEach((block, index) => {
+    const id = block.idLookingBackwards;
+
+    if (!currentBlocksTable.hasOwnProperty(id)) {
+      currentBlocksTable[id] = [];
+    }
+
+    currentBlocksTable[id].push({
+      index,
+      block,
+    });
+  });
+
+  const erasedBlocks = [];
+  const modifiedBlocksBefore = [];
+  const unModifiedBlocks = [];
+  const modifiedBlocksAfter = [];
+  const newBlocks = [];
+
+  previousBlocks.forEach(block => {
+    if (!currentBlocksTable.hasOwnProperty(block.idLookingForwards)) {
+      erasedBlocks.push(block);
+    } else if (
+      JSON.stringify(currentBlocksTable[block.idLookingForwards][0].block.children)
+      === JSON.stringify(block.children)
+    ) {
+      unModifiedBlocks.push(block);
+    } else {
+      modifiedBlocksBefore.push(block);
+    }
   });
 
   currentBlocks.forEach(block => {
-    const id = block.idLookingBack;
-
-    if (!currentIdsTable.hasOwnProperty(id)) {
-      currentIdsTable[id] = 0;
+    if (!previousBlocksTable.hasOwnProperty(block.idLookingBackwards)) {
+      newBlocks.push(block);
+    } else if (
+      JSON.stringify(previousBlocksTable[block.idLookingBackwards][0].block.children)
+      !== JSON.stringify(block.children)
+    ) {
+      modifiedBlocksAfter.push(block);
     }
-
-    currentBlocks[id] += 1;
   });
 
-  console.log(previousIdsTable);
-  console.log(currentIdsTable);
+  erasedBlocks.forEach(block => {
+    block.children.forEach(child => {
+      child.before = true;
+    });
+  });
+
+  modifiedBlocksBefore.forEach(block => {
+    block.children.forEach(child => {
+      child.before = true;
+    });
+  });
+
+  modifiedBlocksAfter.forEach(block => {
+    block.children.forEach(child => {
+      child.after = true;
+    });
+  });
+
+  newBlocks.forEach(block => {
+    block.children.forEach(child => {
+      child.after = true;
+    });
+  });
+
+  const blocksArrays = [
+    erasedBlocks,
+    modifiedBlocksBefore,
+    unModifiedBlocks,
+    modifiedBlocksAfter,
+    newBlocks
+  ];
+
+  return blocksArrays.reduce((accumulator, currentArray) => {
+    return mergeSort(accumulator, currentArray);
+  });
 }
 

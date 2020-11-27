@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useCallback } from 'react';
 import { Wrapper } from './styledComponents';
-import { createEditor } from 'slate';
+import { createEditor, Transforms } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
 import HoveringToolbar from './HoveringToolbar';
 import Leaf from './Leaf';
@@ -8,6 +8,7 @@ import { emitJoinRoom, emitLeaveRoom, emitTyping, listenForTyping } from '../../
 import uuid from 'uuid-random';
 
 export default function Editor({
+  editor,
   value,
   setValue,
   onNoteModify,
@@ -16,32 +17,16 @@ export default function Editor({
   hasWritingPermission,
   checkHasWritingPermission,
 }) {
-  const editor = useMemo(() => withReact(createEditor()), []);
-
-  useEffect(() => {
-    checkHasWritingPermission();
-
-    // if (!currentNote) return;
-
-    // setValue(currentNote.blocks);
-    // onNoteLoad();
-
-    // async function onNoteLoad() {
-    //   const previousNote
-    //     = await requestNote(currentUser._id, currentNote.previous_version);
-
-    //   setPreviousNote(previousNote);
-    // }
-
-    // return () => setPreviousNote(null);
-  }, [currentNote]);
-
   useEffect(() => {
     emitJoinRoom(currentNote?._id);
     listenForTyping(setValue);
 
     return () => emitLeaveRoom(currentNote?._id);
   }, []);
+
+  useEffect(() => {
+    checkHasWritingPermission();
+  }, [currentNote]);
 
   function noteValueChangeHandler(newValue) {
     if (newValue === value) return;
@@ -55,7 +40,7 @@ export default function Editor({
     const newBlock = {
       type: 'paragraph',
       children: [{ text: '' }],
-      idLookingBack: uuid(),
+      idLookingForwards: uuid(),
     };
 
     editor.insertNode(newBlock);

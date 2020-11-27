@@ -46,6 +46,5 @@ export const BranchListBodyWrapper = styled.div`
 `;
 
 export const BranchContainer = styled.div`
-  margin-top: 1em;
   padding-bottom: 1em;
 `;
