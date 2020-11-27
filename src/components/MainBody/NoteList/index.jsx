@@ -3,25 +3,28 @@ import { NoteListWrapper } from '../styledComponents';
 import NoteListEntry from '../NoteListEntry';
 
 export default function NoteList({
-  branchList,
+  noteListEntryInfos,
   onNoteListEntryClick,
 }) {
 
   function createBranchEntries() {
-    return branchList.map((list, i) => (
-      <NoteListEntry
-        key={i}
-        onNoteListEntryClick={onNoteListEntryClick}
-        branchContent={list.branch}
-        count={i}
-        creator={list.email}
-      />
-    ));
+    return noteListEntryInfos.map((list, i) => {
+
+      return (
+        <NoteListEntry
+          key={i}
+          onNoteListEntryClick={onNoteListEntryClick}
+          entryInfos={list}
+          count={i}
+          creator={list.author.username}
+        />
+      );
+    });
   }
 
   return (
     <NoteListWrapper>
-      {branchList && createBranchEntries()}
+      {noteListEntryInfos && createBranchEntries()}
     </NoteListWrapper>
   );
 }

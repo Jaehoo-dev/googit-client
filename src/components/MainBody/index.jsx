@@ -6,7 +6,7 @@ import NoteList from './NoteList';
 import Button, { createNewBranchTheme } from '../shared/Button';
 
 export default function MainBody({
-  branchList,
+  noteListEntryInfos,
   onNoteListEntryClick,
 }) {
 
@@ -19,7 +19,7 @@ export default function MainBody({
         </Button>
       </Link>
       <NoteList
-        branchList={branchList}
+        noteListEntryInfos={noteListEntryInfos}
         onNoteListEntryClick={onNoteListEntryClick}
       />
     </MainBodyWrapper>

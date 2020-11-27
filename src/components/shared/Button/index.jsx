@@ -65,10 +65,10 @@ export const iconButtonTheme = {
 export const createNewBranchTheme = {
   backgroundColor: 'transparent',
   border: '2.5px solid #f08080',
-  width: '55.8em',
+  width: '50%',
   height: '3.2em',
   borderRadius: '1em',
   fontSize: '16px',
-  margin: '0 0 0 8em',
+  margin: '0 0 0 30%',
   transform: 'translate(-50 %, -50 %)',
 };

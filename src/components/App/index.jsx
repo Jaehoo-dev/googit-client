@@ -16,9 +16,9 @@ export default function App({
   onCreateBranch,
   togglePrivateMode,
   isPrivateMode,
-  onSetBranchList,
-  onUpdateBranchList,
-  branchList,
+  onSetNoteList,
+  onUpdateNoteList,
+  noteListEntryInfos,
   currentNote,
   onNoteListEntryClick,
   sharedUsers,
@@ -56,8 +56,8 @@ export default function App({
 
       if (!response) return;
       return (!skip)
-        ? onSetBranchList(response)
-        : onUpdateBranchList(response);
+        ? onSetNoteList(response)
+        : onUpdateNoteList(response);
     }
   }, [currentUser, isPrivateMode, skip, keyword, sharedUsers]);
 
@@ -76,7 +76,7 @@ export default function App({
     return (() => {
       window.removeEventListener('scroll', throttledScrollHandler);
     });
-  }, [branchList]);
+  }, [noteListEntryInfos]);
 
   function skipInitializer() {
     if (!skip) return;
@@ -112,8 +112,8 @@ export default function App({
               togglePrivateMode={togglePrivateMode}
               currentUser={currentUser}
               handleInput={handleInput}
-              branchList={branchList}
-              onLoad={onSetBranchList}
+              noteListEntryInfos={noteListEntryInfos}
+              onLoad={onSetNoteList}
               onNoteListEntryClick={onNoteListEntryClick}
               skipInitializer={skipInitializer}
               onPrivateNotesToggleClick={skipInitializer}

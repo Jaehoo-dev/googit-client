@@ -3,30 +3,32 @@ import { Link } from 'react-router-dom';
 import { NoteListEntryWrapper } from '../styledComponents';
 
 export default function NoteListEntry({
-  branchContent,
+  entryInfos,
   count,
   onNoteListEntryClick,
   creator,
 }) {
-  const isShared = !!branchContent.branch.shared_users_info.length;
-  const title = branchContent.latestNote.blocks[0].children[0].text;
-  const updatedAt = branchContent.branch.updated_at;
+
+  const isShared = !!entryInfos.branch.sharing_infos.length;
+  const title = entryInfos.latestNote.blocks[0].children[0].text;
+  const updatedAt = entryInfos.branch.updated_at;
   const date = updatedAt.substring(0, 10);
   const time = updatedAt.substring(11, 16);
 
   function NoteListEntryClickHandler(note, branch) {
+    console.log(note, branch, 'awfewa');
     onNoteListEntryClick(note, branch);
   }
 
   return (
     <Link
-      to={`/notes/${branchContent.branch.latest_note}`}
+      to={`/notes/${entryInfos.branch.latest_note}`}
       style={{
         textDecoration: 'none',
         color: 'black',
       }}>
       <NoteListEntryWrapper
-        onClick={NoteListEntryClickHandler.bind(null, branchContent.latestNote, branchContent.branch)}
+        onClick={NoteListEntryClickHandler.bind(null, entryInfos.latestNote, entryInfos.branch)}
       >
         <div>{count + 1}</div>
         <div>{title}</div>
