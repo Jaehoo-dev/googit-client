@@ -18,6 +18,13 @@ export default function Button({
   );
 }
 
+export const logoutButtonTheme = {
+  backgroundColor: 'transparent',
+  border: 'none',
+  fontSize: 'xx-large',
+  marginLeft: '1em',
+};
+
 export const permissionHandleButtonTheme = {
   width: '5em',
   height: '2em',

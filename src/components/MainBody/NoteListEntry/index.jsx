@@ -16,7 +16,6 @@ export default function NoteListEntry({
   const time = updatedAt.substring(11, 16);
 
   function NoteListEntryClickHandler(note, branch) {
-    console.log(note, branch, 'awfewa');
     onNoteListEntryClick(note, branch);
   }
 
