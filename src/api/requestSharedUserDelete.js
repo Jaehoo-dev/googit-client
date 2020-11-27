@@ -1,6 +1,6 @@
 export default async function deletePermission(currentUser, currentNote, sharedUserEmail) {
   const response = await fetch(
-    `http://localhost:4000/users/${currentUser._id}/branches/${currentNote.parent}/permission/delete`, {
+    `${process.env.REACT_APP_SERVER_URL}:4000/users/${currentUser._id}/branches/${currentNote.parent}/permission/delete`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',

@@ -16,6 +16,7 @@ module.exports = {
   },
   rules: {
     quotes: ['error', 'single'],
-    'eol-last': ['error', 'always']
+    'eol-last': ['error', 'always'],
+    'react-hooks/exhaustive-deps': 'off'
   },
 };

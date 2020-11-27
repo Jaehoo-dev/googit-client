@@ -27,7 +27,7 @@ export default function SharingButton({ currentUser, currentNote, onSharedUsersL
 
       if (sharedUsers) onSharedUsersLoad(sharedUsers);
     }
-  }, [isSubmitted]); //homebutton
+  }, [isSubmitted]);
 
   function handleOnChange(event) {
     setEmail(event.target.value);
@@ -83,7 +83,7 @@ export default function SharingButton({ currentUser, currentNote, onSharedUsersL
         </Button>
       <Modal theme={sharingModalTheme} isOpen={isModalOpen} toggleModal={toggleModal} >
         <ModalContentWrapper>
-          <ModalCloseButton toggleModal={toggleModal} />
+          <ModalCloseButton onClick={toggleModal} />
           <StyledForm onSubmit={submitHandler}>
             <input onChange={handleOnChange} value={email} name='email' type='text' />
             <select name='permission'>

@@ -1,5 +1,4 @@
 import {
-  HOST,
   PORT,
   USERS,
   BRANCHES,
@@ -16,7 +15,7 @@ export default async function requestCreateNote(
 ) {
   const blocksWithNewIds = applyIdsLookingAhead(blocks);
   const noteCreateRes = await fetch(
-    `${HOST}${PORT}${USERS}/${currentUser._id}${BRANCHES}/${branchId}${NOTES}${NEW}`,
+    `${process.env.REACT_APP_SERVER_URL}:4000${PORT}${USERS}/${currentUser._id}${BRANCHES}/${branchId}${NOTES}${NEW}`,
     {
       method: POST,
       headers: {
