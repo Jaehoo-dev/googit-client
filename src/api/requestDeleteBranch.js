@@ -1,7 +1,7 @@
 export default async function requestDeleteBranch(user, branch) {
   try {
     const branchDeleteRes = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}:4000/users/${user._id}/branches/${branch._id}`,
+      `${process.env.REACT_APP_SERVER_URL}/users/${user._id}/branches/${branch._id}`,
       {
         method: 'DELETE',
         headers: {

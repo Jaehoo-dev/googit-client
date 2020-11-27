@@ -15,7 +15,7 @@ export default async function requestCreateNote(
 ) {
   const blocksWithNewIds = applyIdsLookingAhead(blocks);
   const noteCreateRes = await fetch(
-    `${process.env.REACT_APP_SERVER_URL}:4000${PORT}${USERS}/${currentUser._id}${BRANCHES}/${branchId}${NOTES}${NEW}`,
+    `${process.env.REACT_APP_SERVER_URL}${PORT}${USERS}/${currentUser._id}${BRANCHES}/${branchId}${NOTES}${NEW}`,
     {
       method: POST,
       headers: {

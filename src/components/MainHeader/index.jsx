@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header } from './styledComponents';
+import { MainHeaderWrapper } from './styledComponents';
 import { useHistory } from 'react-router-dom';
 import { auth } from '../../config/firebase';
 import PrivateNotesToggleButton from './PrivateNotesToggleButton';
@@ -38,7 +38,7 @@ export default function MainHeader({
   }
 
   return (
-    <Header>
+    <MainHeaderWrapper>
       <section>
         <HomeButton onClick={homeButtonClickHandler} />
         <PrivateNotesToggleButton
@@ -52,6 +52,6 @@ export default function MainHeader({
         />
         <ProfileIcon onClick={logoutClickHandler} />
       </section>
-    </Header>
+    </MainHeaderWrapper>
   );
 }

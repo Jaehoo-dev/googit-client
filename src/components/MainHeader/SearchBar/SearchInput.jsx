@@ -1,9 +1,10 @@
 import React from 'react';
-import StyledInputArea from '../../shared/InputArea';
+import StyledInputArea, { searchBarTheme } from '../../shared/InputArea';
 
 export default function SearchInput({ onChange, keyword }) {
   return (
     <StyledInputArea
+      theme={searchBarTheme}
       name='keyword'
       value={keyword}
       placeholder='검색어를 입력하세요'

@@ -1,8 +1,8 @@
 import React from 'react';
-import { BranchListEntryWrapper } from '../styledComponents';
 import { Link } from 'react-router-dom';
+import { NoteListEntryWrapper } from '../styledComponents';
 
-export default function BranchListEntry({
+export default function NoteListEntry({
   branchContent,
   count,
   onNoteListEntryClick,
@@ -25,7 +25,7 @@ export default function BranchListEntry({
         textDecoration: 'none',
         color: 'black',
       }}>
-      <BranchListEntryWrapper
+      <NoteListEntryWrapper
         onClick={NoteListEntryClickHandler.bind(null, branchContent.latestNote, branchContent.branch)}
       >
         <div>{count + 1}</div>
@@ -33,7 +33,7 @@ export default function BranchListEntry({
         <div>{creator}</div>
         <div>{`${date} ${time}`}</div>
         <div>{isShared ? 'O' : 'X'}</div>
-      </BranchListEntryWrapper>
+      </NoteListEntryWrapper>
     </Link>
   );
 }

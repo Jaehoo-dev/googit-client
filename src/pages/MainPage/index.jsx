@@ -1,6 +1,6 @@
 import React from 'react';
 import MainHeader from '../../components/MainHeader';
-import BranchList from '../../components/BranchList';
+import BranchList from '../../components/MainBody';
 
 export default function AppMain({
   onLogout,

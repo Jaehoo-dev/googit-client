@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Header = styled.header`
+export const MainHeaderWrapper = styled.header`
   position: fixed;
   min-width: 576px;
   width: 100%;
@@ -11,10 +11,10 @@ export const Header = styled.header`
 
   section {
     text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: 10em 10em 1fr 10em;
     padding: 1em 0;
+    margin-right: 5em;
   }
 `;
 
@@ -31,4 +31,5 @@ export const Form = styled.form`
   display: grid;
   grid-template-columns: 20fr 1fr;
   border-bottom: 1px solid black;
+  margin-left: 15em;
 `;

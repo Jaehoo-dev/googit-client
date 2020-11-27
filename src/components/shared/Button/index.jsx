@@ -29,6 +29,7 @@ export const homeButtonTheme = {
   backgroundColor: 'white',
   fontSize: '26px',
   fontWeight: 900,
+  border: 'none',
 };
 
 export const deleteButtonTheme = {
@@ -40,6 +41,9 @@ export const deleteButtonTheme = {
 export const coralButtonTheme = {
   backgroundColor: '#f08080',
   fontSize: '16px',
+  margin: '0 0 0 2em',
+  border: 'none',
+  borderRadius: '1em',
 };
 
 export const shareButtonTheme = {
@@ -53,10 +57,18 @@ export const saveButtonTheme = {
   fontWeight: 700,
 };
 
-export const searchButtonTheme = {
-  backgroundColor: 'transparent'
+export const iconButtonTheme = {
+  backgroundColor: 'transparent',
+  border: 'none',
 };
 
 export const createNewBranchTheme = {
-  height: '3em',
+  backgroundColor: 'transparent',
+  border: '2.5px solid #f08080',
+  width: '55.8em',
+  height: '3.2em',
+  borderRadius: '1em',
+  fontSize: '16px',
+  margin: '0 0 0 8em',
+  transform: 'translate(-50 %, -50 %)',
 };

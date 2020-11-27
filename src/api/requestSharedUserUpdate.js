@@ -1,7 +1,7 @@
 
 export default async function updatePermission(currentUser, currentNote, sharedUserEmail, newPermission) {
   let response = await fetch(
-    `${process.env.REACT_APP_SERVER_URL}:4000/users/${currentUser._id}/branches/${currentNote.parent}/permission/update`, {
+    `${process.env.REACT_APP_SERVER_URL}/users/${currentUser._id}/branches/${currentNote.parent}/permission/update`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
