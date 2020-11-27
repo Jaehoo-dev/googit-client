@@ -22,9 +22,8 @@ export const setIsPrivateMode = () => ({
   type: SET_IS_PRIVATE_MODE,
 });
 
-export const toggleShowChangesMode = comparedNoteValue => ({
-  type: 'toggleShowChangesMode',
-  comparedNoteValue,
+export const toggleShowModificationsMode = () => ({
+  type: 'toggleShowModificationsMode',
 });
 
 export const setIsModifiedToTrue = () => ({
@@ -44,13 +43,11 @@ export const removeNewBlocksCandidate = () => ({
   type: 'removeNewBlocksCandidate',
 });
 
-export const setCurrentNoteAndBranch = (note, branch) => {
-  return ({
-    type: 'setCurrentNoteAndBranch',
-    note,
-    branch,
-  });
-};
+export const setCurrentNoteAndBranch = (note, branch) => ({
+  type: 'setCurrentNoteAndBranch',
+  note,
+  branch,
+});
 
 export const updateBranchList = branchList => ({
   type: UPDATE_BRANCH_LIST,
@@ -69,9 +66,4 @@ export const setSharedUsers = sharedUsers => ({
 
 export const resetModificationStates = () => ({
   type: 'resetModificationStates',
-});
-
-export const setPreviousNote = note => ({
-  type: 'setPreviousNote',
-  note,
 });

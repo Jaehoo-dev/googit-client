@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import EditorPage from '../pages/EditorPage';
 import {
+  toggleShowModificationsMode,
   setIsModifiedToTrue,
   setIsModifiedToFalse,
   setNewBlocksCandidate,
@@ -9,21 +10,14 @@ import {
   setSharedUsers,
   resetModificationStates,
   setCurrentUser,
-  setPreviousNote,
   setBranchList,
   updateBranchList,
 } from '../actions';
-import requestNote from '../api/requestNote';
-import compareNoteChanges from '../utils/compareNoteChanges';
 
 function mapDispatchToProps(dispatch) {
   return {
-    async onShowModificationsModeToggle(userId, currentNote) {
-      const previousNote = await requestNote(userId, currentNote.previous_version);
-
-      compareNoteChanges(previousNote, currentNote);
-      // let comparedNoteValue;
-      // dispatch(toggleShowChangesMode(comparedNoteValue));
+    onShowModificationsModeToggle() {
+      dispatch(toggleShowModificationsMode());
     },
     onNoteModify(blocks, isModified) {
       dispatch(setNewBlocksCandidate(blocks));
@@ -34,12 +28,14 @@ function mapDispatchToProps(dispatch) {
       dispatch(setIsModifiedToFalse());
       dispatch(removeNewBlocksCandidate());
       dispatch(setCurrentNoteAndBranch(note, branch));
+      localStorage.removeItem('googit-compared-note-value');
     },
     onNoteLoad(note, branch) {
       dispatch(setCurrentNoteAndBranch(note, branch));
     },
     onNoteChange(note, branch) {
       dispatch(setCurrentNoteAndBranch(note, branch));
+      localStorage.removeItem('googit-compared-note-value');
     },
     onSharedUsersLoad(sharedUsers) {
       dispatch(setSharedUsers(sharedUsers));
@@ -47,15 +43,13 @@ function mapDispatchToProps(dispatch) {
     onHomeButtonClick() {
       dispatch(resetModificationStates());
       dispatch(setCurrentNoteAndBranch(null, null));
+      localStorage.removeItem('googit-compared-note-value');
     },
     onDeleteBranch(user) {
       dispatch(setCurrentUser(user));
       dispatch(setCurrentNoteAndBranch(null, null));
       dispatch(resetModificationStates());
-    },
-    setPreviousNote(note) {
-      if (!note) return;
-      dispatch(setPreviousNote(note));
+      localStorage.removeItem('googit-compared-note-value');
     },
     onSetBranchList(branchList) {
       dispatch(setBranchList(branchList));
@@ -65,7 +59,7 @@ function mapDispatchToProps(dispatch) {
     },
     onSharedUsersPermissionUpdate(sharedUsers) {
       dispatch(setSharedUsers(sharedUsers));
-    }
+    },
   };
 }
 

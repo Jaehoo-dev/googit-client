@@ -29,5 +29,13 @@ export default function Leaf({
     children = <mark>{children}</mark>;
   }
 
+  if (leaf.before) {
+    children = <span style={{ background: '#ffa6b0' }}>{children}</span>;
+  }
+
+  if (leaf.after) {
+    children = <span style={{ background: '#a4fcb9' }}>{children}</span>;
+  }
+
   return <span {...attributes}>{children}</span>;
 };

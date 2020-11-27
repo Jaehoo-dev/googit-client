@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import EditorPageHeader from '../../components/EditorPageHeader';
 import Editor from '../../components/Editor';
@@ -6,7 +6,11 @@ import requestCreateBranch from '../../api/requestCreateBranch';
 import requestCreateNote from '../../api/requestCreateNote';
 import requestDeleteBranch from '../../api/requestDeleteBranch';
 import requestBranchList from '../../api/requestBranchList';
+import requestNote from '../../api/requestNote';
 import checkHasWritingPermission from '../../utils/checkHasWritingPermission';
+import compareNoteChanges from '../../utils/compareNoteChanges';
+import { createEditor, Transforms } from 'slate';
+import { withReact } from 'slate-react';
 import uuid from 'uuid-random';
 
 export default function EditorPage({
@@ -27,19 +31,19 @@ export default function EditorPage({
   onClick,
   onHomeButtonClick,
   onDeleteBranch,
-  setPreviousNote,
   skip,
   isPrivateMode,
   onSetBranchList,
   onUpdateBranchList,
 }) {
+  const editor = useMemo(() => withReact(createEditor()), []);
   const history = useHistory();
   const [hasWritingPermission, setHasWritingPermission] = useState(undefined);
   const [value, setValue] = useState([
     {
       type: 'paragraph',
       children: [{ text: '' }],
-      idLookingBack: uuid(),
+      idLookingForwards: uuid(),
     },
   ]);
 
@@ -48,6 +52,39 @@ export default function EditorPage({
 
     setValue(currentNote.blocks);
   }, [currentNote]);
+
+  async function onShowModificationsModeButtonClick() {
+    if (!isShowModificationsMode) {
+      onShowModificationsModeToggle();
+
+      let comparedNoteValue
+        = JSON.parse(localStorage.getItem('googit-compared-note-value')) || null;
+
+      if (comparedNoteValue) {
+        Transforms.select(editor, [0]);
+        initializeSelectAndSetValue(comparedNoteValue);
+
+        return;
+      }
+
+      const previousNote
+        = await requestNote(currentUser._id, currentNote.previous_version);
+
+      comparedNoteValue = compareNoteChanges(previousNote, currentNote);
+
+      initializeSelectAndSetValue(comparedNoteValue);
+      localStorage.setItem('googit-compared-note-value', JSON.stringify(comparedNoteValue));
+
+    } else {
+      onShowModificationsModeToggle();
+      initializeSelectAndSetValue(currentNote.blocks);
+    }
+  }
+
+  function initializeSelectAndSetValue(value) {
+    Transforms.select(editor, [0]);
+    setValue(value);
+  }
 
   async function homeButtonClickHandler() {
     history.push('/');
@@ -121,6 +158,7 @@ export default function EditorPage({
         currentBranch={currentBranch}
         isShowModificationsMode={isShowModificationsMode}
         onShowModificationsModeToggle={onShowModificationsModeToggle}
+        onShowModificationsModeButtonClick={onShowModificationsModeButtonClick}
         isModified={isModified}
         onHomeButtonClick={homeButtonClickHandler}
         onSubmit={submitHandler}
@@ -132,11 +170,11 @@ export default function EditorPage({
         onDeleteButtonClick={deleteButtonClickHandler}
       />
       <Editor
+        editor={editor}
         value={value}
         setValue={setValue}
         currentUser={currentUser}
         currentNote={currentNote}
-        setPreviousNote={setPreviousNote}
         currentBranch={currentBranch}
         onNoteModify={onNoteModify}
         isModified={isModified}

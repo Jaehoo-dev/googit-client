@@ -28,6 +28,7 @@ export default function EditorPageHeader({
   currentUser,
   isShowModificationsMode,
   onShowModificationsModeToggle,
+  onShowModificationsModeButtonClick,
   isModified,
   currentNote,
   currentBranch,
@@ -85,6 +86,10 @@ export default function EditorPageHeader({
     onNoteChange(note, branch);
   }
 
+  async function showModificationmodeToggleClickHandler() {
+    onShowModificationsModeButtonClick();
+  }
+
   return (
     <Header>
       <LeftWrapper>
@@ -115,7 +120,7 @@ export default function EditorPageHeader({
             currentNote?.previous_version && !isModified
             && <Button
               theme={coralButtonTheme}
-              onClick={onShowModificationsModeToggle.bind(null, currentUser._id, currentNote)}
+              onClick={showModificationmodeToggleClickHandler}
             >
               {
                 isShowModificationsMode

@@ -49,7 +49,7 @@ const branchList = (state = [], action) => {
 
 const isShowModificationsMode = (state = false, action) => {
   switch (action.type) {
-    case 'toggleShowChangesMode':
+    case 'toggleShowModificationsMode':
       return !state;
     case 'resetModificationStates':
       return false;
@@ -109,17 +109,6 @@ const sharedUsers = (state = [], action) => {
   }
 };
 
-const comparedNoteValue = (state = null, action) => {
-  switch (action.type) {
-    case 'toggleShowChangesMode':
-      return action.comparedNoteValue;
-    case 'resetModificationStates':
-      return null;
-    default:
-      return state;
-  }
-};
-
 const appReducer = combineReducers({
   hasToken,
   currentUser,
@@ -131,7 +120,6 @@ const appReducer = combineReducers({
   currentNote,
   currentBranch,
   sharedUsers,
-  comparedNoteValue,
 });
 
 export default function rootReducer(state, action) {

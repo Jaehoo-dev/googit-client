@@ -6,7 +6,7 @@ import {
   NEW,
 } from '../constants/urls';
 import { POST } from '../constants/httpMethods';
-import applyIdsLookingAhead from '../utils/applyIdsLookingAhead';
+import applyIdsLookingAhead from '../utils/applyIdsLookingBackwardsBeforeSave';
 
 export default async function requestCreateNote(
   blocks,
