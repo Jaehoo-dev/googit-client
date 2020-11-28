@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, Switch, Route } from 'react-router-dom';
 import Entrance from './Entrance';
 import MainPage from '../pages/MainPage';
-import Loading from './shared/Loading';
+import Loading from './Loading';
 import EditorPage from '../containers/EditorContainer';
 import requestCurrentUser from '../api/requestCurrentUser';
 import { throttle } from 'lodash';
@@ -21,6 +21,7 @@ export default function App({
   currentNote,
   onNoteListEntryClick,
   sharedUsers,
+  onHomeButtonClick,
 }) {
   const history = useHistory();
   const [keyword, setKeyword] = useState('');
@@ -112,8 +113,7 @@ export default function App({
             <EditorPage
               currentNote={currentNote}
               onCreateBranch={onCreateBranch}
-              onClick={skipInitializer}
-              skip={skip}
+              onHomeButtonClick={onHomeButtonClick.bind(null, skipInitializer)}
             />
           </Route>
         </Switch>

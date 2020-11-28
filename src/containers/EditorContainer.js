@@ -40,11 +40,6 @@ function mapDispatchToProps(dispatch) {
     onSharedUsersLoad(sharedUsers) {
       dispatch(setSharedUsers(sharedUsers));
     },
-    onHomeButtonClick() {
-      dispatch(resetModificationStates());
-      dispatch(setCurrentNoteAndBranch(null, null));
-      localStorage.removeItem('googit-compared-note-value');
-    },
     onDeleteBranch(user) {
       dispatch(setCurrentUser(user));
       dispatch(setCurrentNoteAndBranch(null, null));

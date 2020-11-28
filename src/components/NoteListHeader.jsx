@@ -1,5 +1,5 @@
 import React from 'react';
-import { NoteListHeaderWrapper } from '../styledComponents';
+import { NoteListHeaderWrapper } from '../styledComponents/MainBody.styled';
 
 export default function NoteListHeader() {
   return (

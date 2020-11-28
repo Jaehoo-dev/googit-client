@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { auth } from '../config/firebase';
 import PrivateNotesToggleButton from './PrivateNotesToggleButton';
 import SearchBar from './SearchBar';
-import LogoutIcon from './LogoutIcon';
+import LogoutIcon from './LogoutButton';
 import HomeButton from './HomeButton';
 
 export default function MainHeader({

@@ -1,6 +1,6 @@
 import React from 'react';
-import { NoteListWrapper } from '../styledComponents';
-import NoteListEntry from '../NoteListEntry';
+import { NoteListWrapper } from '../styledComponents/MainBody.styled';
+import NoteListEntry from './NoteListEntry';
 
 export default function NoteList({
   noteListEntryInfos,

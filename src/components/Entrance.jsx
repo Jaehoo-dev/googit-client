@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLocation, Link, useHistory } from 'react-router-dom';
-import { IslandWrapper } from '../shared/IslandWrapper/IslandWrapper';
+import { IslandWrapper } from '../styledComponents/IslandWrapper.styled';
 import GoogleAuthButton from './GoogleAuthButton';
-import { auth, provider } from '../../config/firebase';
+import { auth, provider } from '../config/firebase';
 
 export default function Entrance({ onLogin }) {
   const history = useHistory();

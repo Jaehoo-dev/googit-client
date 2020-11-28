@@ -11,7 +11,7 @@ export default async function updatePermission(currentUser, currentNote, sharedU
   });
 
   response = await response.json(response);
-  console.log(response, 'in update shraed user');
+
   if (response.result === 'ok') {
     alert('권한을 수정했습니다.');
   }

@@ -17,7 +17,7 @@ import Button, {
   deleteButtonTheme,
   coralButtonTheme,
   saveButtonTheme,
-} from './shared/Button';
+} from './Button';
 import requestNoteAuthor from '../api/requestNoteAuthor';
 import requestNote from '../api/requestNote';
 import requestBranch from '../api/requestBranch';
@@ -37,7 +37,6 @@ export default function EditorPageHeader({
   onNoteChange,
   sharedUsers,
   onSharedUsersLoad,
-  onClick,
   onDeleteButtonClick,
   onSharedUsersPermissionUpdate,
 }) {
@@ -154,8 +153,12 @@ export default function EditorPageHeader({
         <SaveButtonWrapper>
           {
             isModified
-            && <Button theme={saveButtonTheme} onClick={submitHandler}>저장</Button>
-
+            && <Button
+              theme={saveButtonTheme}
+              onClick={submitHandler}
+            >
+              저장
+            </Button>
           }
         </SaveButtonWrapper>
       </RightWrapper>
@@ -176,7 +179,6 @@ export default function EditorPageHeader({
 
   function submitHandler() {
     onSubmit();
-    onClick();
   }
 }
 

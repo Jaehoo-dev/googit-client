@@ -5,7 +5,7 @@ import {
   SharedUserListMain,
   SharedListHeader,
 } from '../styledComponents/EditorPageHeader.styled';
-import Button, { permissionHandleButtonTheme } from './shared/Button';
+import Button, { permissionHandleButtonTheme } from './Button';
 
 export default function SharedUserList({
   sharedUsers,
@@ -15,7 +15,6 @@ export default function SharedUserList({
   function clickHandler(event) {
     onClick(event.target.value);
   }
-  console.log(sharedUsers);
 
   return (
     <SharedUserListWrapper>

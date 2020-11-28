@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { StyledInputArea } from './styledComponents';
+import { StyledInputArea } from '../styledComponents/InputArea.styled';
 
 export default function InputArea({
   onChange,

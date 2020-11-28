@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { IslandWrapper } from '../IslandWrapper/IslandWrapper';
+import { IslandWrapper } from '../styledComponents/IslandWrapper.styled';
 
 export default function Loading({ text }) {
   const [content, setContent] = useState(text);

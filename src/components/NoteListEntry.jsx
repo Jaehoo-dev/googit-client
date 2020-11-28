@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { NoteListEntryWrapper } from '../styledComponents';
+import { NoteListEntryWrapper } from '../styledComponents/MainBody.styled';
 
 export default function NoteListEntry({
   entryInfos,

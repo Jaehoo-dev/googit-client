@@ -1,15 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MainBodyWrapper } from './styledComponents';
+import { MainBodyWrapper } from '../styledComponents/MainBody.styled';
 import NoteListHeader from './NoteListHeader';
 import NoteList from './NoteList';
-import Button, { createNewBranchTheme } from '../shared/Button';
+import Button, { createNewBranchTheme } from './Button';
 
 export default function MainBody({
   noteListEntryInfos,
   onNoteListEntryClick,
 }) {
-  console.log(noteListEntryInfos);
   return (
     <MainBodyWrapper>
       <NoteListHeader />

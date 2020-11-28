@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import SharedUserList from './SharedUserList';
-import Modal, { ModalCloseButton, sharingModalTheme } from './shared/Modal';
-import Button, { coralButtonTheme, shareButtonTheme } from './shared/Button';
+import { sharingModalTheme } from '../styledComponents/Modal.styled';
+import Modal from './Modal';
+import ModalCloseButton from './ModalCloseButton';
+import Button, { coralButtonTheme, shareButtonTheme } from './Button';
 import { ModalContentWrapper, StyledForm } from '../styledComponents/EditorPageHeader.styled';
 import requestSharedUser from '../api/requestSharedUser';
 import requestSharedUserUpdate from '../api/requestSharedUserUpdate';
