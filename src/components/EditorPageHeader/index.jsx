@@ -21,7 +21,7 @@ import Button, {
 import requestNoteAuthor from '../../api/requestNoteAuthor';
 import requestNote from '../../api/requestNote';
 import requestBranch from '../../api/requestBranch';
-import SharingButton from './ShareButton';
+import SharingButton from '../ShareButton';
 import HomeButton from '../HomeButton';
 
 export default function EditorPageHeader({

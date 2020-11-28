@@ -1,5 +1,5 @@
-import React, { useEffect, useCallback } from 'react';
-import { Wrapper } from './styledComponents';
+import React, { useCallback } from 'react';
+import { Wrapper } from '../styledComponents/Editor.styled';
 import { Slate, Editable } from 'slate-react';
 import HoveringToolbar from './HoveringToolbar';
 import Leaf from './Leaf';
