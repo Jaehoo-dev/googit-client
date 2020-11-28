@@ -9,7 +9,6 @@ export default function MainBody({
   noteListEntryInfos,
   onNoteListEntryClick,
 }) {
-
   return (
     <MainBodyWrapper>
       <NoteListHeader />

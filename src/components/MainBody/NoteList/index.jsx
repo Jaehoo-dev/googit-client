@@ -6,20 +6,16 @@ export default function NoteList({
   noteListEntryInfos,
   onNoteListEntryClick,
 }) {
-
   function createBranchEntries() {
-    return noteListEntryInfos.map((list, i) => {
-
-      return (
-        <NoteListEntry
-          key={i}
-          onNoteListEntryClick={onNoteListEntryClick}
-          entryInfos={list}
-          count={i}
-          creator={list.author.username}
-        />
-      );
-    });
+    return noteListEntryInfos.map((list, i) => (
+      <NoteListEntry
+        key={list.latestNote._id}
+        onNoteListEntryClick={onNoteListEntryClick}
+        entryInfos={list}
+        count={i}
+        creator={list.author.username}
+      />
+    ));
   }
 
   return (
