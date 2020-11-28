@@ -4,8 +4,8 @@ import {
   PermissionUpdateForm,
   SharedUserListMain,
   SharedListHeader,
-} from '../styledComponents';
-import Button, { permissionHandleButtonTheme } from '../shared/Button';
+} from '../styledComponents/EditorPageHeader.styled';
+import Button, { permissionHandleButtonTheme } from './shared/Button';
 
 export default function SharedUserList({
   sharedUsers,

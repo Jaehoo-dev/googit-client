@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import SharedUserList from './SharedUserList';
-import Modal, { ModalCloseButton, sharingModalTheme } from '../shared/Modal';
-import Button, { coralButtonTheme, shareButtonTheme } from '../shared/Button';
-import { ModalContentWrapper, StyledForm } from '../styledComponents';
-import requestSharedUser from '../../../api/requestSharedUser';
-import requestSharedUserUpdate from '../../../api/requestSharedUserUpdate';
-import requestSharedUserDelete from '../../../api/requestSharedUserDelete';
-import requestCreateSharingInfo from '../../../api/requestCreateSharingInfo';
+import Modal, { ModalCloseButton, sharingModalTheme } from './shared/Modal';
+import Button, { coralButtonTheme, shareButtonTheme } from './shared/Button';
+import { ModalContentWrapper, StyledForm } from '../styledComponents/EditorPageHeader.styled';
+import requestSharedUser from '../api/requestSharedUser';
+import requestSharedUserUpdate from '../api/requestSharedUserUpdate';
+import requestSharedUserDelete from '../api/requestSharedUserDelete';
+import requestCreateSharingInfo from '../api/requestCreateSharingInfo';
 
 export default function SharingButton({
   currentUser,

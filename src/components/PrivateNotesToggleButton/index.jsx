@@ -1,5 +1,5 @@
 import React from 'react';
-import Button, { coralButtonTheme } from '../../shared/Button';
+import Button, { coralButtonTheme } from '../shared/Button/index';
 
 export default function PrivateNotesToggleButton({ buttonMode, onClick }) {
   const content = buttonMode ? '모두 보기' : '나만의 쪽지 보기';

@@ -1,5 +1,5 @@
 import React from 'react';
-import StyledInputArea, { searchBarTheme } from '../../shared/InputArea';
+import StyledInputArea, { searchBarTheme } from './shared/InputArea';
 
 export default function SearchInput({ onChange, keyword }) {
   return (

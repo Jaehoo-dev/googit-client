@@ -12,17 +12,17 @@ import {
   DeleteButtonWrapper,
   ShareButtonWrapper,
   SaveButtonWrapper,
-} from './styledComponents';
+} from '../styledComponents/EditorPageHeader.styled';
 import Button, {
   deleteButtonTheme,
   coralButtonTheme,
   saveButtonTheme,
-} from '../shared/Button';
-import requestNoteAuthor from '../../api/requestNoteAuthor';
-import requestNote from '../../api/requestNote';
-import requestBranch from '../../api/requestBranch';
-import SharingButton from '../ShareButton';
-import HomeButton from '../HomeButton';
+} from './shared/Button';
+import requestNoteAuthor from '../api/requestNoteAuthor';
+import requestNote from '../api/requestNote';
+import requestBranch from '../api/requestBranch';
+import SharingButton from './ShareButton';
+import HomeButton from './HomeButton';
 
 export default function EditorPageHeader({
   currentUser,

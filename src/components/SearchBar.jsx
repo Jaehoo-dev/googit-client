@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form } from '../styledComponents';
+import { StyledForm } from '../styledComponents/EditorPageHeader.styled';
 import SearchInput from './SearchInput';
 import SearchIconButton from './SearchIconButton';
 
@@ -18,9 +18,9 @@ export default function SearchBar({ handleInput, onSubmit }) {
     handleInput(event);
   }
   return (
-    <Form onSubmit={submitHandler}>
+    <StyledForm onSubmit={submitHandler}>
       <SearchInput onChange={keywordChangeHandler} keyword={keyword} />
       <SearchIconButton />
-    </Form>
+    </StyledForm>
   );
 }
