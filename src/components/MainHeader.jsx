@@ -1,11 +1,11 @@
 import React from 'react';
-import { MainHeaderWrapper } from './styledComponents';
+import { MainHeaderWrapper } from '../styledComponents/MainHeader.styled';
 import { useHistory } from 'react-router-dom';
-import { auth } from '../../config/firebase';
+import { auth } from '../config/firebase';
 import PrivateNotesToggleButton from './PrivateNotesToggleButton';
 import SearchBar from './SearchBar';
-import ProfileIcon from './LogoutIcon';
-import HomeButton from '../HomeButton';
+import LogoutIcon from './LogoutIcon';
+import HomeButton from './HomeButton';
 
 export default function MainHeader({
   onLogout,
@@ -50,7 +50,7 @@ export default function MainHeader({
           currentUser={currentUser}
           onSubmit={searchHandler}
         />
-        <ProfileIcon onClick={logoutClickHandler} />
+        <LogoutIcon onClick={logoutClickHandler} />
       </section>
     </MainHeaderWrapper>
   );

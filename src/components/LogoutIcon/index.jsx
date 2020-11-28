@@ -1,5 +1,5 @@
 import React from 'react';
-import Button, { logoutButtonTheme } from '../../shared/Button';
+import Button, { logoutButtonTheme } from '../shared/Button/index';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 export default function LogoutIcon({ onClick }) {
