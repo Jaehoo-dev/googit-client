@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form } from '../styledComponents';
 import SearchInput from './SearchInput';
-import SearchIcon from './SearchIcon';
+import SearchIconButton from './SearchIconButton';
 
 export default function SearchBar({ handleInput, onSubmit }) {
   const [keyword, setKeyword] = useState('');
@@ -17,11 +17,10 @@ export default function SearchBar({ handleInput, onSubmit }) {
     onSubmit();
     handleInput(event);
   }
-
   return (
     <Form onSubmit={submitHandler}>
       <SearchInput onChange={keywordChangeHandler} keyword={keyword} />
-      <SearchIcon />
+      <SearchIconButton />
     </Form>
   );
 }

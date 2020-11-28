@@ -1,6 +1,6 @@
 import { GET } from '../constants/httpMethods';
 
-export default async function requestBranchList(currentUser, isPrivateMode, skip, keyword) {
+export default async function requestNoteList(currentUser, isPrivateMode, skip, keyword) {
   try {
     keyword = keyword || '';
     const fetchUrl = isPrivateMode

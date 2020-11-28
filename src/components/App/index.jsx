@@ -3,7 +3,7 @@ import { useHistory, Switch, Route } from 'react-router-dom';
 import Entrance from '../../components/Entrance';
 import MainPage from '../../pages/MainPage';
 import Loading from '../../components/shared/Loading';
-import requestBranchList from '../../api/requestBranchList';
+import requestNoteList from '../../api/requestNoteList';
 import EditorPage from '../../containers/EditorContainer';
 import requestCurrentUser from '../../api/requestCurrentUser';
 import { throttle } from 'lodash';
@@ -51,10 +51,13 @@ export default function App({
     loadBranchList();
 
     async function loadBranchList() {
+      console.log(skip, 'skup');
       const response
-        = await requestBranchList(currentUser, isPrivateMode, skip, keyword);
+        = await requestNoteList(currentUser, isPrivateMode, skip, keyword);
 
       if (!response) return;
+      console.log(response, 'res');
+      console.log(skip, 'skup2');
       return (!skip)
         ? onSetNoteList(response)
         : onUpdateNoteList(response);

@@ -19,9 +19,11 @@ function mapDispatchToProps(dispatch) {
       dispatch(setIsPrivateMode());
     },
     onSetNoteList(noteListEntryInfos) {
+      console.log('set');
       dispatch(setNoteListEntryInfos(noteListEntryInfos));
     },
     onUpdateNoteList(noteListEntryInfos) {
+      console.log('update');
       dispatch(updateNoteListEntryInfos(noteListEntryInfos));
     },
     onNoteListEntryClick(note, branch) {
