@@ -1,9 +1,6 @@
-import React from 'react';
-import { createPortal } from 'react-dom';
-import styled, { ThemeProvider } from 'styled-components';
-import CloseIcon from '@material-ui/icons/Close';
+import styled from 'styled-components';
 
-const Overlay = styled.div`
+export const Overlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -13,7 +10,7 @@ const Overlay = styled.div`
   z-index: 1000;
 `;
 
-const ModalContainer = styled.div`
+export const ModalContainer = styled.div`
   width: ${props => props.theme.width};
   height: ${props => props.theme.height};
   background-color: ${props => props.theme.backgroundColor};
@@ -56,38 +53,3 @@ export const sharingModalTheme = {
   top: '14%',
   left: '23%'
 };
-
-export default function Modal({
-  isOpen,
-  children,
-  toggleModal,
-  theme,
-}) {
-  if (!isOpen) return null;
-
-  return createPortal(
-    <>
-      <Overlay onClick={toggleModal} />
-      <ThemeProvider theme={theme}>
-        <ModalContainer>
-          {children}
-        </ModalContainer>
-      </ThemeProvider>
-    </>,
-    document.getElementById('portal')
-  );
-}
-
-const CloseButton = styled.button`
-  margin-left: 90%;
-  background-color: transparent;
-  border: none;
-`;
-
-export function ModalCloseButton({ onClick }) {
-  return (
-    <CloseButton onClick={onClick}>
-      <CloseIcon />
-    </CloseButton>
-  );
-}

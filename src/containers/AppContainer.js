@@ -1,6 +1,14 @@
 import { connect } from 'react-redux';
-import { setCurrentUser, setHasToken, initializeStore, setIsPrivateMode, setNoteListEntryInfos, setCurrentNoteAndBranch, updateNoteListEntryInfos } from '../actions';
-
+import {
+  setCurrentUser,
+  setHasToken,
+  initializeStore,
+  setIsPrivateMode,
+  setNoteListEntryInfos,
+  setCurrentNoteAndBranch,
+  updateNoteListEntryInfos,
+  resetModificationStates,
+} from '../actions';
 import App from '../components/App';
 
 function mapDispatchToProps(dispatch) {
@@ -26,6 +34,12 @@ function mapDispatchToProps(dispatch) {
     },
     onNoteListEntryClick(note, branch) {
       dispatch(setCurrentNoteAndBranch(note, branch));
+    },
+    onHomeButtonClick(func) {
+      dispatch(resetModificationStates());
+      dispatch(setCurrentNoteAndBranch(null, null));
+      func();
+      localStorage.removeItem('googit-compared-note-value');
     },
   };
 }

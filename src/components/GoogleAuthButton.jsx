@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledGoogleAuthButton } from './styledComponents';
+import { StyledGoogleAuthButton } from '../styledComponents/Entrance.styled';
 
 export default function GoogleAuthButton({
   signupOrLogin,

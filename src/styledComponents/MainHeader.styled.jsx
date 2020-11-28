@@ -22,10 +22,6 @@ export const Wrapper = styled.div`
   margin: 0 2em;
 `;
 
-export const ProfileImg = styled.img`
-  width: 1em;
-`;
-
 export const Form = styled.form`
   width: 50em;
   display: grid;

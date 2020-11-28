@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
-import EditorPageHeader from '../../components/EditorPageHeader';
-import Editor from '../../components/Editor';
-import requestCreateBranch from '../../api/requestCreateBranch';
-import requestCreateNote from '../../api/requestCreateNote';
-import requestDeleteBranch from '../../api/requestDeleteBranch';
-import requestNote from '../../api/requestNote';
-import checkHasWritingPermission from '../../utils/checkHasWritingPermission';
-import compareNoteChanges from '../../utils/compareNoteChanges';
+import EditorPageHeader from '../components/EditorPageHeader';
+import Editor from '../components/Editor';
+import requestCreateBranch from '../api/requestCreateBranch';
+import requestCreateNote from '../api/requestCreateNote';
+import requestDeleteBranch from '../api/requestDeleteBranch';
+import requestNote from '../api/requestNote';
+import checkHasWritingPermission from '../utils/checkHasWritingPermission';
+import compareNoteChanges from '../utils/compareNoteChanges';
 import { createEditor, Transforms } from 'slate';
 import { withReact } from 'slate-react';
-import { emitJoinRoom, emitLeaveRoom, emitTyping, listenForTyping } from '../../services/socket';
+import { emitJoinRoom, emitLeaveRoom, emitTyping, listenForTyping } from '../services/socket';
 import uuid from 'uuid-random';
 
 export default function EditorPage({
@@ -27,7 +27,6 @@ export default function EditorPage({
   onNoteChange,
   sharedUsers,
   onSharedUsersLoad,
-  onClick,
   onHomeButtonClick,
   onDeleteBranch,
   onSharedUsersPermissionUpdate,
@@ -140,10 +139,7 @@ export default function EditorPage({
       onCreateBranch(branchCreationResponse.updatedUser);
     }
 
-    onSave(
-      noteCreateResponse.newNote,
-      noteCreateResponse.updatedBranch
-    );
+    onSave(noteCreateResponse.newNote, noteCreateResponse.updatedBranch);
   }
 
   async function deleteButtonClickHandler() {
@@ -191,7 +187,6 @@ export default function EditorPage({
         onNoteChange={onNoteChange}
         sharedUsers={sharedUsers}
         onSharedUsersLoad={onSharedUsersLoad}
-        onClick={onClick}
         onDeleteButtonClick={deleteButtonClickHandler}
         currentNoteUpdatedAt={currentNoteUpdatedAt}
         onSharedUsersPermissionUpdate={onSharedUsersPermissionUpdate}

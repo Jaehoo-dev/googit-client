@@ -4,7 +4,7 @@ import { ReactEditor, useSlate } from 'slate-react';
 import { Editor } from 'slate';
 import { cx, css } from '@emotion/css';
 import { Range } from 'slate';
-import FormatButton from '../FormatButton';
+import FormatButton from './FormatButton';
 
 export default function HoveringToolbar() {
   const formats = [
