@@ -5,12 +5,12 @@ import Editor from '../../components/Editor';
 import requestCreateBranch from '../../api/requestCreateBranch';
 import requestCreateNote from '../../api/requestCreateNote';
 import requestDeleteBranch from '../../api/requestDeleteBranch';
-import requestNoteList from '../../api/requestNoteList';
 import requestNote from '../../api/requestNote';
 import checkHasWritingPermission from '../../utils/checkHasWritingPermission';
 import compareNoteChanges from '../../utils/compareNoteChanges';
 import { createEditor, Transforms } from 'slate';
 import { withReact } from 'slate-react';
+import { emitJoinRoom, emitLeaveRoom, emitTyping, listenForTyping } from '../../services/socket';
 import uuid from 'uuid-random';
 
 export default function EditorPage({
@@ -24,21 +24,17 @@ export default function EditorPage({
   onSave,
   currentNote,
   currentBranch,
-  onNoteLoad,
   onNoteChange,
   sharedUsers,
   onSharedUsersLoad,
   onClick,
   onHomeButtonClick,
   onDeleteBranch,
-  skip,
-  isPrivateMode,
-  onSetNoteList,
-  onUpdateNoteList,
+  onSharedUsersPermissionUpdate,
 }) {
   const editor = useMemo(() => withReact(createEditor()), []);
   const history = useHistory();
-  const [hasWritingPermission, setHasWritingPermission] = useState(undefined);
+  const [hasWritingPermission, setHasWritingPermission] = useState(null);
   const [value, setValue] = useState([
     {
       type: 'paragraph',
@@ -46,6 +42,32 @@ export default function EditorPage({
       idLookingForwards: uuid(),
     },
   ]);
+
+  useEffect(() => {
+    emitJoinRoom(currentBranch?._id);
+    listenForTyping(setValue);
+
+    return () => emitLeaveRoom(currentBranch?._id);
+  }, [currentBranch]);
+
+  const currentNoteUpdatedAt = useMemo(() => {
+    if (!currentNote) return;
+
+    const date = new Date(currentNote.updated_at);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+
+    return `${year}년 ${month}월${day}일 ${addzero(hour)}시${addzero(minute)}분`;
+
+    function addzero(num) {
+      if (num > 9) return num;
+
+      return `0${num.toString()}`;
+    }
+  }, []);
 
   useEffect(() => {
     if (!currentNote) return;
@@ -56,13 +78,14 @@ export default function EditorPage({
   async function onShowModificationsModeButtonClick() {
     if (!isShowModificationsMode) {
       onShowModificationsModeToggle();
+      emitJoinRoom(currentBranch._id);
 
       let comparedNoteValue
         = JSON.parse(localStorage.getItem('googit-compared-note-value')) || null;
 
       if (comparedNoteValue) {
         Transforms.select(editor, [0]);
-        initializeSelectAndSetValue(comparedNoteValue);
+        setValueAfterInitializingSelect(comparedNoteValue);
 
         return;
       }
@@ -72,37 +95,24 @@ export default function EditorPage({
 
       comparedNoteValue = compareNoteChanges(previousNote, currentNote);
 
-      initializeSelectAndSetValue(comparedNoteValue);
+      setValueAfterInitializingSelect(comparedNoteValue);
       localStorage.setItem('googit-compared-note-value', JSON.stringify(comparedNoteValue));
 
     } else {
       onShowModificationsModeToggle();
-      initializeSelectAndSetValue(currentNote.blocks);
+      setValueAfterInitializingSelect(currentNote.blocks);
+      emitLeaveRoom(currentBranch._id);
     }
   }
 
-  function initializeSelectAndSetValue(value) {
+  function setValueAfterInitializingSelect(value) {
     Transforms.select(editor, [0]);
     setValue(value);
   }
 
   async function homeButtonClickHandler() {
-    history.push('/');
-
     onHomeButtonClick();
-
-    if (!currentUser) return;
-
-    loadNoteList();
-
-    async function loadNoteList() {
-      const response = await requestNoteList(currentUser, isPrivateMode, skip);
-
-      if (!response) return;
-      return (!skip)
-        ? onSetNoteList(response)
-        : onUpdateNoteList(response);
-    }
+    history.push('/');
   }
 
   async function submitHandler() {
@@ -150,6 +160,23 @@ export default function EditorPage({
     history.push('/');
   }
 
+  function noteValueChangeHandler(newValue) {
+    if (newValue === value) return;
+
+    setValue(newValue);
+    onNoteModify(newValue, isModified);
+    emitTyping(currentBranch?._id, newValue);
+  };
+
+  useEffect(() => {
+    checkHasWritingPermission(
+      currentUser,
+      currentNote,
+      currentBranch,
+      setHasWritingPermission
+    );
+  }, [currentNote]);
+
   return (
     <>
       <EditorPageHeader
@@ -157,30 +184,23 @@ export default function EditorPage({
         currentNote={currentNote}
         currentBranch={currentBranch}
         isShowModificationsMode={isShowModificationsMode}
-        onShowModificationsModeToggle={onShowModificationsModeToggle}
         onShowModificationsModeButtonClick={onShowModificationsModeButtonClick}
         isModified={isModified}
         onHomeButtonClick={homeButtonClickHandler}
         onSubmit={submitHandler}
-        onNoteLoad={onNoteLoad}
         onNoteChange={onNoteChange}
         sharedUsers={sharedUsers}
         onSharedUsersLoad={onSharedUsersLoad}
         onClick={onClick}
         onDeleteButtonClick={deleteButtonClickHandler}
+        currentNoteUpdatedAt={currentNoteUpdatedAt}
+        onSharedUsersPermissionUpdate={onSharedUsersPermissionUpdate}
       />
       <Editor
         editor={editor}
         value={value}
-        setValue={setValue}
-        currentUser={currentUser}
-        currentNote={currentNote}
-        currentBranch={currentBranch}
-        onNoteModify={onNoteModify}
-        isModified={isModified}
-        isShowModificationsMode={isShowModificationsMode}
-        checkHasWritingPermission={checkHasWritingPermission.bind(null, currentUser, currentNote, currentBranch, setHasWritingPermission)}
         hasWritingPermission={hasWritingPermission}
+        onNoteValueChange={noteValueChangeHandler}
       />
     </>
   );

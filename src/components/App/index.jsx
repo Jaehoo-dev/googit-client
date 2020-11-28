@@ -3,10 +3,10 @@ import { useHistory, Switch, Route } from 'react-router-dom';
 import Entrance from '../../components/Entrance';
 import MainPage from '../../pages/MainPage';
 import Loading from '../../components/shared/Loading';
-import requestNoteList from '../../api/requestNoteList';
 import EditorPage from '../../containers/EditorContainer';
 import requestCurrentUser from '../../api/requestCurrentUser';
 import { throttle } from 'lodash';
+import requestNoteList from '../../api/requestNoteList';
 
 export default function App({
   hasToken,
@@ -27,6 +27,23 @@ export default function App({
   const [keyword, setKeyword] = useState('');
   const [skip, setSkip] = useState(0);
 
+  // useEffect(() => {
+  //   if (!currentUser) return;
+
+  //   loadNoteList();
+
+  //   async function loadNoteList() {
+  //     const response
+  //       = await requestNoteList(currentUser, isPrivateMode, skip, keyword);
+
+  //     if (!response) return;
+
+  //     return (skip)
+  //       ? onUpdateNoteList(response)
+  //       : onSetNoteList(response);
+  //   }
+  // }, [currentUser, isPrivateMode, skip, keyword, sharedUsers]);
+
   useEffect(() => {
     if (!hasToken) {
       history.push('/login');
@@ -46,30 +63,12 @@ export default function App({
   }, []);
 
   useEffect(() => {
-    if (!currentUser) return;
-
-    loadBranchList();
-
-    async function loadBranchList() {
-      console.log(skip, 'skup');
-      const response
-        = await requestNoteList(currentUser, isPrivateMode, skip, keyword);
-
-      if (!response) return;
-      console.log(response, 'res');
-      console.log(skip, 'skup2');
-      return (!skip)
-        ? onSetNoteList(response)
-        : onUpdateNoteList(response);
-    }
-  }, [currentUser, isPrivateMode, skip, keyword, sharedUsers]);
-
-  useEffect(() => {
     const throttledScrollHandler = throttle(scrollHandler, 2000);
+
     function scrollHandler() {
       const { offsetHeight, scrollTop, scrollHeight } = document.documentElement;
-
-      if (offsetHeight + scrollTop > scrollHeight * 1.05) {
+      console.log(offsetHeight + scrollTop, scrollHeight, '?');
+      if (offsetHeight + scrollTop > scrollHeight * .3) {
         setSkip(skip + 13);
       }
     }
@@ -120,6 +119,11 @@ export default function App({
               onNoteListEntryClick={onNoteListEntryClick}
               skipInitializer={skipInitializer}
               onPrivateNotesToggleClick={skipInitializer}
+              keyword={keyword}
+              skip={skip}
+              onUpdateNoteList={onUpdateNoteList}
+              onSetNoteList={onSetNoteList}
+              sharedUsers={sharedUsers}
             />
           </Route>
           <Route path='/notes'>

@@ -1,5 +1,5 @@
 
-export default async function requestCreateBranchSharingInfo(currentUser, currentNote, sharingInfo) {
+export default async function requestCreateSharingInfo(currentUser, currentNote, sharingInfo) {
   const userId = currentUser._id;
   const noteId = currentNote.parent;
 
@@ -23,8 +23,12 @@ export default async function requestCreateBranchSharingInfo(currentUser, curren
     return;
   }
 
-  alert('성공적으로 공유했습니다.');
+  if (response.result === 'ok') {
+    alert('공유했습니다');
 
-  return;
+    return;
+  }
+
+  alert('공유하다가 문제가 생겼어요');
 }
 

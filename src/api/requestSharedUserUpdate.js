@@ -1,7 +1,7 @@
 
 export default async function updatePermission(currentUser, currentNote, sharedUserEmail, newPermission) {
   let response = await fetch(
-    `${process.env.REACT_APP_SERVER_URL}/users/${currentUser._id}/branches/${currentNote.parent}/permission/update`, {
+    `${process.env.REACT_APP_SERVER_URL}/users/${currentUser._id}/branches/${currentNote.parent}/permission`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -11,9 +11,9 @@ export default async function updatePermission(currentUser, currentNote, sharedU
   });
 
   response = await response.json(response);
-
+  console.log(response, 'in update shraed user');
   if (response.result === 'ok') {
-    alert('권한이 성공적으로 수정되었습니다.');
+    alert('권한을 수정했습니다.');
   }
 
   return [response.data];

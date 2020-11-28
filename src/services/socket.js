@@ -2,25 +2,24 @@ import io from 'socket.io-client';
 
 export const socket = io.connect('http://localhost:4000');
 
-export function emitJoinRoom(noteId) {
-  if (!noteId) return;
+export function emitJoinRoom(branchId) {
+  if (!branchId) return;
 
-  socket.emit('join-room', noteId);
+  socket.emit('join-room', branchId);
 }
 
-export function emitLeaveRoom(noteId) {
-  if (!noteId) return;
+export function emitLeaveRoom(branchId) {
+  if (!branchId) return;
 
-  socket.emit('leave-room', noteId);
+  socket.emit('leave-room', branchId);
 }
 
-export function emitTyping(noteId, value) {
-  if (!noteId) return;
+export function emitTyping(branchId, value) {
+  if (!branchId) return;
 
-  socket.emit('sharing-note-typed', noteId, value);
+  socket.emit('sharing-note-typed', branchId, value);
 }
 
-export function listenForTyping(previousValue, setValue) {
-  socket.on('sharing-note-typed', value => setValue([...previousValue, ...value]));
-  // socket.on('sharing-note-typed', value => setValue(prev => [...prev, ...value]));
+export function listenForTyping(setValue) {
+  socket.on('sharing-note-typed', value => setValue(value));
 }

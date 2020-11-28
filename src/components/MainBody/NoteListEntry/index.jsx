@@ -8,7 +8,6 @@ export default function NoteListEntry({
   onNoteListEntryClick,
   creator,
 }) {
-
   const isShared = !!entryInfos.branch.sharing_infos.length;
   const title = entryInfos.latestNote.blocks[0].children[0].text;
   const updatedAt = entryInfos.branch.updated_at;

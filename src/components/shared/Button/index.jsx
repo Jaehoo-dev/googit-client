@@ -28,8 +28,10 @@ export const logoutButtonTheme = {
 export const permissionHandleButtonTheme = {
   width: '5em',
   height: '2em',
-  backgroundColor: 'yellowgreen',
-  border: '1px solid black',
+  backgroundColor: '#f08080',
+  border: 'none',
+  borderRadius: '1em',
+  margin: '0 3px',
 };
 
 export const homeButtonTheme = {
@@ -43,12 +45,12 @@ export const deleteButtonTheme = {
   color: 'red',
   backgroundColor: 'white',
   fontSize: '12px',
+  border: 'none',
 };
 
 export const coralButtonTheme = {
   backgroundColor: '#f08080',
   fontSize: '16px',
-  margin: '0 0 0 2em',
   border: 'none',
   borderRadius: '1em',
 };
@@ -57,11 +59,15 @@ export const shareButtonTheme = {
   backgroundColor: '#f08080',
   width: '5em',
   height: '2em',
+  border: 'none',
+  borderRadius: '1em',
 };
 
 export const saveButtonTheme = {
   fontSize: '18px',
   fontWeight: 700,
+  border: 'none',
+  borderRadius: '1em',
 };
 
 export const iconButtonTheme = {

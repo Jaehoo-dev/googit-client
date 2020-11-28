@@ -9,6 +9,7 @@ export default function MainBody({
   noteListEntryInfos,
   onNoteListEntryClick,
 }) {
+  console.log(noteListEntryInfos);
   return (
     <MainBodyWrapper>
       <NoteListHeader />

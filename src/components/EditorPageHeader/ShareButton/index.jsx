@@ -6,9 +6,16 @@ import { ModalContentWrapper, StyledForm } from '../styledComponents';
 import requestSharedUser from '../../../api/requestSharedUser';
 import requestSharedUserUpdate from '../../../api/requestSharedUserUpdate';
 import requestSharedUserDelete from '../../../api/requestSharedUserDelete';
-import requestCrateBranchSharingInfo from '../../../api/requestCreateBranchSharingInfo';
+import requestCreateSharingInfo from '../../../api/requestCreateSharingInfo';
 
-export default function SharingButton({ currentUser, currentNote, onSharedUsersLoad, sharedUsers, authorName }) {
+export default function SharingButton({
+  currentUser,
+  currentNote,
+  onSharedUsersLoad,
+  onSharedUsersPermissionUpdate,
+  sharedUsers,
+  authorName,
+}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [actionName, setActionName] = useState('');
@@ -41,7 +48,7 @@ export default function SharingButton({ currentUser, currentNote, onSharedUsersL
       permission: event.target.permission.value
     };
 
-    await requestCrateBranchSharingInfo(currentUser, currentNote, sharingInfo);
+    await requestCreateSharingInfo(currentUser, currentNote, sharingInfo);
 
     setEmail('');
     setIsSubmitted(!isSubmitted);
@@ -63,7 +70,8 @@ export default function SharingButton({ currentUser, currentNote, onSharedUsersL
 
     async function updatePermission(currentUser, currentNote, sharedUserEmail, newPermission) {
       const sharedUsers = await requestSharedUserUpdate(currentUser, currentNote, sharedUserEmail, newPermission);
-      if (sharedUsers) onSharedUsersLoad(sharedUsers);
+
+      if (sharedUsers.length) onSharedUsersPermissionUpdate(sharedUsers);
     }
 
     async function deletePermission(currentUser, currentNote, sharedUserEmail) {
@@ -87,8 +95,8 @@ export default function SharingButton({ currentUser, currentNote, onSharedUsersL
           <StyledForm onSubmit={submitHandler}>
             <input onChange={handleOnChange} value={email} name='email' type='text' />
             <select name='permission'>
-              <option value='read only'>read only</option>
-              <option value='write'>write</option>
+              <option value='read only'>읽기 전용</option>
+              <option value='write'>쓰기</option>
             </select>
             <Button theme={shareButtonTheme}>공유</Button>
           </StyledForm>
