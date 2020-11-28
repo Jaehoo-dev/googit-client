@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, Switch, Route } from 'react-router-dom';
-import Entrance from '../../components/Entrance';
-import MainPage from '../../pages/MainPage';
-import Loading from '../../components/shared/Loading';
-import EditorPage from '../../containers/EditorContainer';
-import requestCurrentUser from '../../api/requestCurrentUser';
+import Entrance from './Entrance';
+import MainPage from '../pages/MainPage';
+import Loading from './shared/Loading';
+import EditorPage from '../containers/EditorContainer';
+import requestCurrentUser from '../api/requestCurrentUser';
 import { throttle } from 'lodash';
-import requestNoteList from '../../api/requestNoteList';
 
 export default function App({
   hasToken,
@@ -26,23 +25,6 @@ export default function App({
   const history = useHistory();
   const [keyword, setKeyword] = useState('');
   const [skip, setSkip] = useState(0);
-
-  // useEffect(() => {
-  //   if (!currentUser) return;
-
-  //   loadNoteList();
-
-  //   async function loadNoteList() {
-  //     const response
-  //       = await requestNoteList(currentUser, isPrivateMode, skip, keyword);
-
-  //     if (!response) return;
-
-  //     return (skip)
-  //       ? onUpdateNoteList(response)
-  //       : onSetNoteList(response);
-  //   }
-  // }, [currentUser, isPrivateMode, skip, keyword, sharedUsers]);
 
   useEffect(() => {
     if (!hasToken) {
@@ -67,7 +49,7 @@ export default function App({
 
     function scrollHandler() {
       const { offsetHeight, scrollTop, scrollHeight } = document.documentElement;
-      console.log(offsetHeight + scrollTop, scrollHeight, '?');
+
       if (offsetHeight + scrollTop > scrollHeight * .3) {
         setSkip(skip + 13);
       }

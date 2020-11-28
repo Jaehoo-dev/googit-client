@@ -5,7 +5,7 @@ import {
   SharedUserListMain,
   SharedListHeader,
 } from '../styledComponents';
-import Button, { permissionHandleButtonTheme } from '../../shared/Button';
+import Button, { permissionHandleButtonTheme } from '../shared/Button';
 
 export default function SharedUserList({
   sharedUsers,

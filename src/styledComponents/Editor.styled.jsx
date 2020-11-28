@@ -11,16 +11,3 @@ export const Wrapper = styled.div`
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
   padding: 20px;
 `;
-
-export const TitleBlock = styled.div`
-  padding: 0 20px 0 20px;
-
-  h2 {
-    margin-block-end: 0;
-  }
-`;
-
-export const ContentBlock = styled.div`
-  padding: 0 20px 20px 20px;
-  margin-top: 15px;
-`;
