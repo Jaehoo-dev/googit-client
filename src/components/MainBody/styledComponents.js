@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const MainBodyWrapper = styled.div`
   margin-top: 6em;
+  display: grid;
+  grid-template-rows: 3.3em 2.5em 4em;
+  justify-content: center;
 `;
 
-export const BranchListHeadWrapper = styled.div`
+export const NoteListHeaderWrapper = styled.div`
   width: 80%;
   height: 2em;
   margin: 0 5em;
@@ -22,7 +25,7 @@ export const BranchListHeadWrapper = styled.div`
   }
 `;
 
-export const BranchListEntryWrapper = styled.div`
+export const NoteListEntryWrapper = styled.div`
   margin-top: 1em;
   height: 3em;
   display: grid;
@@ -34,7 +37,7 @@ export const BranchListEntryWrapper = styled.div`
   padding: 0 2em;
 `;
 
-export const BranchListBodyWrapper = styled.div`
+export const NoteListWrapper = styled.div`
   width: 80%;
   height: 100vh;
   margin: 0 5em;
@@ -43,8 +46,4 @@ export const BranchListBodyWrapper = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
-`;
-
-export const BranchContainer = styled.div`
-  padding-bottom: 1em;
 `;

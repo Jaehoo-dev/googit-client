@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setCurrentUser, setHasToken, initializeStore, setIsPrivateMode, setBranchList, setCurrentNoteAndBranch, updateBranchList } from '../actions';
+import { setCurrentUser, setHasToken, initializeStore, setIsPrivateMode, setNoteListEntryInfos, setCurrentNoteAndBranch, updateNoteListEntryInfos } from '../actions';
 
 import App from '../components/App';
 
@@ -18,11 +18,13 @@ function mapDispatchToProps(dispatch) {
     togglePrivateMode() {
       dispatch(setIsPrivateMode());
     },
-    onSetBranchList(branchList) {
-      dispatch(setBranchList(branchList));
+    onSetNoteList(noteListEntryInfos) {
+      console.log('set');
+      dispatch(setNoteListEntryInfos(noteListEntryInfos));
     },
-    onUpdateBranchList(branchList) {
-      dispatch(updateBranchList(branchList));
+    onUpdateNoteList(noteListEntryInfos) {
+      console.log('update');
+      dispatch(updateNoteListEntryInfos(noteListEntryInfos));
     },
     onNoteListEntryClick(note, branch) {
       dispatch(setCurrentNoteAndBranch(note, branch));
@@ -35,7 +37,7 @@ function mapStateToProps(state) {
     hasToken: state.hasToken,
     currentUser: state.currentUser,
     isPrivateMode: state.isPrivateMode,
-    branchList: state.branchList,
+    noteListEntryInfos: state.noteListEntryInfos,
     currentNote: state.currentNote,
     isModified: state.isModified,
     sharedUsers: state.sharedUsers

@@ -1,7 +1,7 @@
 export default async function requestBranchSharingInfo(userId, sharedUserInfoId) {
   try {
     const res = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}:4000/users/${userId}/branch_sharing_infos/${sharedUserInfoId}`,
+      `${process.env.REACT_APP_SERVER_URL}/users/${userId}/branch_sharing_infos/${sharedUserInfoId}`,
       {
         method: 'GET',
         headers: {

@@ -1,9 +1,9 @@
 import React from 'react';
-import { BranchListHeadWrapper } from '../styledComponents';
+import { NoteListHeaderWrapper } from '../styledComponents';
 
-export default function BranchListHead() {
+export default function NoteListHeader() {
   return (
-    <BranchListHeadWrapper>
+    <NoteListHeaderWrapper>
       <section>
         <div>#</div>
         <div>제목</div>
@@ -11,6 +11,6 @@ export default function BranchListHead() {
         <div>날짜</div>
         <div>공유</div>
       </section>
-    </BranchListHeadWrapper>
+    </NoteListHeaderWrapper>
   );
 }

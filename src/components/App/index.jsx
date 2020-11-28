@@ -3,7 +3,7 @@ import { useHistory, Switch, Route } from 'react-router-dom';
 import Entrance from '../../components/Entrance';
 import MainPage from '../../pages/MainPage';
 import Loading from '../../components/shared/Loading';
-import requestBranchList from '../../api/requestBranchList';
+import requestNoteList from '../../api/requestNoteList';
 import EditorPage from '../../containers/EditorContainer';
 import requestCurrentUser from '../../api/requestCurrentUser';
 import { throttle } from 'lodash';
@@ -16,9 +16,9 @@ export default function App({
   onCreateBranch,
   togglePrivateMode,
   isPrivateMode,
-  onSetBranchList,
-  onUpdateBranchList,
-  branchList,
+  onSetNoteList,
+  onUpdateNoteList,
+  noteListEntryInfos,
   currentNote,
   onNoteListEntryClick,
   sharedUsers,
@@ -51,13 +51,16 @@ export default function App({
     loadBranchList();
 
     async function loadBranchList() {
+      console.log(skip, 'skup');
       const response
-        = await requestBranchList(currentUser, isPrivateMode, skip, keyword);
+        = await requestNoteList(currentUser, isPrivateMode, skip, keyword);
 
       if (!response) return;
+      console.log(response, 'res');
+      console.log(skip, 'skup2');
       return (!skip)
-        ? onSetBranchList(response)
-        : onUpdateBranchList(response);
+        ? onSetNoteList(response)
+        : onUpdateNoteList(response);
     }
   }, [currentUser, isPrivateMode, skip, keyword, sharedUsers]);
 
@@ -76,7 +79,7 @@ export default function App({
     return (() => {
       window.removeEventListener('scroll', throttledScrollHandler);
     });
-  }, [branchList]);
+  }, [noteListEntryInfos]);
 
   function skipInitializer() {
     if (!skip) return;
@@ -112,8 +115,8 @@ export default function App({
               togglePrivateMode={togglePrivateMode}
               currentUser={currentUser}
               handleInput={handleInput}
-              branchList={branchList}
-              onLoad={onSetBranchList}
+              noteListEntryInfos={noteListEntryInfos}
+              onLoad={onSetNoteList}
               onNoteListEntryClick={onNoteListEntryClick}
               skipInitializer={skipInitializer}
               onPrivateNotesToggleClick={skipInitializer}

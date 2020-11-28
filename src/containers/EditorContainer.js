@@ -10,8 +10,8 @@ import {
   setSharedUsers,
   resetModificationStates,
   setCurrentUser,
-  setBranchList,
-  updateBranchList,
+  setNoteListEntryInfos,
+  updateNoteListEntryInfos,
 } from '../actions';
 
 function mapDispatchToProps(dispatch) {
@@ -51,11 +51,11 @@ function mapDispatchToProps(dispatch) {
       dispatch(resetModificationStates());
       localStorage.removeItem('googit-compared-note-value');
     },
-    onSetBranchList(branchList) {
-      dispatch(setBranchList(branchList));
+    onSetNoteList(noteListEntryInfos) {
+      dispatch(setNoteListEntryInfos(noteListEntryInfos));
     },
-    onUpdateBranchList(branchList) {
-      dispatch(updateBranchList(branchList));
+    onUpdateBranchList(noteListEntryInfos) {
+      dispatch(updateNoteListEntryInfos(noteListEntryInfos));
     },
     onSharedUsersPermissionUpdate(sharedUsers) {
       dispatch(setSharedUsers(sharedUsers));

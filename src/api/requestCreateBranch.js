@@ -1,6 +1,6 @@
 export default async function requestCreateBranch(currentUser) {
   const branchCreateRes = await fetch(
-    `${process.env.REACT_APP_SERVER_URL}:4000/users/${currentUser._id}/branches/new`,
+    `${process.env.REACT_APP_SERVER_URL}/users/${currentUser._id}/branches/new`,
     {
       method: 'POST',
       headers: {

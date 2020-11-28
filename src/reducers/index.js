@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import {
   SET_IS_PRIVATE_MODE,
-  SET_BRANCH_LIST,
-  UPDATE_BRANCH_LIST,
+  SET_NOTE_LIST_ENTRY_INFOS,
+  UPDATE_NOTE_LIST_ENTRY_INFOS,
   SET_SHARED_USERS,
 } from '../constants/actionTypes';
 
@@ -36,11 +36,11 @@ const isPrivateMode = (state = false, action) => {
   }
 };
 
-const branchList = (state = [], action) => {
+const noteListEntryInfos = (state = [], action) => {
   switch (action.type) {
-    case SET_BRANCH_LIST:
+    case SET_NOTE_LIST_ENTRY_INFOS:
       return action.payload;
-    case UPDATE_BRANCH_LIST:
+    case UPDATE_NOTE_LIST_ENTRY_INFOS:
       return [...state, ...action.payload];
     default:
       return state;
@@ -113,7 +113,7 @@ const appReducer = combineReducers({
   hasToken,
   currentUser,
   isPrivateMode,
-  branchList,
+  noteListEntryInfos,
   isShowModificationsMode,
   isModified,
   newBlocksCandidate,

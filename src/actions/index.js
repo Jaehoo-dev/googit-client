@@ -1,7 +1,7 @@
 import {
   SET_IS_PRIVATE_MODE,
-  SET_BRANCH_LIST,
-  UPDATE_BRANCH_LIST,
+  UPDATE_NOTE_LIST_ENTRY_INFOS,
+  SET_NOTE_LIST_ENTRY_INFOS,
   SET_SHARED_USERS,
 } from '../constants/actionTypes';
 
@@ -49,14 +49,14 @@ export const setCurrentNoteAndBranch = (note, branch) => ({
   branch,
 });
 
-export const updateBranchList = branchList => ({
-  type: UPDATE_BRANCH_LIST,
-  payload: branchList
+export const updateNoteListEntryInfos = noteListEntryInfos => ({
+  type: UPDATE_NOTE_LIST_ENTRY_INFOS,
+  payload: noteListEntryInfos
 });
 
-export const setBranchList = branchList => ({
-  type: SET_BRANCH_LIST,
-  payload: branchList
+export const setNoteListEntryInfos = noteListEntryInfos => ({
+  type: SET_NOTE_LIST_ENTRY_INFOS,
+  payload: noteListEntryInfos
 });
 
 export const setSharedUsers = sharedUsers => ({

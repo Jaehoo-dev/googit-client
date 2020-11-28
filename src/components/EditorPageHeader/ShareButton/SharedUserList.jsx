@@ -12,7 +12,7 @@ export default function SharedUserList({ sharedUsers, submitHandler, onClick }) 
       <SharedListHeader>공유받은 이용자 목록</SharedListHeader>
       <SharedUserListMain>
         {sharedUsers && sharedUsers.map((user, i) => (
-          <PermissionUpdateForm key={i} onSubmit={submitHandler}>
+          <PermissionUpdateForm key={user._id} onSubmit={submitHandler}>
             <input
               name='email'
               value={user.sharedUser.email}

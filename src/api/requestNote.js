@@ -1,6 +1,6 @@
 export default async function requestNote(userId, noteId) {
   const res = await fetch(
-    `${process.env.REACT_APP_SERVER_URL}:4000/users/${userId}/notes/${noteId}`,
+    `${process.env.REACT_APP_SERVER_URL}/users/${userId}/notes/${noteId}`,
     {
       method: 'GET',
       headers: {

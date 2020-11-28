@@ -1,6 +1,6 @@
 import React from 'react';
 import MainHeader from '../../components/MainHeader';
-import BranchList from '../../components/BranchList';
+import MainBody from '../../components/MainBody';
 
 export default function AppMain({
   onLogout,
@@ -8,7 +8,7 @@ export default function AppMain({
   togglePrivateMode,
   currentUser,
   handleInput,
-  branchList,
+  noteListEntryInfos,
   onNoteListEntryClick,
   onPrivateNotesToggleClick,
 }) {
@@ -23,10 +23,10 @@ export default function AppMain({
         handleInput={handleInput}
         currentUser={currentUser}
       />
-      <BranchList
+      <MainBody
         isPrivateMode={isPrivateMode}
         currentUser={currentUser}
-        branchList={branchList}
+        noteListEntryInfos={noteListEntryInfos}
         onNoteListEntryClick={onNoteListEntryClick}
       />
     </>

@@ -5,7 +5,7 @@ import Editor from '../../components/Editor';
 import requestCreateBranch from '../../api/requestCreateBranch';
 import requestCreateNote from '../../api/requestCreateNote';
 import requestDeleteBranch from '../../api/requestDeleteBranch';
-import requestBranchList from '../../api/requestBranchList';
+import requestNoteList from '../../api/requestNoteList';
 import requestNote from '../../api/requestNote';
 import checkHasWritingPermission from '../../utils/checkHasWritingPermission';
 import compareNoteChanges from '../../utils/compareNoteChanges';
@@ -33,8 +33,8 @@ export default function EditorPage({
   onDeleteBranch,
   skip,
   isPrivateMode,
-  onSetBranchList,
-  onUpdateBranchList,
+  onSetNoteList,
+  onUpdateNoteList,
 }) {
   const editor = useMemo(() => withReact(createEditor()), []);
   const history = useHistory();
@@ -93,15 +93,15 @@ export default function EditorPage({
 
     if (!currentUser) return;
 
-    loadBranchList();
+    loadNoteList();
 
-    async function loadBranchList() {
-      const response = await requestBranchList(currentUser, isPrivateMode, skip);
+    async function loadNoteList() {
+      const response = await requestNoteList(currentUser, isPrivateMode, skip);
 
       if (!response) return;
       return (!skip)
-        ? onSetBranchList(response)
-        : onUpdateBranchList(response);
+        ? onSetNoteList(response)
+        : onUpdateNoteList(response);
     }
   }
 

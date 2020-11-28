@@ -1,23 +1,30 @@
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
 import { StyledInputArea } from './styledComponents';
 
 export default function InputArea({
   onChange,
   value,
   placeholder,
-  name
+  name,
+  theme
 }) {
   function textChangeHandler(event) {
     onChange(event);
   }
 
   return (
-    <StyledInputArea
-      name={name}
-      placeholder={placeholder}
-      value={value}
-      onChange={textChangeHandler}
-    />
+    <ThemeProvider theme={theme}>
+      <StyledInputArea
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        onChange={textChangeHandler}
+      />
+    </ThemeProvider>
   );
-
 }
+
+export const searchBarTheme = {
+  border: 'none'
+};

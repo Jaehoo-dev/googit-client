@@ -18,6 +18,7 @@ export default function Editor({
   checkHasWritingPermission,
 }) {
   useEffect(() => {
+    console.log(currentNote, ' currentnote');
     emitJoinRoom(currentNote?._id);
     listenForTyping(setValue);
 
