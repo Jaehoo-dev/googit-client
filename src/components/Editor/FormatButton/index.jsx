@@ -12,6 +12,25 @@ import { cx, css } from '@emotion/css';
 export default function FormatButton({ format, icon }) {
   const editor = useSlate();
 
+  function iconSelector(icon) {
+    switch (icon) {
+      case 'bold':
+        return <FormatBoldIcon />;
+      case 'italic':
+        return <FormatItalicIcon />;
+      case 'underline':
+        return <FormatUnderlinedIcon />;
+      case 'strike':
+        return <FormatStrikethroughIcon />;
+      case 'mark':
+        return <HighlightIcon />;
+      case 'big':
+        return <FormatSizeIcon />;
+      default:
+        return;
+    }
+  }
+
   return (
     <Button
       reversed
@@ -21,14 +40,7 @@ export default function FormatButton({ format, icon }) {
         toggleFormat(editor, format);
       }}
     >
-      {
-        icon === 'bold' ? <FormatBoldIcon />
-          : icon === 'italic' ? <FormatItalicIcon />
-            : icon === 'underline' ? <FormatUnderlinedIcon />
-              : icon === 'strike' ? <FormatStrikethroughIcon />
-                : icon === 'mark' ? <HighlightIcon />
-                  : <FormatSizeIcon />
-      }
+      {iconSelector(icon)}
     </Button>
   );
 };

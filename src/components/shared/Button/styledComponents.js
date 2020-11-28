@@ -17,6 +17,7 @@ export const StyledButton = styled.button`
   top: ${props => props.theme.top};
   left: ${props => props.theme.left};
   transform: ${props => props.theme.transform};
+  /* padding: 7px; */
 
   &:hover {
     cursor: pointer;

@@ -1,43 +1,17 @@
-import React, { useEffect, useMemo, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Wrapper } from './styledComponents';
-import { createEditor, Transforms } from 'slate';
-import { Slate, Editable, withReact } from 'slate-react';
+import { Slate, Editable } from 'slate-react';
 import HoveringToolbar from './HoveringToolbar';
 import Leaf from './Leaf';
-import { emitJoinRoom, emitLeaveRoom, emitTyping, listenForTyping } from '../../services/socket';
 import uuid from 'uuid-random';
 
 export default function Editor({
   editor,
   value,
-  setValue,
-  onNoteModify,
-  isModified,
-  currentNote,
   hasWritingPermission,
-  checkHasWritingPermission,
+  onNoteValueChange,
 }) {
-  useEffect(() => {
-    console.log(currentNote, ' currentnote');
-    emitJoinRoom(currentNote?._id);
-    listenForTyping(setValue);
-
-    return () => emitLeaveRoom(currentNote?._id);
-  }, []);
-
-  useEffect(() => {
-    checkHasWritingPermission();
-  }, [currentNote]);
-
-  function noteValueChangeHandler(newValue) {
-    if (newValue === value) return;
-
-    setValue(newValue);
-    onNoteModify(newValue, isModified);
-    emitTyping(currentNote?._id, newValue);
-  }
-
-  function enterPressHandler() {
+  const enterPressHandler = useCallback(() => {
     const newBlock = {
       type: 'paragraph',
       children: [{ text: '' }],
@@ -45,7 +19,7 @@ export default function Editor({
     };
 
     editor.insertNode(newBlock);
-  }
+  }, []);
 
   const renderLeaf = useCallback(props => {
     return <Leaf {...props} />;
@@ -73,4 +47,8 @@ export default function Editor({
       </Slate>
     </Wrapper>
   );
+
+  function noteValueChangeHandler(value) {
+    onNoteValueChange(value);
+  }
 }

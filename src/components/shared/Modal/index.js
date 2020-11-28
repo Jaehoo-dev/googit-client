@@ -1,8 +1,7 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 import styled, { ThemeProvider } from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import CloseIcon from '@material-ui/icons/Close';
 
 const Overlay = styled.div`
   position: fixed;
@@ -58,7 +57,12 @@ export const sharingModalTheme = {
   left: '23%'
 };
 
-export default function Modal({ isOpen, children, toggleModal, theme }) {
+export default function Modal({
+  isOpen,
+  children,
+  toggleModal,
+  theme,
+}) {
   if (!isOpen) return null;
 
   return createPortal(
@@ -70,7 +74,8 @@ export default function Modal({ isOpen, children, toggleModal, theme }) {
         </ModalContainer>
       </ThemeProvider>
     </>,
-    document.getElementById('portal'));
+    document.getElementById('portal')
+  );
 }
 
 const CloseButton = styled.button`
@@ -82,7 +87,7 @@ const CloseButton = styled.button`
 export function ModalCloseButton({ onClick }) {
   return (
     <CloseButton onClick={onClick}>
-      <FontAwesomeIcon icon={faTimes} />
+      <CloseIcon />
     </CloseButton>
   );
 }

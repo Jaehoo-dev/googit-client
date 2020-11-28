@@ -16,7 +16,7 @@ export default async function checkHasWritingPermission(
     return setHasWritingPermission(true);
   }
 
-  const sharedUserInfoIds = currentBranch.shared_users_info;
+  const sharedUserInfoIds = currentBranch.sharing_infos;
 
   for (let i = 0; i < sharedUserInfoIds.length; i++) {
     const branchSharingInfo

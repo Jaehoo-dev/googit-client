@@ -1,48 +1,61 @@
 import React from 'react';
-import { SharedUserListWrapper, PermissionUpdateForm, SharedUserListMain, SharedListHeader } from '../styledComponents';
+import {
+  SharedUserListWrapper,
+  PermissionUpdateForm,
+  SharedUserListMain,
+  SharedListHeader,
+} from '../styledComponents';
 import Button, { permissionHandleButtonTheme } from '../../shared/Button';
 
-export default function SharedUserList({ sharedUsers, submitHandler, onClick }) {
+export default function SharedUserList({
+  sharedUsers,
+  submitHandler,
+  onClick,
+}) {
   function clickHandler(event) {
     onClick(event.target.value);
   }
+  console.log(sharedUsers);
 
   return (
     <SharedUserListWrapper>
       <SharedListHeader>공유받은 이용자 목록</SharedListHeader>
       <SharedUserListMain>
-        {sharedUsers && sharedUsers.map((user, i) => (
-          <PermissionUpdateForm key={user._id} onSubmit={submitHandler}>
-            <input
-              name='email'
-              value={user.sharedUser.email}
-              style={{ backgroundColor: 'transparent', border: 'none', color: 'black', fontSize: '1em' }}
-              disabled
-            />
-            <select name='permission'>
-              <option>{user.permission}</option>
-              <option>{user.permission === 'write' ? 'read only' : 'write'}</option>
-            </select>
-            <div>
-              <Button
-                theme={permissionHandleButtonTheme}
-                onClick={clickHandler}
-                name='update'
-                value='update'
-              >
-                수정
+        {
+          sharedUsers
+          && sharedUsers.map(user => (
+            <PermissionUpdateForm key={user._id} onSubmit={submitHandler}>
+              <input
+                name='email'
+                value={user.sharedUser.email}
+                style={{ backgroundColor: 'transparent', border: 'none', color: 'black', fontSize: '1em' }}
+                disabled
+              />
+              <select name='permission'>
+                <option>{user.permission}</option>
+                <option>{user.permission === 'write' ? 'read only' : 'write'}</option>
+              </select>
+              <div>
+                <Button
+                  theme={permissionHandleButtonTheme}
+                  onClick={clickHandler}
+                  name='update'
+                  value='update'
+                >
+                  수정
                 </Button>
-              <Button
-                theme={permissionHandleButtonTheme}
-                onClick={clickHandler}
-                name='delete'
-                value='delete'
-              >
-                삭제
+                <Button
+                  theme={permissionHandleButtonTheme}
+                  onClick={clickHandler}
+                  name='delete'
+                  value='delete'
+                >
+                  삭제
               </Button>
-            </div>
-          </PermissionUpdateForm>
-        ))}
+              </div>
+            </PermissionUpdateForm>
+          ))
+        }
       </SharedUserListMain>
     </SharedUserListWrapper>
   );

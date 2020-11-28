@@ -1,7 +1,6 @@
 import React from 'react';
 import Button, { logoutButtonTheme } from '../../shared/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 export default function LogoutIcon({ onClick }) {
   function clickHandler() {
@@ -12,7 +11,7 @@ export default function LogoutIcon({ onClick }) {
 
   return (
     <Button theme={logoutButtonTheme} onClick={clickHandler}>
-      <FontAwesomeIcon icon={faSignOutAlt} />
+      <ExitToAppIcon />
     </Button>
   );
 }

@@ -27,7 +27,7 @@ import HomeButton from '../HomeButton';
 export default function EditorPageHeader({
   currentUser,
   isShowModificationsMode,
-  onShowModificationsModeToggle,
+  currentNoteUpdatedAt,
   onShowModificationsModeButtonClick,
   isModified,
   currentNote,
@@ -39,12 +39,9 @@ export default function EditorPageHeader({
   onSharedUsersLoad,
   onClick,
   onDeleteButtonClick,
+  onSharedUsersPermissionUpdate,
 }) {
   const [authorName, setAuthorName] = useState(null);
-
-  function deleteButtonClickHandler() {
-    onDeleteButtonClick();
-  }
 
   useEffect(() => {
     if (!currentNote) return;
@@ -61,15 +58,6 @@ export default function EditorPageHeader({
     }
   }, [currentNote]);
 
-  function homeButtonClickHandler() {
-    onHomeButtonClick();
-  }
-
-  function submitHandler() {
-    onSubmit();
-    onClick();
-  }
-
   async function displayLinkedNote(version) {
     const note
       = version === 'previous'
@@ -84,10 +72,6 @@ export default function EditorPageHeader({
     if (!branch) return;
 
     onNoteChange(note, branch);
-  }
-
-  async function showModificationmodeToggleClickHandler() {
-    onShowModificationsModeButtonClick();
   }
 
   return (
@@ -134,14 +118,16 @@ export default function EditorPageHeader({
       <ModifyRecordWrapper>
         {
           isShowModificationsMode
-            ? `${authorName}(이)가 ${currentNote.updated_at}에 수정함`
+            ? `${authorName}님이 ${currentNoteUpdatedAt}에 수정함`
             : null
         }
       </ModifyRecordWrapper>
       <RightWrapper>
         <DeleteButtonWrapper>
           {
-            currentNote && (currentUser._id === currentNote.created_by) && (currentNote._id === currentBranch.latest_note)
+            currentNote
+            && (currentUser._id === currentNote.created_by)
+            && (currentNote._id === currentBranch.latest_note)
             && <Button
               theme={deleteButtonTheme}
               onClick={deleteButtonClickHandler}
@@ -158,6 +144,7 @@ export default function EditorPageHeader({
               currentNote={currentNote}
               sharedUsers={sharedUsers}
               onSharedUsersLoad={onSharedUsersLoad}
+              onSharedUsersPermissionUpdate={onSharedUsersPermissionUpdate}
               authorName={authorName}
             >
               공유
@@ -174,5 +161,22 @@ export default function EditorPageHeader({
       </RightWrapper>
     </Header>
   );
+
+  function homeButtonClickHandler() {
+    onHomeButtonClick();
+  }
+
+  function showModificationmodeToggleClickHandler() {
+    onShowModificationsModeButtonClick();
+  }
+
+  function deleteButtonClickHandler() {
+    onDeleteButtonClick();
+  }
+
+  function submitHandler() {
+    onSubmit();
+    onClick();
+  }
 }
 
