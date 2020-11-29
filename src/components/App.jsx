@@ -7,6 +7,7 @@ import EditorPage from '../containers/EditorContainer';
 import requestCurrentUser from '../api/requestCurrentUser';
 import { throttle } from 'lodash';
 import { ROOT, LOGIN, NOTES } from '../constants/paths';
+import { SKIP } from '../constants/stringsAndNumbers';
 
 export default function App({
   hasToken,
@@ -53,7 +54,7 @@ export default function App({
       const { offsetHeight, scrollTop, scrollHeight } = document.documentElement;
 
       if (offsetHeight + scrollTop > scrollHeight * .3) {
-        setSkip(skip + 13);
+        setSkip(skip + SKIP);
       }
     }
 
