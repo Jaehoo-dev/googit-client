@@ -25,14 +25,16 @@ export default function NoteListEntry({
         textDecoration: 'none',
         color: 'black',
       }}>
+
       <NoteListEntryWrapper
+        data-testid='NoteListEntryWrapper'
         onClick={NoteListEntryClickHandler.bind(null, entryInfos.latestNote, entryInfos.branch)}
       >
-        <div>{count + 1}</div>
-        <div>{title}</div>
-        <div>{creator}</div>
-        <div>{`${date} ${time}`}</div>
-        <div>{isShared ? 'O' : 'X'}</div>
+        <div data-testid='count'>{count + 1}</div>
+        <div data-testid='title'>{title}</div>
+        <div data-testid='creator'>{creator}</div>
+        <div data-testid='updatedAt'>{`${date} ${time}`}</div>
+        <div data-testid='isShared'>{isShared ? 'O' : 'X'}</div>
       </NoteListEntryWrapper>
     </Link>
   );
