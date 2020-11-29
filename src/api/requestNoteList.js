@@ -6,7 +6,7 @@ export default async function requestNoteList(currentUser, isPrivateMode, skip, 
     const fetchUrl = isPrivateMode
       ? `${process.env.REACT_APP_SERVER_URL}/users/${currentUser._id}/branches/private/?limit=13&skip=${skip}&q=${keyword}`
       : `${process.env.REACT_APP_SERVER_URL}/users/${currentUser._id}/branches/?limit=13&skip=${skip}&q=${keyword}`;
-    `${keyword ? `${}`}`;
+
     let response = await fetch(fetchUrl, {
       method: GET,
       headers: {

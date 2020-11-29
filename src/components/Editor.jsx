@@ -25,6 +25,10 @@ export default function Editor({
     return <Leaf {...props} />;
   }, []);
 
+  function noteValueChangeHandler(value) {
+    onNoteValueChange(value);
+  }
+
   return (
     <Wrapper>
       <Slate
@@ -47,8 +51,4 @@ export default function Editor({
       </Slate>
     </Wrapper>
   );
-
-  function noteValueChangeHandler(value) {
-    onNoteValueChange(value);
-  }
 }

@@ -6,6 +6,7 @@ import Loading from './Loading';
 import EditorPage from '../containers/EditorContainer';
 import requestCurrentUser from '../api/requestCurrentUser';
 import { throttle } from 'lodash';
+import { ROOT, LOGIN, NOTES } from '../constants/paths';
 
 export default function App({
   hasToken,
@@ -29,7 +30,7 @@ export default function App({
 
   useEffect(() => {
     if (!hasToken) {
-      history.push('/login');
+      history.push(LOGIN);
 
       return;
     }
@@ -90,7 +91,7 @@ export default function App({
       {
         hasToken && currentUser
         && <Switch>
-          <Route exact path='/'>
+          <Route exact path={ROOT}>
             <MainPage
               onLogout={onLogout}
               isPrivateMode={isPrivateMode}
@@ -109,7 +110,7 @@ export default function App({
               sharedUsers={sharedUsers}
             />
           </Route>
-          <Route path='/notes'>
+          <Route path={NOTES}>
             <EditorPage
               currentNote={currentNote}
               onCreateBranch={onCreateBranch}

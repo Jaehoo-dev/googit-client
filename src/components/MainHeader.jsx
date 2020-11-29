@@ -4,8 +4,10 @@ import { useHistory } from 'react-router-dom';
 import { auth } from '../config/firebase';
 import PrivateNotesToggleButton from './PrivateNotesToggleButton';
 import SearchBar from './SearchBar';
-import LogoutIcon from './LogoutButton';
+import LogoutButton from './LogoutButton';
 import HomeButton from './HomeButton';
+import { LOGIN } from '../constants/paths';
+import { GOOGIT_LOGIN_TOKEN } from '../constants/auth';
 
 export default function MainHeader({
   onLogout,
@@ -19,9 +21,9 @@ export default function MainHeader({
 
   async function logoutClickHandler() {
     await auth.signOut();
-    localStorage.removeItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN);
+    localStorage.removeItem(GOOGIT_LOGIN_TOKEN);
     onLogout();
-    history.push('/login');
+    history.push(LOGIN);
   }
 
   function privateNotesToggleHandler() {
@@ -50,7 +52,7 @@ export default function MainHeader({
           currentUser={currentUser}
           onSubmit={searchHandler}
         />
-        <LogoutIcon onClick={logoutClickHandler} />
+        <LogoutButton onClick={logoutClickHandler} />
       </section>
     </MainHeaderWrapper>
   );

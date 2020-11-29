@@ -1,25 +1,26 @@
 import io from 'socket.io-client';
+import { JOIN_ROOM, LEAVE_ROOM, SHARING_NOTE_TYPED } from '../constants/socketEvents';
 
-export const socket = io.connect('http://localhost:4000');
+export const socket = io.connect(process.env.REACT_APP_SERVER_URL);
 
 export function emitJoinRoom(branchId) {
   if (!branchId) return;
 
-  socket.emit('join-room', branchId);
+  socket.emit(JOIN_ROOM, branchId);
 }
 
 export function emitLeaveRoom(branchId) {
   if (!branchId) return;
 
-  socket.emit('leave-room', branchId);
+  socket.emit(LEAVE_ROOM, branchId);
 }
 
 export function emitTyping(branchId, value) {
   if (!branchId) return;
 
-  socket.emit('sharing-note-typed', branchId, value);
+  socket.emit(SHARING_NOTE_TYPED, branchId, value);
 }
 
 export function listenForTyping(setValue) {
-  socket.on('sharing-note-typed', value => setValue(value));
+  socket.on(SHARING_NOTE_TYPED, value => setValue(value));
 }

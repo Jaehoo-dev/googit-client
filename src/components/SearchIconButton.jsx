@@ -1,5 +1,6 @@
 import React from 'react';
-import Button, { iconButtonTheme } from './Button';
+import Button from './Button';
+import { iconButtonTheme } from '../styledComponents/Button.styled';
 import SearchIcon from '@material-ui/icons/Search';
 
 export default function SearchIconButton() {

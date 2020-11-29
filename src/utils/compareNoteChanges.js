@@ -62,29 +62,18 @@ export default function compareNoteChanges(previousNote, currentNote) {
     }
   });
 
-  erasedBlocks.forEach(block => {
-    block.children.forEach(child => {
-      child.before = true;
-    });
-  });
+  markBlocks(erasedBlocks, 'before');
+  markBlocks(modifiedBlocksBefore, 'before');
+  markBlocks(modifiedBlocksAfter, 'after');
+  markBlocks(newBlocks, 'after');
 
-  modifiedBlocksBefore.forEach(block => {
-    block.children.forEach(child => {
-      child.before = true;
+  function markBlocks(blocks, attribute) {
+    blocks.forEach(block => {
+      block.children.forEach(child => {
+        child[attribute] = true;
+      });
     });
-  });
-
-  modifiedBlocksAfter.forEach(block => {
-    block.children.forEach(child => {
-      child.after = true;
-    });
-  });
-
-  newBlocks.forEach(block => {
-    block.children.forEach(child => {
-      child.after = true;
-    });
-  });
+  }
 
   const blocksArrays = [
     erasedBlocks,

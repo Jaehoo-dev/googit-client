@@ -3,19 +3,29 @@ import {
   UPDATE_NOTE_LIST_ENTRY_INFOS,
   SET_NOTE_LIST_ENTRY_INFOS,
   SET_SHARED_USERS,
+  SET_CURRENT_USER,
+  SET_HAS_TOKEN,
+  INITIALIZE_STORE,
+  TOGGLE_SHOW_MODIFICATIONS_MODE,
+  SET_IS_MODIFIED_TO_TRUE,
+  SET_IS_MODIFIED_TO_FALSE,
+  SET_NEW_BLOCKS_CANDIDATE,
+  REMOVE_NEW_BLOCKS_CANDIDATE,
+  SET_CURRENT_NOTE_AND_BRANCH,
+  RESET_MODIFICATION_STATES,
 } from '../constants/actionTypes';
 
 export const setCurrentUser = user => ({
-  type: 'setCurrentUser',
+  type: SET_CURRENT_USER,
   user,
 });
 
 export const setHasToken = () => ({
-  type: 'setHasToken',
+  type: SET_HAS_TOKEN,
 });
 
 export const initializeStore = () => ({
-  type: 'initializeStore',
+  type: INITIALIZE_STORE,
 });
 
 export const setIsPrivateMode = () => ({
@@ -23,28 +33,28 @@ export const setIsPrivateMode = () => ({
 });
 
 export const toggleShowModificationsMode = () => ({
-  type: 'toggleShowModificationsMode',
+  type: TOGGLE_SHOW_MODIFICATIONS_MODE,
 });
 
 export const setIsModifiedToTrue = () => ({
-  type: 'setIsModifiedToTrue',
+  type: SET_IS_MODIFIED_TO_TRUE,
 });
 
 export const setIsModifiedToFalse = () => ({
-  type: 'setIsModifiedToFalse',
+  type: SET_IS_MODIFIED_TO_FALSE,
 });
 
 export const setNewBlocksCandidate = newNote => ({
-  type: 'setNewBlocksCandidate',
+  type: SET_NEW_BLOCKS_CANDIDATE,
   newNote,
 });
 
 export const removeNewBlocksCandidate = () => ({
-  type: 'removeNewBlocksCandidate',
+  type: REMOVE_NEW_BLOCKS_CANDIDATE,
 });
 
 export const setCurrentNoteAndBranch = (note, branch) => ({
-  type: 'setCurrentNoteAndBranch',
+  type: SET_CURRENT_NOTE_AND_BRANCH,
   note,
   branch,
 });
@@ -65,5 +75,5 @@ export const setSharedUsers = sharedUsers => ({
 });
 
 export const resetModificationStates = () => ({
-  type: 'resetModificationStates',
+  type: RESET_MODIFICATION_STATES,
 });

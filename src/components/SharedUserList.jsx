@@ -5,7 +5,8 @@ import {
   SharedUserListMain,
   SharedListHeader,
 } from '../styledComponents/EditorPageHeader.styled';
-import Button, { permissionHandleButtonTheme } from './Button';
+import Button from './Button';
+import { permissionHandleButtonTheme } from '../styledComponents/Button.styled';
 
 export default function SharedUserList({
   sharedUsers,
@@ -27,7 +28,6 @@ export default function SharedUserList({
               <input
                 name='email'
                 value={user.sharedUser.email}
-                style={{ backgroundColor: 'transparent', border: 'none', color: 'black', fontSize: '1em' }}
                 disabled
               />
               <select name='permission'>

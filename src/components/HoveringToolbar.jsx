@@ -5,15 +5,16 @@ import { Editor } from 'slate';
 import { cx, css } from '@emotion/css';
 import { Range } from 'slate';
 import FormatButton from './FormatButton';
+import { BOLD, ITALIC, UNDERLINE, STRIKE, MARK, BIG } from '../constants/formats';
 
 export default function HoveringToolbar() {
   const formats = [
-    'bold',
-    'italic',
-    'underline',
-    'strike',
-    'mark',
-    'big'
+    BOLD,
+    ITALIC,
+    UNDERLINE,
+    STRIKE,
+    MARK,
+    BIG
   ];
   const menuRef = useRef();
   const editor = useSlate();

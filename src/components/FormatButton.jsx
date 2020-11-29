@@ -8,23 +8,24 @@ import FormatStrikethroughIcon from '@material-ui/icons/FormatStrikethrough';
 import FormatSizeIcon from '@material-ui/icons/FormatSize';
 import HighlightIcon from '@material-ui/icons/Highlight';
 import { cx, css } from '@emotion/css';
+import { BOLD, ITALIC, UNDERLINE, STRIKE, MARK, BIG } from '../constants/formats';
 
 export default function FormatButton({ format, icon }) {
   const editor = useSlate();
 
   function iconSelector(icon) {
     switch (icon) {
-      case 'bold':
+      case BOLD:
         return <FormatBoldIcon />;
-      case 'italic':
+      case ITALIC:
         return <FormatItalicIcon />;
-      case 'underline':
+      case UNDERLINE:
         return <FormatUnderlinedIcon />;
-      case 'strike':
+      case STRIKE:
         return <FormatStrikethroughIcon />;
-      case 'mark':
+      case MARK:
         return <HighlightIcon />;
-      case 'big':
+      case BIG:
         return <FormatSizeIcon />;
       default:
         return;
