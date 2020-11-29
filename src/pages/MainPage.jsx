@@ -20,7 +20,7 @@ export default function MainPage({
 }) {
   useEffect(() => {
     if (!currentUser) return;
-    console.log('mounted');
+
     loadNoteList();
 
     async function loadNoteList() {
@@ -33,8 +33,6 @@ export default function MainPage({
         ? onUpdateNoteList(response)
         : onSetNoteList(response);
     }
-
-    return (() => console.log('unmounted'));
   }, [currentUser, isPrivateMode, skip, keyword, sharedUsers]);
 
   return (

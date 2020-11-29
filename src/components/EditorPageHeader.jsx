@@ -13,15 +13,16 @@ import {
   ShareButtonWrapper,
   SaveButtonWrapper,
 } from '../styledComponents/EditorPageHeader.styled';
-import Button, {
+import Button from './Button';
+import {
   deleteButtonTheme,
   coralButtonTheme,
   saveButtonTheme,
-} from './Button';
+} from '../styledComponents/Button.styled';
 import requestNoteAuthor from '../api/requestNoteAuthor';
 import requestNote from '../api/requestNote';
 import requestBranch from '../api/requestBranch';
-import SharingButton from './ShareButton';
+import ShareButton from './ShareButton';
 import HomeButton from './HomeButton';
 
 export default function EditorPageHeader({
@@ -71,6 +72,22 @@ export default function EditorPageHeader({
     if (!branch) return;
 
     onNoteChange(note, branch);
+  }
+
+  function homeButtonClickHandler() {
+    onHomeButtonClick();
+  }
+
+  function showModificationmodeToggleClickHandler() {
+    onShowModificationsModeButtonClick();
+  }
+
+  function deleteButtonClickHandler() {
+    onDeleteButtonClick();
+  }
+
+  function submitHandler() {
+    onSubmit();
   }
 
   return (
@@ -138,7 +155,7 @@ export default function EditorPageHeader({
         <ShareButtonWrapper>
           {
             currentNote
-            && <SharingButton
+            && <ShareButton
               currentUser={currentUser}
               currentNote={currentNote}
               sharedUsers={sharedUsers}
@@ -147,7 +164,7 @@ export default function EditorPageHeader({
               authorName={authorName}
             >
               공유
-            </SharingButton>
+            </ShareButton>
           }
         </ShareButtonWrapper>
         <SaveButtonWrapper>
@@ -164,21 +181,5 @@ export default function EditorPageHeader({
       </RightWrapper>
     </Header>
   );
-
-  function homeButtonClickHandler() {
-    onHomeButtonClick();
-  }
-
-  function showModificationmodeToggleClickHandler() {
-    onShowModificationsModeButtonClick();
-  }
-
-  function deleteButtonClickHandler() {
-    onDeleteButtonClick();
-  }
-
-  function submitHandler() {
-    onSubmit();
-  }
 }
 

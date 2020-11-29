@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { MainBodyWrapper } from '../styledComponents/MainBody.styled';
 import NoteListHeader from './NoteListHeader';
 import NoteList from './NoteList';
-import Button, { createNewBranchTheme } from './Button';
+import Button from './Button';
+import { createNewBranchTheme } from '../styledComponents/Button.styled';
 
 export default function MainBody({
   noteListEntryInfos,

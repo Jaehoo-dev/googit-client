@@ -1,4 +1,5 @@
 import React from 'react';
+import { LIGHT_RED, LIGHT_GREEN } from '../constants/colors';
 
 export default function Leaf({
   attributes,
@@ -30,11 +31,11 @@ export default function Leaf({
   }
 
   if (leaf.before) {
-    children = <span style={{ background: '#ffa6b0' }}>{children}</span>;
+    children = <span style={{ background: LIGHT_RED }}>{children}</span>;
   }
 
   if (leaf.after) {
-    children = <span style={{ background: '#a4fcb9' }}>{children}</span>;
+    children = <span style={{ background: LIGHT_GREEN }}>{children}</span>;
   }
 
   return <span {...attributes}>{children}</span>;

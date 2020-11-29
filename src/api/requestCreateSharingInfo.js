@@ -1,4 +1,6 @@
 import { GOOGIT_LOGIN_TOKEN } from '../constants/auth';
+import { POST } from '../constants/httpMethods';
+import { OK, VALIDATION_ERR } from '../constants/responseResults';
 
 export default async function requestCreateSharingInfo(currentUser, currentNote, sharingInfo) {
   const userId = currentUser._id;
@@ -7,7 +9,7 @@ export default async function requestCreateSharingInfo(currentUser, currentNote,
   let response = await fetch(
     `${process.env.REACT_APP_SERVER_URL}/users/${userId}/branches/${noteId}/share/new`,
     {
-      method: 'POST',
+      method: POST,
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem(GOOGIT_LOGIN_TOKEN)}`,
@@ -18,13 +20,13 @@ export default async function requestCreateSharingInfo(currentUser, currentNote,
 
   response = await response.json();
 
-  if (response.result === 'validation err') {
+  if (response.result === VALIDATION_ERR) {
     alert(`${response.message}`);
 
     return;
   }
 
-  if (response.result === 'ok') {
+  if (response.result === OK) {
     alert('공유했습니다');
 
     return;
