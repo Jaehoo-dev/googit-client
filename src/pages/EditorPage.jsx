@@ -11,6 +11,7 @@ import compareNoteChanges from '../utils/compareNoteChanges';
 import { createEditor, Transforms } from 'slate';
 import { withReact } from 'slate-react';
 import { emitJoinRoom, emitLeaveRoom, emitTyping, listenForTyping } from '../services/socket';
+import dateFormatter from '../utils/dateFormatter';
 import uuid from 'uuid-random';
 
 export default function EditorPage({
@@ -52,20 +53,7 @@ export default function EditorPage({
   const currentNoteUpdatedAt = useMemo(() => {
     if (!currentNote) return;
 
-    const date = new Date(currentNote.updated_at);
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const hour = date.getHours();
-    const minute = date.getMinutes();
-
-    return `${year}년 ${month}월${day}일 ${addzero(hour)}시${addzero(minute)}분`;
-
-    function addzero(num) {
-      if (num > 9) return num;
-
-      return `0${num.toString()}`;
-    }
+    return dateFormatter(currentNote.updated_at);
   }, []);
 
   useEffect(() => {

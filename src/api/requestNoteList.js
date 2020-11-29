@@ -1,11 +1,12 @@
 import { GET } from '../constants/httpMethods';
 import { GOOGIT_LOGIN_TOKEN } from '../constants/auth';
+import { SKIP } from '../constants/stringsAndNumbers';
 
 export default async function requestNoteList(currentUser, isPrivateMode, skip, keyword = '') {
   try {
     const fetchUrl = isPrivateMode
-      ? `${process.env.REACT_APP_SERVER_URL}/users/${currentUser._id}/branches/private/?limit=13&skip=${skip}&q=${keyword}`
-      : `${process.env.REACT_APP_SERVER_URL}/users/${currentUser._id}/branches/?limit=13&skip=${skip}&q=${keyword}`;
+      ? `${process.env.REACT_APP_SERVER_URL}/users/${currentUser._id}/branches/private/?limit=${SKIP}&skip=${skip}&q=${keyword}`
+      : `${process.env.REACT_APP_SERVER_URL}/users/${currentUser._id}/branches/?limit=${SKIP}&skip=${skip}&q=${keyword}`;
 
     let response = await fetch(fetchUrl, {
       method: GET,
