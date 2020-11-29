@@ -1,3 +1,4 @@
+import { GOOGIT_LOGIN_TOKEN } from '../constants/auth';
 
 export default async function updatePermission(currentUser, currentNote, sharedUserEmail, newPermission) {
   let response = await fetch(
@@ -5,7 +6,7 @@ export default async function updatePermission(currentUser, currentNote, sharedU
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN)}`,
+      Authorization: `Bearer ${localStorage.getItem(GOOGIT_LOGIN_TOKEN)}`,
     },
     body: JSON.stringify({ newPermission, sharedUserEmail })
   });

@@ -14,7 +14,7 @@ export default function MainBody({
       <NoteListHeader />
       <Link to='/notes/new'>
         <Button theme={createNewBranchTheme}>
-          새로운 노트 만들기 +
+          새로운 쪽지 만들기 +
         </Button>
       </Link>
       <NoteList

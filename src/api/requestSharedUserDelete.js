@@ -1,10 +1,12 @@
+import { GOOGIT_LOGIN_TOKEN } from '../constants/auth';
+
 export default async function deletePermission(currentUser, currentNote, sharedUserEmail) {
   const response = await fetch(
     `${process.env.REACT_APP_SERVER_URL}/users/${currentUser._id}/branches/${currentNote.parent}/permission`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN)}`,
+      Authorization: `Bearer ${localStorage.getItem(GOOGIT_LOGIN_TOKEN)}`,
     },
     body: JSON.stringify({ sharedUserEmail })
   });

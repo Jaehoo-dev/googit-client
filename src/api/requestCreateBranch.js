@@ -1,16 +1,18 @@
+import { GOOGIT_LOGIN_TOKEN } from '../constants/auth';
+
 export default async function requestCreateBranch(currentUser) {
-  const branchCreateRes = await fetch(
+  let branchCreateResponse = await fetch(
     `${process.env.REACT_APP_SERVER_URL}/users/${currentUser._id}/branches/new`,
     {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem(process.env.REACT_APP_GOOGIT_LOGIN_TOKEN)}`,
+        Authorization: `Bearer ${localStorage.getItem(GOOGIT_LOGIN_TOKEN)}`,
       },
     }
   );
 
-  const branchCreateResponse = await branchCreateRes.json();
+  branchCreateResponse = await branchCreateResponse.json();
 
   if (branchCreateResponse.result === 'failure') {
     alert('브랜치를 만들다가 문제가 생겼어요');
