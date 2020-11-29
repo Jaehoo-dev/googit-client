@@ -7,11 +7,13 @@ import { createLogger } from 'redux-logger';
 import AppContainer from './containers/AppContainer';
 import reducer from './reducers';
 
-const middleware = [];
+const middlewares = [];
 
-middleware.push(createLogger());
+if (process.env.NODE_ENV === 'development') {
+  middlewares.push(createLogger());
+}
 
-const store = createStore(reducer, applyMiddleware(...middleware));
+const store = createStore(reducer, applyMiddleware(...middlewares));
 
 ReactDOM.render(
   <Provider store={store}>
