@@ -8,6 +8,7 @@ export const MainHeaderWrapper = styled.header`
   left: 0;
   height: 75px;
   box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.2);
+  background-color: white;
 
   section {
     text-align: center;
