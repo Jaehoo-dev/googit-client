@@ -5,7 +5,7 @@ import { FAILURE } from '../constants/responseResults';
 export default async function requestBranchSharingInfo(userId, sharedUserInfoId) {
   try {
     let response = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/users/${userId}/branch_sharing_infos/${sharedUserInfoId}`,
+      `${process.env.REACT_APP_SERVER_URL}/users/${userId}/branch-sharing-infos/${sharedUserInfoId}`,
       {
         method: GET,
         headers: {

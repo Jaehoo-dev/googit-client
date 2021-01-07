@@ -7,4 +7,4 @@ export const USERS = '/users';
 export const BRANCHES = '/branches';
 export const NOTES = '/notes';
 export const NEW = '/new';
-export const G_LOGO = '/images/G-logo.png';
+export const G_LOGO = '/images/G-logo.jpg';
