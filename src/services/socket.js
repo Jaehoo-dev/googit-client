@@ -1,7 +1,9 @@
 import io from 'socket.io-client';
 import { JOIN_ROOM, LEAVE_ROOM, SHARING_NOTE_TYPED } from '../constants/socketEvents';
 
-export const socket = io.connect(process.env.REACT_APP_SERVER_URL);
+export const socket = io(process.env.REACT_APP_SERVER_URL, {
+  withCredentials: true,
+});
 
 export function emitJoinRoom(branchId) {
   if (!branchId) return;
