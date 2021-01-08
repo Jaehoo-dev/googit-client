@@ -5,7 +5,7 @@ import {
   NEW,
 } from '../constants/paths';
 import { POST } from '../constants/httpMethods';
-import applyIdsLookingAhead from '../utils/applyIdsLookingBackwardsBeforeSave';
+import setIdsBeforeSave from '../utils/setIdsBeforeSave';
 import { GOOGIT_LOGIN_TOKEN } from '../constants/auth';
 import { FAILURE } from '../constants/responseResults';
 
@@ -14,7 +14,7 @@ export default async function requestCreateNote(
   currentUser,
   branchId,
 ) {
-  const blocksWithNewIds = applyIdsLookingAhead(blocks);
+  const blocksWithNewIds = setIdsBeforeSave(blocks);
 
   let noteCreateResponse = await fetch(
     `${process.env.REACT_APP_SERVER_URL}${USERS}/${currentUser._id}${BRANCHES}/${branchId}${NOTES}${NEW}`,

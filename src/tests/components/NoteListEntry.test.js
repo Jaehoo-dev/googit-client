@@ -35,7 +35,7 @@ describe('<NoteListEntryList>', () => {
         creator={creator}
         count={count}
       />
-    </Router >
+    </Router>
   );
 
   it('create 6 div tags', () => {

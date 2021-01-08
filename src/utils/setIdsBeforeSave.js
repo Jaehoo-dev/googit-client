@@ -1,6 +1,6 @@
 import uuid from 'uuid-random';
 
-export default function applyIdsLookingBackwardsBeforeSave(blocks) {
+export default function setIdsBeforeSave(blocks) {
   const newBlocks = JSON.parse(JSON.stringify(blocks));
 
   newBlocks.forEach((block, index) => {

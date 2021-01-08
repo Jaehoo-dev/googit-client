@@ -3,7 +3,7 @@ import { GET } from '../constants/httpMethods';
 import { FAILURE } from '../constants/responseResults';
 
 export default async function requestCurrentUser() {
-  let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/users/current_user`, {
+  let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/users/current-user`, {
     method: GET,
     headers: {
       'Content-Type': 'application/json',
