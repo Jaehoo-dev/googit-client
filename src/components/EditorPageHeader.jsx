@@ -142,7 +142,7 @@ export default function EditorPageHeader({
         <DeleteButtonWrapper>
           {
             currentNote
-            && (currentUser._id === currentNote.created_by)
+            && (currentUser._id === currentBranch.created_by)
             && (currentNote._id === currentBranch.latest_note)
             && <Button
               theme={deleteButtonTheme}
