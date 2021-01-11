@@ -5,6 +5,8 @@
 
 ### 🎬 시연 GIF
 
+<img src="README.assets/preview.git" alt="googit-preview" width="75%" />
+
 ### 🗂 깃헙 저장소
 
 - [https://github.com/Goo-Git/Client](https://github.com/Goo-Git/Client)
