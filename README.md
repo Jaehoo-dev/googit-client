@@ -5,7 +5,7 @@
 
 ### 🎬 시연 GIF
 
-<img src="README.assets/preview.git" alt="googit-preview" width="75%" />
+![Main](/README.assets/preview.gif)
 
 ### 🗂 깃헙 저장소
 
