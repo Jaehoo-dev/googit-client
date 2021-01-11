@@ -3,34 +3,9 @@ import mergeSort from './mergeSort';
 export default function compareNoteChanges(previousNote, currentNote) {
   const previousBlocks = JSON.parse(JSON.stringify(previousNote)).blocks;
   const currentBlocks = JSON.parse(JSON.stringify(currentNote)).blocks;
-  const previousBlocksTable = {};
-  const currentBlocksTable = {};
 
-  previousBlocks.forEach((block, index) => {
-    const id = block.idLookingForwards;
-
-    if (!previousBlocksTable.hasOwnProperty(id)) {
-      previousBlocksTable[id] = [];
-    }
-
-    previousBlocksTable[id].push({
-      index,
-      block,
-    });
-  });
-
-  currentBlocks.forEach((block, index) => {
-    const id = block.idLookingBackwards;
-
-    if (!currentBlocksTable.hasOwnProperty(id)) {
-      currentBlocksTable[id] = [];
-    }
-
-    currentBlocksTable[id].push({
-      index,
-      block,
-    });
-  });
+  const previousBlocksTable = convertArrayToTable(previousBlocks, 'forwards');
+  const currentBlocksTable = convertArrayToTable(currentBlocks, 'backwards');
 
   const erasedBlocks = [];
   const modifiedBlocksBefore = [];
@@ -67,14 +42,6 @@ export default function compareNoteChanges(previousNote, currentNote) {
   markBlocks(modifiedBlocksAfter, 'after');
   markBlocks(newBlocks, 'after');
 
-  function markBlocks(blocks, attribute) {
-    blocks.forEach(block => {
-      block.children.forEach(child => {
-        child[attribute] = true;
-      });
-    });
-  }
-
   const blocksArrays = [
     erasedBlocks,
     modifiedBlocksBefore,
@@ -88,3 +55,32 @@ export default function compareNoteChanges(previousNote, currentNote) {
   });
 }
 
+function convertArrayToTable(array, idSelection) {
+  const resultTable = {};
+
+  array.forEach((block, index) => {
+    const id
+      = idSelection === 'forwards'
+        ? block.idLookingForwards
+        : block.idLookingBackwards;
+
+    if (!resultTable.hasOwnProperty(id)) {
+      resultTable[id] = [];
+    }
+
+    resultTable[id].push({
+      index,
+      block,
+    });
+  });
+
+  return resultTable;
+}
+
+function markBlocks(blocks, attribute) {
+  blocks.forEach(block => {
+    block.children.forEach(child => {
+      child[attribute] = true;
+    });
+  });
+}
